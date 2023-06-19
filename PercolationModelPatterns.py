@@ -9,6 +9,7 @@ from PercolationModel import PercolationModel2D
 
 def add_block(cell, icentre,jcentre):
     '''
+    As a beginning, set a starting point of 2x2 block into the system.
     Adds a 2x2 block into the system, with bottom left corner (icentre, jcentre)
     '''
         
@@ -16,6 +17,14 @@ def add_block(cell, icentre,jcentre):
     cell.clear(icentre,jcentre,extent)    
     cell.grid[icentre:icentre+2,jcentre:jcentre+2] = 1
     
+def add_river(cell, icentre,jcentre):
+    '''
+    As a beginning, set a starting point of 2x2 block into the system.
+    Adds a 2x2 block into the system, with bottom left corner (icentre, jcentre)
+    '''
+    extent = 2    
+    # cell.clear(icentre,jcentre,extent)    
+    cell.grid[icentre:icentre+2,jcentre:jcentre+2] = -0.5
 
 def add_beehive(cell, icentre,jcentre):
     '''

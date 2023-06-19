@@ -110,7 +110,7 @@ class PercolationModel2D(object):
         self.nextgrid = np.zeros((self.N,self.N))
         
                  
-    
+    # the part we can change later
     def ApplyPercolationModelRule(self, P):
         '''
         Constructs the self.nextgrid matrix based on the properties of self.grid
@@ -122,15 +122,19 @@ class PercolationModel2D(object):
         
         for i in range(self.N):
             for j in range(self.N):
-               
-                
+                # set value -2 represent reiver
+                if(self.grid[i,j]==-0.5 and self.tested[i,j]==0):
+                    self.nextgrid[i,j]=self.grid[i,j]
+                    continue
+
+                # below we test other cells
                 if(self.tested[i,j]==1):
                     self.nextgrid[i,j]=self.grid[i,j]
                     continue
                 
                 # If cell contains a coloniser, then decide whether to colonise
-                if(self.grid[i,j]==1 and self.tested[i,j]==0):
-                   
+                if(self.grid[i,j]==1 and self.tested[i,j]==0):                    
+                    
                     randtest = np.random.rand()
                     
                     # If colonisation occurs
