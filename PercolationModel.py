@@ -1,7 +1,3 @@
-# Written 05/01/17 by dh4gan
-# Object runs a 2D percolation model
-# for stellar settlement
-
 import numpy as np
 
 class PercolationModel2D(object):    
@@ -17,101 +13,67 @@ class PercolationModel2D(object):
         produces N x N blank grid
         '''
         
-        self.N = ni
-        self.Ntot = self.N*self.N        
-        self.grid = np.zeros((self.N,self.N))        
-        self.nextgrid = np.zeros((self.N,self.N))
-        self.tested = np.zeros((self.N,self.N))
-        self.complete = False
-        
-    def getMooreNeighbourhood(self, i,j):
+        self.N = ni                     # Size of 1 side
+        self.Ntot = self.N*self.N       # Overall size
+        # Much more complex initializations for grid can be implemented later       
+        # Each point has some unique parameters, on which something is determined
+        self.grid_param1 = np.random.rand(self.N,self.N)            # Current step grid
+
+        # Everything is implemented in this style instead of classes to increase performance
+
+    # We assume that neighborhood is finishing at border (it is not rolling from another side)
+    def getMooreNeighbourhood(self, i,j, extent=1):
         '''
         Returns a set of indices corresponding to the Moore Neighbourhood
         (These are the cells immediately adjacent to (i,j), plus those diagonally adjacent)
         '''
+
+        # Check for incorrect input
+        # Make it a test later
+        if (i<0 or i>=self.N or j<0 or j>self.N):
+            return ValueError
         
         indices = []
         
-        for iadd in range(i-1,i+2):
-            for jadd in range(j-1, j+2):        
-                if(iadd==i and jadd == j): continue
-                
-                if(iadd>self.N-1): iadd = iadd - self.N
-                if(jadd>self.N-1): jadd = jadd - self.N
-                
+        for iadd in range(i-extent,i+extent+1):
+            for jadd in range(j-extent, j+extent+1):        
+                if(iadd==i and jadd == j):  # If is not the same cell
+                    continue
+                if (iadd < 0 or iadd>=self.N):          # If is not in bounds
+                    continue                
+                if (jadd < 0 or jadd>=self.N):          # If is not in bounds
+                    continue
                 indices.append([iadd,jadd])
         
         return indices
     
-    def getVonNeumannNeighbourhood(self,i,j):
+    def getVonNeumannNeighbourhood(self,i,j,extent=1):
         '''
         Returns a set of indices corresponding to the Von Neumann Neighbourhood
         (These are the cells immediately adjacent to (i,j), but not diagonally adjacent)
         '''
+
+        # Check for incorrect input
+        # Make it a test later
+        if (i<0 or i>=self.N or j<0 or j>self.N):
+            return ValueError
         
         indices = []
         
-        for iadd in range(i-1,i+2):
+        for iadd in range(i-extent,i+extent+1):
             if(iadd==i): continue
-            if(iadd>self.N-1): iadd = iadd - self.N        
-                
+            if(iadd < 0 or iadd>=self.N): continue       # If is not in bounds                
             indices.append([iadd,j])
             
-        for jadd in range(j-1,j+2):
+        for jadd in range(j-extent,j+extent+1):
             if(jadd==j): continue
-            if(jadd>self.N-1): jadd = jadd - self.N
-            
+            if(jadd < 0 or jadd>=self.N): continue       # If is not in bounds                            
             indices.append([i,jadd])
             
         return indices    
     
-    
-    def check_complete(self):
-        
-        ntested = np.sum(self.tested)
-        
-        if (ntested == self.N*self.N):
-            self.complete=True
-            
-        return self.complete
-    
-    def randomise(self):
-        '''
-        Places a random selection of zeros and ones into grid
-        '''
-        
-        for i in range(self.N):
-            for j in range(self.N):
-                self.grid[i,j] = np.rint(np.random.random())
-                
-    def randomise_with_symmetry(self):
-        
-        for i in range(self.N/2):
-            for j in range(self.N/2):
-                self.grid[i,j] = np.rint(np.random.random())
-                self.grid[i+self.N/2,j] = self.grid[i,j+self.N/2] =self.grid[i+self.N/2,j+self.N/2]= self.grid[i,j]
-                
-    def clear(self, icentre, jcentre, extent):
-        '''
-        Clears a space on the grid
-        '''
-        
-        for i in range(icentre-extent, icentre+extent):
-            for j in range(jcentre-extent, jcentre+extent):
-                if(i>0 and i<self.N and j>0 and j<self.N):
-                    self.grid[i,j] = 0
-    
-    def updateGrid(self):
-        '''
-        Takes the changes queued up on self.nextgrid, and applies them to self.grid
-        '''
-        
-        self.grid = np.copy(self.nextgrid)
-        self.nextgrid = np.zeros((self.N,self.N))
-        
-                 
     # the part we can change later
-    def ApplyPercolationModelRule(self, P):
+    def step(self):
         '''
         Constructs the self.nextgrid matrix based on the properties of self.grid
         Applies the Percolation Model Rules:
@@ -119,37 +81,32 @@ class PercolationModel2D(object):
         1. Cells attempt to colonise their Moore Neighbourhood with probability P
         2. Cells do not make the attempt with probability 1-P
         '''
-        
+
+        # Placeholder for next step's grid
+        self.next_grid_param1 = np.zeros((self.N,self.N))       # Current step grid
+
+        # We should vectorize this before final test on big map
         for i in range(self.N):
             for j in range(self.N):
-                # set value -2 represent reiver
-                if(self.grid[i,j]==-0.5 and self.tested[i,j]==0):
-                    self.nextgrid[i,j]=self.grid[i,j]
-                    continue
 
-                # below we test other cells
-                if(self.tested[i,j]==1):
-                    self.nextgrid[i,j]=self.grid[i,j]
-                    continue
-                
-                # If cell contains a coloniser, then decide whether to colonise
-                if(self.grid[i,j]==1 and self.tested[i,j]==0):                    
-                    
-                    randtest = np.random.rand()
-                    
-                    # If colonisation occurs
-                    if(randtest<P):
-                        self.nextgrid[i,j]=1
-                        indices = self.getMooreNeighbourhood(i,j)
-                        
-                        for element in indices:
-                            if(self.tested[element[0],element[1]]==1):
-                                continue
-                            if(self.grid[element[0],element[1]]==0):
-                                self.nextgrid[element[0],element[1]]=1
-                            
-                    else:
-                        self.nextgrid[i,j]=-1
-                                                                                
-                    self.tested[i,j] =1
+                # Here we define our rules
+
+                # Example 1, compare current value
+                if (self.grid_param1[i,j] < 0.4):
+                    self.next_grid_param1[i,j] = self.grid_param1[i,j]*1.2
         
+                # Example 2, compare with neighborhood
+                neighbor_threshold = 0.6
+                cell_neighborhood = self.getMooreNeighbourhood(i, j)
+                # Find sum of param_1 in the neighborhood
+                # Better to simplify this thing into lambda or create functions for all rules
+                neighbor_sum_param1 = 0
+                for neighbor in cell_neighborhood:
+                    neighbor_sum_param1 += self.grid_param1[neighbor[0], neighbor[1]]
+                # Checking rule based on neighbors
+                if (neighbor_sum_param1) > neighbor_threshold:
+                    self.next_grid_param1[i,j] = self.grid_param1[i,j]*0.8
+        
+        # Saving changes
+        self.grid_param1 = self.next_grid_param1
+      
