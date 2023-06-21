@@ -246,8 +246,8 @@ class PercolationModel2D(object):
                 #     self.next_pop[i,j] = self.pop[i,j]*0.8 
 
                 # # update temperature
-                # self.next_temp = self.new_temp(self.temp)
-                # d_temp = self.next_temp - self.temp
+                self.next_temp = self.new_temp(self.temp)
+                d_temp = self.next_temp - self.temp
                 
                 # update cell values
                 if self.type[i, j] == 0:
