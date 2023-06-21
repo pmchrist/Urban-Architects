@@ -83,17 +83,16 @@ class PercolationModel2D(object):
             y = 1/(x-0.4)
         return y
     
-    def neighbour_fitness(self, i, j):
+    def neighbour_fitness(self, i, j, matrix):
         '''
-        return neighborhood occupied average density and number of blank positions
+        return sorted values from the neighborhood.
         '''
         neighbors = self.getMooreNeighbourhood(i,j, extent=1)
         values = []
         for neighbor in neighbors:
-            values.append(self.grid_param1[neighbor])
-        empty_cells = values.count(0)
-        values.drop(0)
-        return np.mean(values), empty_cells
+            values.append(matrix[neighbor])
+
+        return sorted(values, reverse=True)
     
     # the part we can change later
     def step(self):
