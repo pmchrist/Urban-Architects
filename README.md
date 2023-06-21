@@ -9,13 +9,10 @@ http://www.geoffreylandis.com/percolation.htp
 ## Initial model:  
 
 The code generates a grid of shape NXN. 
+There are 2 example rules
+Visualization is based on vector of some parameter
 The cells colonize their neighbor with probability P.
-Below a critical probability Pc, the points will fail to occupy the entire box, and regions of space will be left empty.
-Well above Pc, the majority of the box is colonized.  Around the critical probability, arbitrarily large regions can be occupied or left empty.
-Initialization:
-
-A block of size 2X2 is generalized in the center as the initial starting point.
-The river is added into the grid where the cells can never be occupied or colonized.
+Initialization is random
 
 ## Visualization:  
 
@@ -23,9 +20,7 @@ plots generated with numpy and matplotlib
 
 ## Files:  
 
-`PercolationModel2D.py` contains the PercolationModel2D object which holds the automaton and the rules by which it evolves.
-
-`PercolationModelPatterns.py` contains a set of basic patterns to add to the grid initially.
+`PercolationModel.py` contains the PercolationModel2D object which holds the automaton and the rules by which it evolves.
 
 `config.py` contains the variables needed to run the model.
 
