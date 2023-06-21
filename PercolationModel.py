@@ -72,6 +72,29 @@ class PercolationModel2D(object):
             
         return indices    
     
+    def self_fitness(self, i,j):
+        '''
+        return fitness value according to the cell population density.
+        '''
+        x = self.grid_param1[i,j]
+        if x < 0.4:
+            y = 1
+        else:
+            y = 1/(x-0.4)
+        return y
+    
+    def neighbour_fitness(self, i, j):
+        '''
+        return neighborhood occupied average density and number of blank positions
+        '''
+        neighbors = self.getMooreNeighbourhood(i,j, extent=1)
+        values = []
+        for neighbor in neighbors:
+            values.append(self.grid_param1[neighbor])
+        empty_cells = values.count(0)
+        values.drop(0)
+        return np.mean(values), empty_cells
+    
     # the part we can change later
     def step(self):
         '''
@@ -98,6 +121,7 @@ class PercolationModel2D(object):
                 # Example 2, compare with neighborhood
                 neighbor_threshold = 0.6
                 cell_neighborhood = self.getMooreNeighbourhood(i, j)
+                # 
                 # Find sum of param_1 in the neighborhood
                 # Better to simplify this thing into lambda or create functions for all rules
                 neighbor_sum_param1 = 0
@@ -105,7 +129,7 @@ class PercolationModel2D(object):
                     neighbor_sum_param1 += self.grid_param1[neighbor[0], neighbor[1]]
                 # Checking rule based on neighbors
                 if (neighbor_sum_param1) > neighbor_threshold:
-                    self.next_grid_param1[i,j] = self.grid_param1[i,j]*0.8
+                    self.next_grid_param1[i,j] = self.grid_param1[i,j]*0.8 
         
         # Saving changes
         self.grid_param1 = self.next_grid_param1
