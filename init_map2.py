@@ -86,7 +86,6 @@ def add_river(water_map, river_width, min_river_length, map_size, sea_index, lan
 
     return True, water_map
 
-
 def init_water_map(size, sea_fraction, num_lakes, lake_size, num_rivers):
     """Initializes a map with a sea and possible lakes and rivers.
 
@@ -115,7 +114,7 @@ def init_water_map(size, sea_fraction, num_lakes, lake_size, num_rivers):
     sea_index = round((1 - sea_fraction) * size)
 
     # set the label indicating the sea
-    sea_indicator = -2
+    sea_indicator = 2
 
     # fill the desired fraction of the map with sea
     column_indices, row_indices = np.meshgrid(np.arange(size), np.arange(size))
@@ -123,7 +122,7 @@ def init_water_map(size, sea_fraction, num_lakes, lake_size, num_rivers):
     water_map[mask] = sea_indicator
 
     # set the label indicating a lake
-    lake_indicator = -1
+    lake_indicator = 1
 
     # add the desired number of lakes
     for lake in range(num_lakes):
@@ -138,7 +137,7 @@ def init_water_map(size, sea_fraction, num_lakes, lake_size, num_rivers):
         water_map[mask] = lake_indicator
     
     # set the label indicating a river
-    river_indicator = -3
+    river_indicator = 3
 
     # add the desired number of rivers
     for river in range(num_rivers):
@@ -165,15 +164,11 @@ def init_water_map(size, sea_fraction, num_lakes, lake_size, num_rivers):
 
 if __name__=="__main__":
     water_map = init_water_map(100, 0.2 , 2, 5, 1)
-    
-    # Create custom colormap
-    cmap = colors.ListedColormap(['blue', 'lightblue', 'teal', 'white'])
-    bounds=[-3.5, -2.5,-1.5,-0.5,0.5]
-    norm = colors.BoundaryNorm(bounds, cmap.N)
+    print(water_map)
 
     fig, ax = plt.subplots()
-    cax = ax.imshow(water_map, cmap=cmap, norm=norm)
-    cbar = fig.colorbar(cax, ticks=[-3, -2, -1, 0])
+    cax = ax.imshow(water_map, cmap="Blues")
+    cbar = fig.colorbar(cax, ticks=[3, 2, 1, 0])
     cbar.ax.set_yticklabels(['River', 'Sea', 'Lake', 'Land'])
     plt.show()
 

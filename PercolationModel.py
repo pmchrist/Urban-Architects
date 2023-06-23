@@ -1,10 +1,76 @@
 import numpy as np
+import copy
+from init_map2 import *
+
 
 class PercolationModel2D(object):    
     '''
     Object that calculates and displays behaviour of 2D cellular automata
     '''
+
+    # Just keeping global variables for reference:
+    migration_threshold = 0.2
+    burnrate = 0.1
+    growthrate = 0.1
+    emissions = 0.0     # Current emissions, not additive now
+    emmigration_size = 0.1
+    energy_replenish_chance = 0.2
+    energy_replenish_size = 0.1
+    energy_barrier = 0.8
+
+    # Just describing global arrays of environment here:
+    pop_dens = None     # Population density map
+    energy = None       # Amount of energy map
+    type = None         # Type of cell map
+    fitness = None      # Fitness map
+    # Maps for next step
+    next_pop_dens = None
+    next_energy = None
+
+    # Some helper arrays for utility function
+    water_score = None
+    average_water_score = None
+
+
+    # Function used to create water availability for fitness function
+    def upd_available_water_map(self):
+        self.water_score = np.zeros((self.N, self.N))
+        for i in range(self.N):
+            for j in range(self.N):
+                # Getting neighbours
+                neighbors = self.getMooreNeighbourhood(i,j, extent=2)
+                w_counter = 0
+                for neighbor in neighbors:
+                    # Counting available water
+                    if self.type[neighbor[0], neighbor[1]] == 1:
+                        w_counter += 1
+                    if self.type[neighbor[0], neighbor[1]] == 2:
+                        w_counter += 0.5    # Sea water counts as half
+                self.water_score[i, j] = w_counter
+        self.average_water_score = np.mean(self.water_score)      # Average water availability score
+
+    def init_grid(self):
+        '''
+        Initializes grid, which is a set of vectors which describe environment (for now randomly)
         
+        Each point has some unique parameters, on which something is determined
+
+        '''
+
+        self.pop_dens = np.random.rand(self.N, self.N)       # population grid [0, 1]
+        self.energy = np.random.rand(self.N, self.N)    # energy grid [0, 1]
+        self.type = init_water_map(self.N, 0.2 , 2, 5, 1)
+
+        # I believe this is too much, we can model existence/non existence of water just by changing cell type to land/toxic water etc.
+        #self.water = np.zeros((self.N, self.N)) # grid to save water volumn value
+        # loop to purge population values in water area
+        # also loop to initialize water 'volumn' values
+        for i in range(self.N):
+            for j in range(self.N):
+                if self.type[i, j]!=0:
+                    self.pop_dens[i, j] = 0
+                    #self.water[i, j] = np.random.rand()
+
     def __init__(self, ni, temp):
         '''
         Constructor reads:
@@ -12,40 +78,24 @@ class PercolationModel2D(object):
         
         produces N x N blank grid
         '''
-        self.temp = temp                #temperature
+
+        # Set environment
+        self.temp = temp                # temperature
+        self.emissions = 0              # current emissions
         self.N = ni                     # Size of 1 side
         self.Ntot = self.N*self.N       # Overall size
-        # Much more complex initializations for grid can be implemented later       
-        # Each point has some unique parameters, on which something is determined
+        self.init_grid()                # Initialize environment grid
+        self.upd_available_water_map()  # Stores water availability score for utility function
+        # Init grids for next step
+        self.next_pop_dens = copy.deepcopy(self.pop_dens)
+        self.next_energy = copy.deepcopy(self.energy)
+        self.fitness = np.zeros((self.N, self.N))
 
-        # step grid
-        self.pop = np.random.rand(self.N,self.N) # population grid
-        self.energy = np.random.rand(self.N,self.N) # energy grid
-        self.type = np.zeros((self.N, self.N)) # type - fresh water, sea water, and land
-        # type 0-land where people can live on; 1-fresh water; 2-sea water
-        self.water = np.zeros((self.N, self.N)) # grid to save water volumn value
 
-        # Here is a random initialization of self.type (will be replaced by a map)
-        row_sum = 2
-        for i in range(row_sum):
-            self.type.ravel()[i::self.type.shape[1]+row_sum] = 1
-        np.random.shuffle(self.type)
-        for i in range(row_sum):
-            self.type.ravel()[i::self.type.shape[1]+row_sum] = 2
-        np.random.shuffle(self.type)
 
-        # loop to purge population values in water area
-        # also loop to initialize water 'volumn' values
-        for i in range(self.N):
-            for j in range(self.N):
-                if self.type[i, j]!=0:
-                    self.pop[i, j] = 0
-                    self.water[i, j] = np.random.rand()
 
-        
-        # Everything is implemented in this style instead of classes to increase performance
 
-    # We assume that neighborhood is finishing at border (it is not rolling from another side)
+    # We assume that neighborhoods stop at border (it is not rolling from another side)
     def getMooreNeighbourhood(self, i,j, extent=1):
         '''
         Returns a set of indices corresponding to the Moore Neighbourhood
@@ -95,117 +145,110 @@ class PercolationModel2D(object):
             indices.append([i,jadd])
             
         return indices    
-    
+
+    # Fitness
+    # Function which values higher middle value
+    def gaussian(self, val):
+        return 1*np.exp((-(val - 0.5)**2/(0.05)))
+
+    # Function which values higher high values
+    def sigmoid(self, val):
+        return 1/(1 + np.exp(-(val-0.5)/0.2))
+
+    def update_fitness(self, i, j):
+        # It is just made up for now
+        # We are combining available energy/density/water availabiltiy
+        fitness = 0
+        if self.type[i,j] != 0: self.fitness[i,j] = 0      # people can't live on water
+        else: 
+            fitness += self.gaussian(self.pop_dens[i,j])
+            fitness += self.sigmoid(self.energy[i,j])
+            if self.water_score[i,j] > 3:
+                fitness += 1
+            elif self.water_score[i,j] > 1:
+                fitness += 0.5
+            fitness = fitness/3 # Getting Average
+        self.fitness[i,j] = fitness
+
+
+    # Emmigration
     def neighbour_feature(self, i, j):
         '''
         output: 1. sorted (descending) population values from the neighborhood.
-                2. number of water cells in the neighborhood (with penalty to sea water)
 
         '''
-        neighbors = self.getMooreNeighbourhood(i,j, extent=1)
+        neighbors = self.getMooreNeighbourhood(i,j, extent=2)
+        random.shuffle(neighbors)
         values = []
-        w_counter = 0
         for neighbor in neighbors:
-            values.append(self.pop[neighbor])
-            # penalty to sea water
-            if self.type[neighbor] == 1:
-                w_counter += 1
-            if self.type[neighbor] == 2:
-                w_counter += 0.5
-        return sorted(values, reverse=True), w_counter
+            # Getting neighbours
+            values.append(self.fitness[neighbor])
+        return sorted(values, reverse=True)
     
-    def sigmoid(self, val):
-        return 1/(1 + np.exp(-val))
-
-    def fitness(self, i,j):
+    def emmigration(self, i, j, size = emmigration_size):
         '''
-        return fitness value according to the cell population density.
+        size - is proportion of people who wants to leave
         '''
-        # curve that shows stress with growing density / give penalty to crowdness
-        def curve(x, pivot):
-            if x > pivot:
-                return 1/(x-pivot)
-            else:
-                return 1
-            
-        # Check cell type
-        if self.type[i, j] != 0:
-            pass
-        
-        # self density score
-        y1 = curve(self.pop[i, j], 0.4)
+        if size > self.pop_dens[i,j]:
+            self.next_pop_dens[i,j] = self.pop_dens[i,j]
+            return
 
-        neighbors, w = self.neighbour_feature(i, j)
-        # give fitness score if we have water nearby
-        if w<=4:
-            y2 = 0.1 * w
+        destinations = self.getMooreNeighbourhood(i, j, extent=2)
+        random.shuffle(destinations)
+        for k in range(len(destinations)):
+            if self.pop_dens[destinations[k][0], destinations[k][1]] < 1.0 - size and self.type[destinations[k][0], destinations[k][1]] == 0:
+                self.next_pop_dens[destinations[k][0], destinations[k][1]] += size
+                self.next_pop_dens[i,j] -= size
+                return
+
+    # Step Update
+    def growth(self, i, j):
+        '''
+        burnrate = proportion of energy used by population
+        growthrate = proportion of population growth if energy is sufficient
+        '''
+
+        # Growth
+        if self.energy[i,j] > self.pop_dens[i,j]*self.burnrate:
+            self.next_energy[i,j] -= self.pop_dens[i,j]*self.burnrate
+            self.next_pop_dens[i,j] += self.pop_dens[i,j]*self.growthrate
+            self.emissions += self.pop_dens[i,j]*self.burnrate
+        # Decline
         else:
-            y2=0.4
+            self.next_pop_dens[i,j] -= self.pop_dens[i,j]*self.growthrate
 
-        # give penalty to the fitness score if we have crowded neighborhood
-        # calculate average density of the neighborhood
-        mean_density = np.mean(neighbors)
-        y3 = curve(mean_density, 0.4)
+    def upd_water_level(self):
+        self.emissions = np.mean(self.pop_dens)
+        for i in range(self.N):
+            for j in range(self.N):
+                if self.type[i,j] == 0: continue
+                else:
+                    if np.random.rand() < self.emissions/10:
+                        neighbors = self.getVonNeumannNeighbourhood(i,j, extent = 1)
+                        random.shuffle(neighbors)
+                        water_expansion_cell = neighbors[np.random.randint(len(neighbors))]
+                        self.type[water_expansion_cell[0], water_expansion_cell[1]] = self.type[i,j]   # Pick random adjacent cell
+                        self.emmigration(i,j,size=self.pop_dens[water_expansion_cell[0], water_expansion_cell[1]])
 
-        # return normalized y value
-        # return self.sigmoid(y1 + y2 + y3)
+    def spawn_energy(self):
+        for i in range(self.N):
+            for j in range(self.N):
+                if np.random.rand() < self.energy_replenish_chance and self.energy[i,j]<self.energy_barrier:
+                    self.next_energy[i,j] += self.energy_replenish_size
 
-        '''
-        sigmoid deal with value in [-inf, inf], in this case y in [0, 3]
-        I don't think sigmoid is a proper normalization function here
-        for now, I just divide the sum value by max value
-        '''
-        return (y1+y2+y3)/2.4
-    
-    def new_pop(self, i, j):
-        '''
-        population grow if cell density < threshold value
-        otherwise people in this cell move to a less crowded cell, or move out from the map(or we can say death rate> birth rate)
-        new population = f(self.pop, fitness, etc.)
-        '''
-        if (self.pop[i,j] < 0.4):
-            return self.pop[i,j]*1.2
-
-        # Example 2, compare with neighborhood
-        neighbor_threshold = 0.6
-        cell_neighborhood = self.getMooreNeighbourhood(i, j)
-        # 
-        # Find sum of pop in the neighborhood
-        # Better to simplify this thing into lambda or create functions for all rules
-        neighbor_sum_pop = 0
-        for neighbor in cell_neighborhood:
-            neighbor_sum_pop += self.pop[neighbor[0], neighbor[1]]
-        # Checking rule based on neighbors
-        if (neighbor_sum_pop) > neighbor_threshold:
-            return self.pop[i,j]*0.8 
- 
-    def new_energy(self, i, j):
-        '''
-        calculate the energy consumption(Delta energy) of the cell in the current step
-        Assume delta energy is proportional to the delta CO2 emmision for now
-        (people might use more clean energy with the development of the city)
-        '''
-        # some resources are renewable, if no energy renew term added to the value, it will drain out
-        return self.energy[i, j] - self.pop[i, j] * 0.05 + self.energy[i, j] * 0.05
-
-    def new_water(self, i, j, d_temp):
-        '''
-        imput: cell position (i, j); delta temperature
-        calculate the delta water of the cell in the current step
-        '''
-        # log10(temp) in [1, 2] (assume average temp in [10, 40])
-        # we should be causious about temp <10
-        # delta_water = 0.1
-        delta_water = 0.001*np.log10(100*d_temp+1)
-        if self.type[i, j]==1: # fresh water (river dries)
-            self.water[i, j] -= delta_water
-        elif self.type[i, j]==2: # sea water(sea level increase)
-            self.water[i, j] += delta_water
-        return self.water[i, j]
-    
-    def new_temp(self, temp):
-        # we can set rules for changing temperature here
-        return temp
+    def fix_water_nomads(self):
+        for i in range(self.N):
+            for j in range(self.N):
+                if self.type[i, j]!=0:
+                    destinations = self.getMooreNeighbourhood(i, j, extent=2)
+                    random.shuffle(destinations)
+                    size = self.pop_dens[i, j]
+                    for k in range(len(destinations)):
+                        if self.pop_dens[destinations[k][0], destinations[k][1]] < 1.0 - size and self.type[destinations[k][0], destinations[k][1]] == 0:
+                            self.next_pop_dens[destinations[k][0], destinations[k][1]] += size
+                            self.next_pop_dens[i,j] -= size
+                            break
+                    if k == len(destinations): self.pop_dens[i, j] = 0      # loop ended = nowhere to leave, they die :(
 
     # the part we can change later
     def step(self):
@@ -216,52 +259,27 @@ class PercolationModel2D(object):
         1. Cells attempt to colonise their Moore Neighbourhood with probability P
         2. Cells do not make the attempt with probability 1-P
         '''
-
-        # Placeholder for next step's grid
-        self.next_pop = np.zeros((self.N,self.N))       # Current step grid
-        self.next_energy = np.zeros((self.N, self.N))
-        self.next_water = np.zeros((self.N, self.N))
-
-        # We should vectorize this before final test on big map
+        
+        self.fix_water_nomads()
+        self.upd_available_water_map()
+        # We should vectorize this before final test on big map        
         for i in range(self.N):
             for j in range(self.N):
+                # Find Utility
+                self.update_fitness(i,j)
+                # Migration
+                if self.fitness[i,j] < self.migration_threshold:
+                    self.emmigration(i,j)
+                # Growth
+                self.growth(i,j)
+        self.upd_water_level()
+        self.spawn_energy()
 
-                # # Here we define our rules
-                # # population updating rule
-                # # Example 1, compare current value
-                # if (self.pop[i,j] < 0.4):
-                #     self.next_pop[i,j] = self.pop[i,j]*1.2
-        
-                # # Example 2, compare with neighborhood
-                # neighbor_threshold = 0.6
-                # cell_neighborhood = self.getMooreNeighbourhood(i, j)
-                # # 
-                # # Find sum of pop in the neighborhood
-                # # Better to simplify this thing into lambda or create functions for all rules
-                # neighbor_sum_pop = 0
-                # for neighbor in cell_neighborhood:
-                #     neighbor_sum_pop += self.pop[neighbor[0], neighbor[1]]
-                # # Checking rule based on neighbors
-                # if (neighbor_sum_pop) > neighbor_threshold:
-                #     self.next_pop[i,j] = self.pop[i,j]*0.8 
+        print("Population: ", self.pop_dens.mean())
+        print("Energy: ", self.energy.mean())
+        print("Fitness: ", self.fitness.mean())
+        print("\n")
 
-                # # update temperature
-                self.next_temp = self.new_temp(self.temp)
-                d_temp = self.next_temp - self.temp
-                
-                # update cell values
-                if self.type[i, j] == 0:
-                    self.next_energy[i, j] = self.new_energy(i, j)
-                    self.next_pop[i, j] = self.new_pop(i, j)
-                else:
-                    self.next_water[i, j] = self.new_water(i, j, d_temp)
-
-
-
-        
         # Saving changes
-        self.pop = self.next_pop
+        self.pop_dens = self.next_pop_dens
         self.energy = self.next_energy
-        self.water = self.next_water
-        self.temp = self.next_temp
-      

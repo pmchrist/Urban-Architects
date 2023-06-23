@@ -20,28 +20,30 @@ while istep < nsteps:
     ax.clear()
     print("Current Step: ", istep)
     # Draw the population automaton
-    vis_param = cell.pop
-    hist = ax.pcolor(vis_param, edgecolors='black', vmin=-1, vmax=1)
+    vis_param = cell.pop_dens
+    hist = ax.pcolor(vis_param, edgecolors='black', vmin=0, vmax=1)
     #hist = ax.pcolor(cell.nextgrid,edgecolors='black', cmap='binary')
 
     plt.draw()
     plt.savefig('./results/pop/step_pop'+str(istep).zfill(nzeros)+".png")      # change address i have linux sorry :)
     
-    # Draw the water automaton
-    vis_param = cell.water
-    hist = ax.pcolor(vis_param, edgecolors='black', vmin=-1, vmax=1)
-    #hist = ax.pcolor(cell.nextgrid,edgecolors='black', cmap='binary')
-
-    plt.draw()
-    plt.savefig('./results/water/step_water'+str(istep).zfill(nzeros)+".png")      # change address i have linux sorry :)
 
     # Draw the energy automaton
     vis_param = cell.energy
-    hist = ax.pcolor(vis_param, edgecolors='black', vmin=-1, vmax=1)
+    hist = ax.pcolor(vis_param, edgecolors='black', vmin=0, vmax=1)
     #hist = ax.pcolor(cell.nextgrid,edgecolors='black', cmap='binary')
 
     plt.draw()
     plt.savefig('./results/energy/step_energy'+str(istep).zfill(nzeros)+".png")      # change address i have linux sorry :)
+
+
+    # Draw the energy automaton
+    vis_param = cell.type
+    hist = ax.pcolor(vis_param, edgecolors='black', vmin=0, vmax=2)
+    #hist = ax.pcolor(cell.nextgrid,edgecolors='black', cmap='binary')
+
+    plt.draw()
+    plt.savefig('./results/water/type'+str(istep).zfill(nzeros)+".png")      # change address i have linux sorry :)
 
     
     # Apply the Game of Life Rule, and update the grid
