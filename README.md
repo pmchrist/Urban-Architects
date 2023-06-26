@@ -12,7 +12,7 @@ http://www.geoffreylandis.com/percolation.htp
 
 ### Initialization:  
 The initial map is applied at step = 0;  
-Grid of population, energy, cell type of size NXN are generated accordingly.    
+Grid of population, energy, and cell type of size NXN are generated accordingly.    
 The initial parameters are:  
     migration_threshold,  
     burnrate,   
@@ -27,19 +27,19 @@ The initial parameters are:
 
 ### Logical insides:  
 
-The population of the cell grows over time with a certain amount of energy consuming.  
-The initial energy grid is randomized with a constant replenish chance and size.  
-When the energy in a cell is drained out by the population, or the density of population is too high (too crowded), people migrate to find a cell with higher fitness score to live in.  
+The population of the cell grows over time with a certain amount of energy consumption.  
+The initial energy grid is randomized and the energy in the cell is replenished at a certain replenishment chance and size
+When the energy in a cell is drained out by the population, or the density of the population is too high (too crowded), people migrate to find a cell with higher fitness score to live in.  
 The fitness is decided by the population, energy and number of water cells in the neighborhood.  
-While people consume energy in the region, they also emmit CO2 etc. that lead to the regional climate change such as green house effect.  
-The cell type change according to the climate change: rise of sea level...  
+While people consume energy in the region, they also emit CO2, etc. which leads to regional climate change such as the greenhouse effect.  
+The cell type change according to climate change: the rise of sea level...  
 
 ## Visualization:  
 
-The following plots generated with numpy and matplotlib:    
-1. Energy, population and cell type 2D plate plots over n time steps.    
-2. Line plots of the climate change, mean population, mean energy and etc.   
-3. Hist plots of the climate change, mean population, mean energy and etc.   
+The following plots are generated with numpy and matplotlib:    
+1. Energy, population, and cell type 2D plate plots over n time steps.    
+2. Line plots of climate change, mean population, mean energy and etc.   
+3. Hist plots of climate change, mean population, mean energy and etc.   
 
 ## Files:  
 
@@ -47,7 +47,7 @@ The following plots generated with numpy and matplotlib:
 
 `config.py` contains the variables needed to run the model.
 
-`init_map2.py` and `init_water_map.py` provides the initial map of the field we are looking into.
+`init_map2.py` and `init_water_map.py` provide the initial maps of the field we are looking into.
 
 `run_model.py` is a run script to generate percolation models.
 
