@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from time import sleep
 from numpy import log10
 from config import N, temp, nsteps, nzeros
+import powerlaw
 
 # Create the percolation model, and seed four colony sites at the centre
 cell= PercolationModel2D(N, temp)
@@ -14,7 +15,7 @@ plt.ion()
 fig1 = plt.figure()
 ax = fig1.add_subplot(111)
 
-istep= 0
+istep = 0
 while istep < nsteps:    
 
     ax.clear()
@@ -44,6 +45,26 @@ while istep < nsteps:
 
     plt.draw()
     plt.savefig('./results/water/type'+str(istep).zfill(nzeros)+".png")      # change address i have linux sorry :)
+
+    # Making the fit for migrants
+    data = cell.climate_migration_displaced
+    if len(data) > 50:
+        print("\nResults of Climate Migration Fit:")
+        results = powerlaw.Fit(data)
+        print("alpha", results.power_law.alpha)
+        print("xmin:", results.power_law.xmin)
+        R, p = results.distribution_compare('power_law', 'lognormal')
+        print("Powerlaw and Lognormal", R, p)
+
+    # Making the fit for migrants
+    data = cell.climate_migration_dead
+    if len(data) > 50:
+        print("\nResults of Climate Migration Dead Fit:")
+        results = powerlaw.Fit(data)
+        print("alpha", results.power_law.alpha)
+        print("xmin:", results.power_law.xmin)
+        R, p = results.distribution_compare('power_law', 'lognormal')
+        print("Powerlaw and Lognormal", R, p)
 
     
     # Apply the Game of Life Rule, and update the grid
