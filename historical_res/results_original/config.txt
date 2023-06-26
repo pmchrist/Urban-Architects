@@ -1,0 +1,10 @@
+    # Just keeping global variables for reference:
+    migration_threshold = 0.0       # Without simple migration all of the environment events much more clear
+    burnrate = 0.2
+    growthrate = 0.2
+    emissions = 0.0     # Current emissions, not additive now
+    emmigration_size = 0.1
+    energy_replenish_chance = 0.1
+    energy_replenish_size = 0.1
+    energy_barrier = 0.6
+    view_distance = 5    # Quarter Map

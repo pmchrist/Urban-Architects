@@ -11,11 +11,11 @@ class PercolationModel2D(object):
     # Just keeping global variables for reference:
     migration_threshold = 0.0       # Without simple migration all of the environment events much more clear
     burnrate = 0.2
-    growthrate = 0.2
+    growthrate = 0.8
     emissions = 0.0     # Current emissions, not additive now
     emmigration_size = 0.1
-    energy_replenish_chance = 0.1
-    energy_replenish_size = 0.1
+    energy_replenish_chance = 0.5
+    energy_replenish_size = 0.5
     energy_barrier = 0.6
     view_distance = 5    # Quarter Map
 
@@ -35,7 +35,9 @@ class PercolationModel2D(object):
     climate_migration_displaced = []
     climate_migration_dead = []
     simple_migration = []
-
+    l_pop_dens_mean = []
+    l_energy_mean = []
+    l_fitness_mean = []
 
     def init_grid(self):
         '''
@@ -48,6 +50,7 @@ class PercolationModel2D(object):
         self.pop_dens = np.random.rand(self.N, self.N)       # population grid [0, 1]
         self.energy = np.random.rand(self.N, self.N)    # energy grid [0, 1]
         self.type = init_water_map(self.N, 0.2 , 2, 5, 1)
+
 
         # I believe this is too much, we can model existence/non existence of water just by changing cell type to land/toxic water etc.
         #self.water = np.zeros((self.N, self.N)) # grid to save water volumn value
@@ -336,6 +339,10 @@ class PercolationModel2D(object):
         # Replenishing energy
         self.spawn_energy()
         pop_dens_mean, energy_mean, fitness_mean = self.update_stats()
+
+        self.l_pop_dens_mean.append(pop_dens_mean)
+        self.l_energy_mean.append(energy_mean)
+        self.l_fitness_mean.append(fitness_mean)
 
         print()
         print("Population: ", pop_dens_mean)
