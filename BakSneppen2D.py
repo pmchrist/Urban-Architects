@@ -6,17 +6,23 @@ import os
 class BakSneppen2D(object):
 
     def __init__(self, size, save_folder):
+
+        # use a seed for repeatability
         np.random.seed(2)
+
+        # initialize the system with random fitness values
         self.size = size
         self.system = np.random.rand(size, size)
 
+        # set global parameters
         self.save_folder = save_folder
 
+        # initialize lists for storing interesting parameter values
         self.min_fitness = []
 
     def update_system(self):
 
-        # get the indices of the lowest (fitness) value
+        # get the indices of the lowest fitness value
         min_indices = np.unravel_index(np.argmin(self.system), self.system.shape)
         i, j = min_indices
 
@@ -48,7 +54,6 @@ class BakSneppen2D(object):
 
     def store_system_properties(self):
         self.min_fitness.append(np.min(self.system))
-
 
 
 if __name__=="__main__":
