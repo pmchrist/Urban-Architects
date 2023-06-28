@@ -9,14 +9,15 @@ class PercolationModel2D(object):
     '''
 
     # Just keeping global variables for reference:
-    migration_threshold = 0.0       # Without simple migration all of the environment events much more clear
+    migration_threshold = 0.1       # Without simple migration all of the environment events much more clear
     burnrate = 0.2
-    growthrate = 0.8
+    growthrate = 0.2
     emissions = 0.0     # Current emissions, not additive now
-    emmigration_size = 0.1
-    energy_replenish_chance = 0.5
-    energy_replenish_size = 0.5
-    energy_barrier = 0.6
+    migrants_current = 0
+    emmigration_size = 0.2
+    energy_replenish_chance = 0.1
+    energy_replenish_size = 0.1
+    energy_barrier = 0.8
     view_distance = 5    # Quarter Map
 
     # Just describing global arrays of environment here:
@@ -32,12 +33,8 @@ class PercolationModel2D(object):
     # Some helper arrays for utility function
     water_score = None
 
-    climate_migration_displaced = []
-    climate_migration_dead = []
-    simple_migration = []
-    l_pop_dens_mean = []
-    l_energy_mean = []
-    l_fitness_mean = []
+    migrants = []
+
 
     def init_grid(self):
         '''
@@ -50,7 +47,6 @@ class PercolationModel2D(object):
         self.pop_dens = np.random.rand(self.N, self.N)       # population grid [0, 1]
         self.energy = np.random.rand(self.N, self.N)    # energy grid [0, 1]
         self.type = init_water_map(self.N, 0.2 , 2, 5, 1)
-
 
         # I believe this is too much, we can model existence/non existence of water just by changing cell type to land/toxic water etc.
         #self.water = np.zeros((self.N, self.N)) # grid to save water volumn value
@@ -193,7 +189,8 @@ class PercolationModel2D(object):
         for i in range(self.N):
             for j in range(self.N):
                 fitness = 0
-                if self.type[i,j] != 0: self.fitness[i,j] = 0      # people can't live on water
+                if self.type[i,j] != 0:
+                    self.fitness[i,j] = 0      # people can't live on water
                 else: 
                     fitness += self.gaussian(self.pop_dens[i,j])
                     fitness += self.sigmoid(self.energy[i,j])
@@ -203,19 +200,19 @@ class PercolationModel2D(object):
 
     # Emigration which covers land to land
     def land_migration(self):
-        simple_migration = 0
         for i in range(self.N):
             for j in range(self.N):
-                if self.type[i,j] == 0 and self.fitness[i,j] < self.migration_threshold:
+                if self.type[i,j] == 0 and self.fitness[i,j] < self.migration_threshold and self.pop_dens[i,j] > 0:
+                    size = self.pop_dens[i,j]*self.emmigration_size
                     destinations = self.neighbour_feature(i, j, extent=self.view_distance)
                     for k in range(len(destinations)):
-                        if self.pop_dens[destinations[k][0], destinations[k][1]] < 1.0 - self.emmigration_size and self.type[destinations[k][0], destinations[k][1]] == 0:
-                            self.next_pop_dens[destinations[k][0], destinations[k][1]] += self.emmigration_size
-                            self.next_pop_dens[i,j] -= self.emmigration_size
-                            simple_migration += self.emmigration_size
+                        if self.pop_dens[destinations[k][0], destinations[k][1]] < 1.0 - size and self.type[destinations[k][0], destinations[k][1]] == 0:
+                            self.next_pop_dens[destinations[k][0], destinations[k][1]] += size
+                            self.next_pop_dens[i,j] -= size
+                            self.migrants_current += size
                             if self.next_pop_dens[i,j] < 0:       # So that we do not have negative people
                                 self.next_pop_dens[i,j] = 0
-        self.simple_migration.append(simple_migration)
+                            break
         self.pop_dens = self.next_pop_dens
 
     def climate_emmigration(self):
@@ -224,8 +221,6 @@ class PercolationModel2D(object):
         People have to be displaced because of water rise, If there is no spot to go, they die
 
         '''
-        climate_migration_displaced = 0
-        climate_migration_dead = 0
         for i in range(self.N):
             for j in range(self.N):
                 if self.type[i,j] != 0 and self.pop_dens[i,j] > 0:     # Only people in the water are eligible
@@ -236,15 +231,14 @@ class PercolationModel2D(object):
                         if self.pop_dens[destinations[k][0], destinations[k][1]] < 1.0 - size and self.type[destinations[k][0], destinations[k][1]] == 0:
                             self.next_pop_dens[destinations[k][0], destinations[k][1]] += size
                             self.next_pop_dens[i,j] -= size
+                            self.migrants_current += size
                             if self.next_pop_dens[i,j] < 0:       # So that we do not have negative people
                                 self.next_pop_dens[i,j] = 0
-                                climate_migration_displaced += size
+                            break
                         if k == len(destinations)-1:       # loop ended = nowhere to leave, they die :(
-                            climate_migration_dead += size
+                            self.migrants_current += size
                             self.next_pop_dens[i, j] = 0
         # Saving Changes
-        self.climate_migration_displaced.append(climate_migration_displaced)
-        self.climate_migration_dead.append(climate_migration_dead)
         self.pop_dens = self.next_pop_dens
 
     # Step Update
@@ -328,31 +322,32 @@ class PercolationModel2D(object):
         # Preparing Map and Values
         self.upd_available_water_map()
         # Find Utility and Initial Migration
-        self.update_fitness()
-        self.land_migration()
         # Emissions, Sea Rise
         self.emissions = 0
         self.growth()
         self.upd_water_level()
-        # Climate Migration
-        self.climate_emmigration()
+        # Migration
+        self.migrants_current = 0
+        while True:
+            migrants_prev = self.migrants_current
+            self.update_fitness()
+            pop_dens_mean, energy_mean, fitness_mean = self.update_stats()
+            self.climate_emmigration()
+            self.land_migration()
+            print(migrants_prev)
+            print(self.migrants_current)
+            if self.migrants_current - migrants_prev < np.sqrt(migrants_prev):
+                break
+        self.migrants.append(self.migrants_current) 
         # Replenishing energy
         self.spawn_energy()
         pop_dens_mean, energy_mean, fitness_mean = self.update_stats()
-
-        self.l_pop_dens_mean.append(pop_dens_mean)
-        self.l_energy_mean.append(energy_mean)
-        self.l_fitness_mean.append(fitness_mean)
 
         print()
         print("Population: ", pop_dens_mean)
         print("Energy: ", energy_mean)
         print("Fitness: ", fitness_mean)
         print("Emissions: ", self.emissions)
-        if len(self.simple_migration) > 0:
-            print("Displaced by Fitness: ", self.simple_migration[-1])
-        if len(self.climate_migration_displaced) > 0:
-            print("Displaced by Climate: ", self.climate_migration_displaced[-1])
-        if len(self.climate_migration_dead) > 0:
-            print("Killed by Climate: ", self.climate_migration_dead[-1])
+        if len(self.migrants) > 0:
+            print("Displaced: ", self.migrants[-1])
         print("\n")
