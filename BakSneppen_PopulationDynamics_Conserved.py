@@ -4,9 +4,9 @@ import random
 import matplotlib.pyplot as plt
 import os
 
-class BakSneppen2D(object):
+class BakSneppen2D_ConservedPopulation(object):
 
-    def __init__(self, size, save_folder, alpha, beta, gamma, delta, labda):
+    def __init__(self, size, save_folder, alpha, beta, gamma, delta, labda, fitness_mean, fitness_std, gaussian_weight):
 
         # use a seed for repeatability
         # np.random.seed(2)
@@ -22,7 +22,13 @@ class BakSneppen2D(object):
         self.beta = beta
         self.gamma = gamma
         self.delta = delta
+
+        # set parameters for fitness function
         self.labda = labda
+        self.fitness_mean = fitness_mean
+        self.fitness_std = fitness_std
+        self.gaussian_weight = gaussian_weight
+
 
         # initialize lists for storing interesting parameter values
         self.min_fitness = []
@@ -64,7 +70,7 @@ class BakSneppen2D(object):
         return sum(neighbour_populations) / len(neighbour_populations)
     
     def fitness(self, density_ij, average_density_ij):
-        return 0.5 * np.exp(-self.labda * (density_ij - average_density_ij) ** 2) + 0.5 * self.gaussian(density_ij, 0.5, 0.19)
+        return (1 - self.gaussian_weight) * np.exp(-self.labda * (density_ij - average_density_ij) ** 2) + self.gaussian_weight * self.gaussian(density_ij, self.fitness_mean, self.fitness_std)
 
     def new_density(self, average_density, local_density, fitness, random_factor):
         assert self.alpha + self.beta + self.gamma + self.delta == 1
@@ -76,11 +82,6 @@ class BakSneppen2D(object):
         # get the indices of the lowest fitness value
         min_value = np.min(self.system[self.system != 0])
         i, j = np.where(self.system == min_value)
-
-        # min_indices = np.unravel_index(np.argmin(self.system[self.system != 0]), self.system.shape)
-        # i, j = min_indices
-        # print(i, j)
-        # print(self.system[i, j])
 
         neighbours = self.getMooreNeighbourhood(i[0], j[0])
         # print(f"Neighbours: {neighbours}")
@@ -140,15 +141,6 @@ class BakSneppen2D(object):
         # do we need to see the absolute values?
         self.migrations.append(abs(self.system[i, j] - next_density)[0])
         self.system[i, j] = next_density
-
-        # give a new fitness value to the cell with the lowest value
-        # self.system[i, j] = np.random.rand()
-
-        # # also update the neighbors, where we use periodic boundary conditions
-        # self.system[(i - 1) % self.size, j] =  np.random.rand()
-        # self.system[(i + 1) % self.size, j] =  np.random.rand()
-        # self.system[i, (j - 1) % self.size] =  np.random.rand()
-        # self.system[i, (j + 1) % self.size] =  np.random.rand()
     
     def simulate(self, iterations):
         self.plot_system(0, initial=True)
@@ -159,7 +151,7 @@ class BakSneppen2D(object):
             if iteration % 100 == 0:
                 self.plot_system(iteration)
 
-    def plot_system(self, iteration, initial=False):
+    def plot_system(self, iteration, initial=False, close=True):
         plt.imshow(self.system, cmap='hot', origin='lower')
         plt.colorbar(label='Population density')
         plt.clim(0, 1)
@@ -173,7 +165,11 @@ class BakSneppen2D(object):
             plt.savefig(os.path.join(self.save_folder, f'iteration_{iteration}.png'))
         else:
             plt.savefig(os.path.join(self.save_folder, f'iteration_{iteration + 1}.png'))
-        plt.close()
+        
+        if close:
+            plt.close()
+        else:
+            plt.show()
 
     def store_system_properties(self):
         self.min_fitness.append(np.min(self.system))
@@ -186,7 +182,7 @@ if __name__=="__main__":
 
     iterations = 10001
 
-    model = BakSneppen2D(size, save_folder, 0, 0, 1, 0, 10)
+    model = BakSneppen2D_ConservedPopulation(size, save_folder, 0, 0, 1, 0, 10, 0.5, 0.19, 1)
     # print(model.system)
     model.simulate(iterations)
     # print(model.system)

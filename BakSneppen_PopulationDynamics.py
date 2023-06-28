@@ -109,7 +109,7 @@ class BakSneppen2D(object):
             if iteration % 10 == 0:
                 self.plot_system(iteration)
 
-    def plot_system(self, iteration, initial=False):
+    def plot_system(self, iteration, initial=False, close=True):
         plt.imshow(self.system, cmap='hot', origin='lower')
         plt.colorbar(label='Population density')
         plt.clim(0, 1)
@@ -123,7 +123,9 @@ class BakSneppen2D(object):
             plt.savefig(os.path.join(self.save_folder, f'iteration_{iteration}.png'))
         else:
             plt.savefig(os.path.join(self.save_folder, f'iteration_{iteration + 1}.png'))
-        plt.close()
+        
+        if close:
+            plt.close()
 
     def store_system_properties(self):
         self.min_fitness.append(np.min(self.system))
