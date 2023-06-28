@@ -19,7 +19,15 @@ class BakSneppen2D(object):
 
         # initialize lists for storing interesting parameter values
         self.min_fitness = []
+        self.avg_fitness = [] 
         
+        # Updated to compute additional metrics
+
+
+    def store_system_properties(self):
+        self.min_fitness.append(np.min(self.system))
+        self.avg_fitness.append(np.mean(self.system))  # Compute average fitness
+
 
     def update_system(self):
 
@@ -35,6 +43,7 @@ class BakSneppen2D(object):
         self.system[(i + 1) % self.size, j] =  np.random.rand()
         self.system[i, (j - 1) % self.size] =  np.random.rand()
         self.system[i, (j + 1) % self.size] =  np.random.rand()
+
     
     def simulate(self, iterations):
         for iteration in range(iterations):
@@ -55,16 +64,53 @@ class BakSneppen2D(object):
 
     def store_system_properties(self):
         self.min_fitness.append(np.min(self.system))
+        self.avg_fitness.append(np.mean(self.system))  # Compute average fitness
+
+
 
 
 if __name__=="__main__":
     save_folder = 'BakSneppen_results'
     size = 100
 
-    iterations = 1000
+    iterations = 10000
 
     model = BakSneppen2D(size, save_folder)
     model.simulate(iterations)
 
+    # Plot minimum fitness evolution
+    plt.figure(figsize=(10, 8))
+    plt.subplot(2, 1, 1)
+
     plt.plot(range(iterations), model.min_fitness)
+    plt.xlabel('Iteration Number')  
+    plt.ylabel('Minimum Fitness')  
+    plt.title('Minimum Fitness Evolution in the Bak-Sneppen Model')  
+
+    #Each time an avalanche occurs (i.e., the least fit cell is replaced), the minimum fitness increases 
+    #because the least fit cell has been replaced by a new one with higher fitness.
+    #However, over time, some scells fitness will decrease due to the random "mutations" you're applying, 
+    # causing the minimum fitness to decrease again. This results in the oscillating pattern
+
+    # Plot average fitness evolution
+    plt.subplot(2, 1, 2)
+    plt.plot(range(iterations), model.avg_fitness)
+    plt.xlabel('Iteration Number')
+    plt.ylabel('Average Fitness')
+    plt.title('Average Fitness Evolution in the Bak-Sneppen Model')
+
+    plt.tight_layout()
+    plt.show()
+
+    #Over time, the replacement of the least fit cell and its neighbors
+    #leads to an overall increase in fitness throughout the system, so
+    #the average fitness should increase gradually.
+    
+
+    # Create a histogram of the final fitness values
+    final_fitness_values = model.system.flatten()
+    plt.hist(final_fitness_values, bins=30, edgecolor='black')
+    plt.xlabel('Fitness Value')
+    plt.ylabel('Frequency')
+    plt.title('Histogram of Final Fitness Values')
     plt.show()
