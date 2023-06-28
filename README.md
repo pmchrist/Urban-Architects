@@ -1,10 +1,10 @@
 # Urban-Architects
 2023 Complex Systems Simulation Group 11
-
+Isabel Klennert, Christos Perchanidis, Frenk Klein Schiphorst, Chang Lin
 ## Introduction:  
 
-This project looks into the insides of the interactions between regional geography, population, climate, and energy.  
-A CA (cellular automata) model is used to simulate this complex system.  
+This project looks into the dynamics of the interactions between regional geography, population, climate, and energy.  
+A CA (cellular automata) model is used to simulate this complex system, and the Bak-Sneppen model is used as an inspiration.  
 The initial CA model follows the percolation model see Landis 1999, "The Fermi Paradox: An Approach Based on Percolation Theory", JBIS, 51, 163-166
 http://www.geoffreylandis.com/percolation.htp  
 
@@ -79,6 +79,8 @@ The Gaussian function and fitness function are used to generate a fitness score,
 
 Update rule is significantly more complex: The new density is calculated using the *new_density* function, and depending on this value, the densities of the neighbouring cells are also updated. This update considers a balance of population migration, ensuring that the total population (sum of all cell densities) remains conserved.
 
+
+## Percolation Model
 
 
 
