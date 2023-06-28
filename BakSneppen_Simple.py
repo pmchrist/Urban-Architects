@@ -10,7 +10,7 @@ class BakSneppen2D(object):
         # use a seed for repeatability
         np.random.seed(2)
 
-        # initialize the system with random fitness values
+        # initialize the system with random population density values
         self.size = size
         self.system = np.random.rand(size, size)
 
@@ -19,6 +19,7 @@ class BakSneppen2D(object):
 
         # initialize lists for storing interesting parameter values
         self.min_fitness = []
+        
 
     def update_system(self):
 
@@ -29,7 +30,7 @@ class BakSneppen2D(object):
         # give a new fitness value to the cell with the lowest value
         self.system[i, j] = np.random.rand()
 
-        # also update the neighbors, where we use periodic boundary conditions
+        # # also update the neighbors, where we use periodic boundary conditions
         self.system[(i - 1) % self.size, j] =  np.random.rand()
         self.system[(i + 1) % self.size, j] =  np.random.rand()
         self.system[i, (j - 1) % self.size] =  np.random.rand()
