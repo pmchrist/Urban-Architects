@@ -15,7 +15,7 @@ class PercolationModel2D(object):
     emissions = 0.0     # Current emissions, not additive now
     emmigration_size = 0.1
     energy_replenish_chance = 0.5
-    energy_replenish_size = 0.5
+    energy_replenish_size = 0.
     energy_barrier = 0.6
     view_distance = 5    # Quarter Map
 
