@@ -9,10 +9,10 @@ class PercolationModel2D(object):
     '''
 
     # Just keeping global variables for reference:
-    migration_threshold = 0.0       # Without simple migration all of the environment events much more clear
-    burnrate = 0.2
+    migration_threshold = -10.0       # Without simple migration all of the environment events much more clear
+    burnrate = 0.0
     growthrate = 0.2
-    emissions = 0.0     # Current emissions, not additive now
+    emissions = 0.2     # Current emissions, not additive now
     emmigration_size = 0.1
     energy_replenish_chance = 0.1
     energy_replenish_size = 0.1
@@ -81,7 +81,8 @@ class PercolationModel2D(object):
         self.next_pop_dens = copy.deepcopy(self.pop_dens)
         self.next_energy = copy.deepcopy(self.energy)
         self.next_type = copy.deepcopy(self.type)
-        self.fitness = self.update_fitness()
+        # self.fitness = self.update_fitness()
+        self.fitness = np.random.rand(self.N, self.N)
 
 
     # Helper Functions
@@ -187,7 +188,7 @@ class PercolationModel2D(object):
 
     # Can be easily improved
     def update_fitness(self):
-        self.fitness = np.zeros((self.N, self.N))   # Fitness map
+        # self.fitness = np.zeros((self.N, self.N))   # Fitness map
         # get the indices of the lowest fitness value
         min_indices = np.unravel_index(np.argmin(self.fitness), self.fitness.shape)
         i, j = min_indices
@@ -353,7 +354,7 @@ class PercolationModel2D(object):
         self.climate_emmigration()
         # Replenishing energy
         self.spawn_energy()
-        pop_dens_mean, energy_mean, fitness_mean = self.update_stats()
+        fitness_mean, pop_dens_mean, energy_mean  = self.update_stats()
 
         self.l_pop_dens_mean.append(pop_dens_mean)
         self.l_energy_mean.append(energy_mean)

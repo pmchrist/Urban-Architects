@@ -338,7 +338,7 @@ class PercolationModel2D(object):
         self.climate_emmigration()
         # Replenishing energy
         self.spawn_energy()
-        pop_dens_mean, energy_mean, fitness_mean = self.update_stats()
+        fitness_mean, pop_dens_mean, energy_mean  = self.update_stats()
 
         self.l_pop_dens_mean.append(pop_dens_mean)
         self.l_energy_mean.append(energy_mean)
