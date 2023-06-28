@@ -1,10 +1,10 @@
 # Urban-Architects
 2023 Complex Systems Simulation Group 11
-
+Isabel Klennert, Christos Perchanidis, Frenk Klein Schiphorst, Chang Lin
 ## Introduction:  
 
-This project looks into the insides of the interactions between regional geography, population, climate, and energy.  
-A CA (cellular automata) model is used to simulate this complex system.  
+This project looks into the dynamics of the interactions between regional geography, population, climate, and energy.  
+A CA (cellular automata) model is used to simulate this complex system, and the Bak-Sneppen model is used as an inspiration.  
 The initial CA model follows the percolation model see Landis 1999, "The Fermi Paradox: An Approach Based on Percolation Theory", JBIS, 51, 163-166
 http://www.geoffreylandis.com/percolation.htp  
 
@@ -52,3 +52,40 @@ The following plots are generated with numpy and matplotlib:
 `run_model.py` is a run script to generate percolation models.
 
 `visualization.ipynb` provides the visualization of the results.
+
+
+## Bak-Sneppen Simple
+
+Each cell in the grid is initialized with a random value that represents the fitness of the species in that cell.
+
+In each iteration of the simulation, the cell with the lowest fitness value (and its immediate neighbors) is identified and then given a new random fitness value. 
+
+*plot_system*  generates a heat map of the fitness values in the grid at a given iteration. In addition, the minimum fitness of the system after each iteration of the simulation is plotted. 
+
+## Bak-Sneppen Population Dynamics
+
+Modified simulation of Bak-Sneppen model where fitness calculation based on the local and neighboring (Moore) densities of species. 
+The density of a species in a cell is given by a random number at the start. During the simulation, the density of a cell is recalculated based on the local density, the average density of the neighboring cells, a fitness factor and a random factor.
+The proportion of these contributions is governed by the alpha, beta, gamma, and delta parameters that must sum up to 1.
+
+The model continues to replace the cells with the least density value and its neighbors until the specified number of iterations is complete. 
+
+It also stores and plots the minimum density value at each iteration, which gives a view of how the lowest density in the system evolves over time.
+
+The Gaussian function and fitness function are used to generate a fitness score, which is then used as one of the factors in the calculation of new density values.
+
+
+## Bak-Sneppen Population Dynamics Conserved
+
+Update rule is significantly more complex: The new density is calculated using the *new_density* function, and depending on this value, the densities of the neighbouring cells are also updated. This update considers a balance of population migration, ensuring that the total population (sum of all cell densities) remains conserved.
+
+
+## Percolation Model
+
+
+
+
+
+
+
+
