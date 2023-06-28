@@ -21,12 +21,8 @@ class BakSneppen2D(object):
         self.min_fitness = []
         self.avg_fitness = [] 
         
-        # Updated to compute additional metrics
-
-
-    def store_system_properties(self):
-        self.min_fitness.append(np.min(self.system))
-        self.avg_fitness.append(np.mean(self.system))  # Compute average fitness
+        self.std_fitness = []
+        self.least_fit_location = []
 
 
     def update_system(self):
@@ -65,6 +61,8 @@ class BakSneppen2D(object):
     def store_system_properties(self):
         self.min_fitness.append(np.min(self.system))
         self.avg_fitness.append(np.mean(self.system))  # Compute average fitness
+        self.std_fitness.append(np.std(self.system))  # Compute std dev of fitness
+        self.least_fit_location.append(np.unravel_index(np.argmin(self.system), self.system.shape))  # Store least fit location
 
 
 
@@ -108,9 +106,19 @@ if __name__=="__main__":
     
 
     # Create a histogram of the final fitness values
+    # Can see a threshold at approx 0.22, distribution is skewed to higher values?
     final_fitness_values = model.system.flatten()
     plt.hist(final_fitness_values, bins=30, edgecolor='black')
     plt.xlabel('Fitness Value')
     plt.ylabel('Frequency')
     plt.title('Histogram of Final Fitness Values')
+    #plt.show()
+
+    # Plot standard deviation of fitness evolution
+    # If the model leads to a homogeneous distribution, the standard deviation should decrease over time.
+    plt.figure(figsize=(10, 8))
+    plt.plot(range(iterations), model.std_fitness)
+    plt.xlabel('Iteration Number')
+    plt.ylabel('Standard Deviation of Fitness')
+    plt.title('Fitness Variability Evolution in the Bak-Sneppen Model')
     plt.show()
