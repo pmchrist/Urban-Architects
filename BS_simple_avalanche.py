@@ -269,10 +269,28 @@ if __name__=="__main__":
 
     # Kolmogorov-Smirnov to check power
     avalanche_sizes = model.avalanche_sizes
-    fit = powerlaw.Fit(np.array(avalanche_sizes)+1, xmin=1)
-    print("Power-law exponent: ", fit.power_law.alpha)
+    avalanche_durations = model.avalanche_durations
+    fit1 = powerlaw.Fit(np.array(avalanche_sizes), discrete=True, verbose=False)
+    fit2 = powerlaw.Fit(np.array(avalanche_durations), discrete=True, verbose=False)
     # comparing the power-law distribution to an exponential distribution
-    R, p = fit.distribution_compare('power_law', 'exponential', normalized_ratio=True)
-    print("Test statistic: ", R)
-    print("p-value: ", p)
+    R1, p1 = fit1.distribution_compare('power_law', 'exponential', normalized_ratio=True)
+    R2, p2 = fit2.distribution_compare('power_law', 'exponential', normalized_ratio=True)
+    print("Test statistic, size : ", R1)
+    print("p-value, size: ", p1)
+    print("Power-law exponent, size: ", fit1.power_law.alpha)
+    print("Test statistic, duration: ", R2)
+    print("p-value, duration: ", p2)
+    print("Power-law exponent duration: ", fit2.power_law.alpha)
+
+    # comparing the power-law distribution to a log-normal distribution
+    R3, p3 = fit1.distribution_compare('power_law', 'lognormal', normalized_ratio=True)
+    R4, p5 = fit2.distribution_compare('power_law', 'lognormal', normalized_ratio=True)
+    print("Test statistic, size: ", R3)
+    print("p-value, size: ", p3)
+    print("Power-law exponent, size: ", fit1.power_law.alpha)
+    print("Test statistic, duration: ", R4)
+    print("p-value, duration: ", p5)
+    print("Power-law exponent, duration: ", fit2.power_law.alpha)
+
+    
 
