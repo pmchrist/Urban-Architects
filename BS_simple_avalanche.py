@@ -47,11 +47,16 @@ class BakSneppen2D(object):
 
     
     def get_min(self):
+    # Get the indices of the cell with the minimum fitness in the system
         min_indices = np.unravel_index(np.argmin(self.system), self.system.shape)
+        # Get the minimum fitness value
         min_fitness = self.system[min_indices]
 
+        # Append the minimum fitness to the min_fitness list
         self.min_fitness.append(min_fitness)
 
+        # If there are no thresholds set yet, or if the current min_fitness is
+        # higher than all previous thresholds, append it to the threshold list
         if not self.threshold_list['threshold']:
             self.threshold_list['threshold'].append(min_fitness)
             self.threshold_list['time_step'].append(self.time_step)
@@ -59,9 +64,13 @@ class BakSneppen2D(object):
             self.threshold_list['threshold'].append(min_fitness)
             self.threshold_list['time_step'].append(self.time_step)
 
+
     def get_avalanche_time(self):
+        # If any cell in the system has a fitness less than the current threshold, increment the avalanche timer
         if not all(self.system.flat >= max(self.threshold_list['threshold'])):
             self.avalanche_timer += 1
+        # If all cells in the system have a fitness greater than or equal to the current threshold,
+        # then the avalanche has ended. Record the duration of the avalanche and the time_step it ended at
         else:
             self.avalanche_time_list['avalanche_time'].append(self.avalanche_timer)
             self.avalanche_time_list['time_step'].append(self.time_step)
@@ -69,24 +78,33 @@ class BakSneppen2D(object):
             self.avalanche_timer = 1
 
     def simulate(self, iterations):
+        # Get the initial minimum fitness of the system
         prev_min_fitness = np.min(self.system)
-        self.time_step = 0  # Reset the time_step
+        # Reset the time_step and set initial avalanche size
+        self.time_step = 0  
         avalanche_size = 0
 
         for iteration in range(iterations):
+            # Record the minimum fitness before updating the system
             min_before = np.min(self.system)
+            # Update the system
             self.update_system()
+            # Record the minimum fitness after updating the system
             min_after = np.min(self.system)
 
+            # If the new minimum fitness is higher than the previous one...
             if min_after > prev_min_fitness:
+                # ...and we're not currently in an avalanche, start a new one
                 if not self.in_avalanche:
                     self.in_avalanche = True
                     self.avalanche_timer = 1
                     avalanche_size = 1
+                 # ...and we're already in an avalanche, continue it
                 else:
                     self.avalanche_timer += 1
                     avalanche_size += 1
 
+            # If the new minimum fitness is not higher and we're in an avalanche, the avalanche has ended
             elif self.in_avalanche:
                 self.get_avalanche_time()
                 self.avalanche_durations.append(self.avalanche_timer)
@@ -94,8 +112,10 @@ class BakSneppen2D(object):
                 self.in_avalanche = False
                 avalanche_size = 0 
 
-            self.get_min() # remember to get min in each step
+            # Get the minimum fitness and store the system properties at this time step
+            self.get_min() 
             self.store_system_properties()
+            # Set the previous minimum fitness for the next iteration
             prev_min_fitness = min_after
 
             if iteration % 10 == 0:
