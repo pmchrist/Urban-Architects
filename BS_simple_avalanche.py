@@ -267,11 +267,12 @@ if __name__=="__main__":
     plt.ylabel('Row')
     plt.show()
 
-    # Get your data
+    # Kolmogorov-Smirnov to check power
     avalanche_sizes = model.avalanche_sizes
     fit = powerlaw.Fit(np.array(avalanche_sizes)+1, xmin=1)
     print("Power-law exponent: ", fit.power_law.alpha)
-    # Perform K-S test comparing the power-law distribution to an exponential distribution
+    # comparing the power-law distribution to an exponential distribution
     R, p = fit.distribution_compare('power_law', 'exponential', normalized_ratio=True)
     print("Test statistic: ", R)
     print("p-value: ", p)
+
