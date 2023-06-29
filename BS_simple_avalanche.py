@@ -21,11 +21,13 @@ class BakSneppen2D(object):
         self.least_fit_location = []
         
         # initialize variables to track avalanches
-        self.avalanche_sizes = []
-        self.current_avalanche_size = 0
-        self.avalanche_durations = []
-        self.current_avalanche_duration = 0
+        self.threshold_list = {'threshold': [], 'time_step': []}
+        self.avalanche_time_list = {'avalanche_time': [], 'time_step': []}
+        self.avalanche_timer = 1
         self.in_avalanche = False
+        self.avalanche_sizes = []  
+        self.avalanche_durations = []
+        self.time_step = 0 
 
 
     def update_system(self):
@@ -42,33 +44,64 @@ class BakSneppen2D(object):
         self.system[i, (j - 1) % self.size] =  np.random.rand()
         self.system[i, (j + 1) % self.size] =  np.random.rand()
 
-        # track avalanche size and duration
-        if self.in_avalanche:
-            self.current_avalanche_size += 5  # We have replaced 5 sites (1 + 4 neighbours)
-            self.current_avalanche_duration += 1
-        else:
-            self.in_avalanche = True
-            self.current_avalanche_size = 5
-            self.current_avalanche_duration = 1
 
     
+    def get_min(self):
+        min_indices = np.unravel_index(np.argmin(self.system), self.system.shape)
+        min_fitness = self.system[min_indices]
+
+        self.min_fitness.append(min_fitness)
+
+        if not self.threshold_list['threshold']:
+            self.threshold_list['threshold'].append(min_fitness)
+            self.threshold_list['time_step'].append(self.time_step)
+        elif min_fitness > max(self.threshold_list['threshold']):
+            self.threshold_list['threshold'].append(min_fitness)
+            self.threshold_list['time_step'].append(self.time_step)
+
+    def get_avalanche_time(self):
+        if not all(self.system.flat >= max(self.threshold_list['threshold'])):
+            self.avalanche_timer += 1
+        else:
+            self.avalanche_time_list['avalanche_time'].append(self.avalanche_timer)
+            self.avalanche_time_list['time_step'].append(self.time_step)
+            # reset avalanche_timer
+            self.avalanche_timer = 1
+
     def simulate(self, iterations):
+        prev_min_fitness = np.min(self.system)
+        self.time_step = 0  # Reset the time_step
+        avalanche_size = 0
+
         for iteration in range(iterations):
             min_before = np.min(self.system)
             self.update_system()
             min_after = np.min(self.system)
-            
-            if min_after > min_before:
-                # avalanche has ended
-                if self.in_avalanche:
-                    self.avalanche_sizes.append(self.current_avalanche_size)
-                    self.avalanche_durations.append(self.current_avalanche_duration)
-                    self.in_avalanche = False
 
+            if min_after > prev_min_fitness:
+                if not self.in_avalanche:
+                    self.in_avalanche = True
+                    self.avalanche_timer = 1
+                    avalanche_size = 1
+                else:
+                    self.avalanche_timer += 1
+                    avalanche_size += 1
+
+            elif self.in_avalanche:
+                self.get_avalanche_time()
+                self.avalanche_durations.append(self.avalanche_timer)
+                self.avalanche_sizes.append(avalanche_size)
+                self.in_avalanche = False
+                avalanche_size = 0 
+
+            self.get_min() # remember to get min in each step
             self.store_system_properties()
+            prev_min_fitness = min_after
 
             if iteration % 10 == 0:
                 self.plot_system(iteration)
+
+
 
     def plot_system(self, iteration):
         plt.imshow(self.system, cmap='hot', origin='lower')
@@ -80,7 +113,7 @@ class BakSneppen2D(object):
         plt.close()
 
     def store_system_properties(self):
-        self.min_fitness.append(np.min(self.system))
+        
         self.avg_fitness.append(np.mean(self.system))  # Compute average fitness
         self.std_fitness.append(np.std(self.system))  # Compute std dev of fitness
         self.least_fit_location.append(np.unravel_index(np.argmin(self.system), self.system.shape))  # Store least fit location
@@ -89,7 +122,7 @@ if __name__=="__main__":
     save_folder = 'BakSneppen_results'
     size = 100
 
-    iterations = 10000
+    iterations = 1000
 
     model = BakSneppen2D(size, save_folder)
     model.simulate(iterations)
@@ -141,7 +174,7 @@ if __name__=="__main__":
     plt.title('Fitness Variability Evolution in the Bak-Sneppen Model')
     plt.show()
 
-    # Create a histogram of the avalanche sizes
+     # Create a histogram of the avalanche sizes
     # If exhibits self-organized criticality, should see smaller avalanches much more frequent than larger
     plt.figure()
     plt.hist(model.avalanche_sizes, bins=30, edgecolor='black')
