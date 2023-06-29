@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+import powerlaw
 
 class BakSneppen2D(object):
     def __init__(self, size, save_folder):
@@ -29,11 +30,22 @@ class BakSneppen2D(object):
         self.avalanche_durations = []
         self.time_step = 0 
 
+        # Ages: number of iterations it has gone through without mutating
+        self.ages = np.zeros((size, size), dtype=int)
+
 
     def update_system(self):
+        self.ages += 1
         # get the indices of the lowest fitness value
         min_indices = np.unravel_index(np.argmin(self.system), self.system.shape)
         i, j = min_indices
+
+        # Reset the age of the least fit cell and its neighbours
+        self.ages[i, j] = 0
+        self.ages[(i - 1) % self.size, j] = 0
+        self.ages[(i + 1) % self.size, j] = 0
+        self.ages[i, (j - 1) % self.size] = 0
+        self.ages[i, (j + 1) % self.size] = 0
 
         # give a new fitness value to the cell with the lowest value
         self.system[i, j] = np.random.rand()
@@ -118,7 +130,7 @@ class BakSneppen2D(object):
             # Set the previous minimum fitness for the next iteration
             prev_min_fitness = min_after
 
-            if iteration % 10 == 0:
+            if iteration % 1000 == 0:
                 self.plot_system(iteration)
 
 
@@ -138,11 +150,13 @@ class BakSneppen2D(object):
         self.std_fitness.append(np.std(self.system))  # Compute std dev of fitness
         self.least_fit_location.append(np.unravel_index(np.argmin(self.system), self.system.shape))  # Store least fit location
 
+    
+
 if __name__=="__main__":
     save_folder = 'BakSneppen_results'
     size = 100
 
-    iterations = 1000
+    iterations = 50000
 
     model = BakSneppen2D(size, save_folder)
     model.simulate(iterations)
@@ -156,10 +170,10 @@ if __name__=="__main__":
     plt.ylabel('Minimum Fitness')  
     plt.title('Minimum Fitness Evolution in the Bak-Sneppen Model')  
 
-    #Each time an avalanche occurs (i.e., the least fit cell is replaced), the minimum fitness increases 
+    #Each time the least fit cell gets replaced, the minimum fitness increases 
     #because the least fit cell has been replaced by a new one with higher fitness.
     #However, over time, some scells fitness will decrease due to the random "mutations" you're applying, 
-    # causing the minimum fitness to decrease again. This results in the oscillating pattern
+    #causing the minimum fitness to decrease again. This results in the oscillating pattern
 
     # Plot average fitness evolution
     plt.subplot(2, 1, 2)
@@ -242,4 +256,13 @@ if __name__=="__main__":
     plt.xlabel('Avalanche Duration (log scale)')
     plt.ylabel('Avalanche Size (log scale)')
     plt.title('Avalanche Size vs Duration')
+    plt.show()
+
+    # Ages
+    # higher age therefore means that a cell has remained stable for a longer period of time
+    plt.imshow(model.ages, cmap='viridis')
+    plt.colorbar(label='Age')
+    plt.title('Age distribution after 50000 iterations')
+    plt.xlabel('Column')
+    plt.ylabel('Row')
     plt.show()
