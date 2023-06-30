@@ -9,13 +9,12 @@ class PercolationModel2D(object):
     '''
 
     # Just keeping global variables for reference:
-    migration_threshold = 0.065       # Without simple migration all of the environment events much more clear
-    burnrate = 0.2      # Energy Consumptiom
-    growthrate = 0.2    # Absolute Value
+    migration_threshold = 0.1       # Without simple migration all of the environment events much more clear
+    growthrate = 0.1    # Energy Consumptio/Growth Value
     emissions = 0.0     # Current emissions, NOT Additive 
     emmigration_size = 0.1
-    energy_replenish_chance = 0.1
-    energy_replenish_size = 0.1
+    energy_replenish_chance = 0.4
+    energy_replenish_size = 0.4
     energy_barrier = 0.8
     view_distance = 3    # Quarter Map
 
@@ -45,9 +44,12 @@ class PercolationModel2D(object):
 
         '''
 
-        self.pop_dens = np.random.rand(self.N, self.N)       # population grid [0, 1]
+        #self.pop_dens = np.random.rand(self.N, self.N)       # population grid [0, 1]
+        self.pop_dens = np.zeros((self.N, self.N))       # population grid [0, 1]
         self.energy = np.random.rand(self.N, self.N)    # energy grid [0, 1]
         self.type = init_water_map(self.N, 0.2 , 2, 5, 1)
+        #self.type = np.zeros((self.N, self.N))       # population grid [0, 1]
+        self.fitness = np.zeros((self.N, self.N))
 
         # I believe this is too much, we can model existence/non existence of water just by changing cell type to land/toxic water etc.
         #self.water = np.zeros((self.N, self.N)) # grid to save water volumn value
@@ -78,7 +80,6 @@ class PercolationModel2D(object):
         self.next_pop_dens = copy.deepcopy(self.pop_dens)
         self.next_energy = copy.deepcopy(self.energy)
         self.next_type = copy.deepcopy(self.type)
-        self.fitness = self.update_fitness()
 
 
     # Helper Functions
@@ -215,15 +216,19 @@ class PercolationModel2D(object):
         simple_migration = 0
         for i in range(self.N):
             for j in range(self.N):
-                if self.type[i,j] == 0 and self.fitness[i,j] < self.migration_threshold:
+                if self.type[i,j] == 0 and self.fitness[i,j] < self.migration_threshold and self.pop_dens[i,j] > self.emmigration_size:
                     destinations = self.neighbour_feature(i, j, extent=self.view_distance)
                     for k in range(len(destinations)):
-                        if self.pop_dens[destinations[k][0], destinations[k][1]] < 1.0 - self.emmigration_size and self.type[destinations[k][0], destinations[k][1]] == 0:
+                        if self.type[destinations[k][0], destinations[k][1]] == 0:
                             self.next_pop_dens[destinations[k][0], destinations[k][1]] += self.emmigration_size
                             self.next_pop_dens[i,j] -= self.emmigration_size
                             simple_migration += self.emmigration_size
                             if self.next_pop_dens[i,j] < 0:       # So that we do not have negative people
                                 self.next_pop_dens[i,j] = 0
+                            break
+                        if k == len(destinations)-1:       # loop ended = nowhere to leave, they die :(
+                            climate_migration_dead += size
+                            self.next_pop_dens[i, j] = 0
         self.simple_migration.append(simple_migration)
         self.pop_dens = self.next_pop_dens
 
@@ -242,12 +247,13 @@ class PercolationModel2D(object):
                     destinations = self.neighbour_feature(i, j, extent=self.view_distance)
                     for k in range(len(destinations)):
                         # Should play with border for capacity
-                        if self.pop_dens[destinations[k][0], destinations[k][1]] < 1.0 - size and self.type[destinations[k][0], destinations[k][1]] == 0:
+                        if self.type[destinations[k][0], destinations[k][1]] == 0:
                             self.next_pop_dens[destinations[k][0], destinations[k][1]] += size
                             self.next_pop_dens[i,j] -= size
+                            climate_migration_displaced += size
                             if self.next_pop_dens[i,j] < 0:       # So that we do not have negative people
                                 self.next_pop_dens[i,j] = 0
-                                climate_migration_displaced += size
+                            break
                         if k == len(destinations)-1:       # loop ended = nowhere to leave, they die :(
                             climate_migration_dead += size
                             self.next_pop_dens[i, j] = 0
@@ -261,21 +267,22 @@ class PercolationModel2D(object):
         '''
         Simulates population growth/decline based on the available resources
 
-        burnrate = proportion of energy used by population
+        growthrate = proportion of energy used by population
         growthrate = proportion of population growth if energy is sufficient
         '''
         emissions = 0
         for i in range(self.N):
             for j in range(self.N):
                 # Growth
-                if self.energy[i,j] > self.pop_dens[i,j]*self.burnrate:
-                    self.next_energy[i,j] -= self.pop_dens[i,j]*self.burnrate
-                    self.next_pop_dens[i,j] += self.pop_dens[i,j]*self.growthrate
-                    emissions += self.pop_dens[i,j]*self.burnrate
+                if self.energy[i,j] > self.growthrate:
+                    self.next_energy[i,j] -= self.growthrate
+                    self.next_pop_dens[i,j] += self.growthrate
+                    emissions += self.growthrate
                 # Decline
                 else:
-                    self.next_pop_dens[i,j] -= self.pop_dens[i,j]*self.growthrate
-        self.emissions += emissions/self.Ntot
+                    self.next_pop_dens[i,j] /= 2
+        self.emissions = emissions/self.Ntot
+        self.energy = self.next_energy
         self.pop_dens = self.next_pop_dens  # Update Map
 
     def upd_water_level(self):
@@ -286,7 +293,7 @@ class PercolationModel2D(object):
             for j in range(self.N):
                 if self.type[i,j] == 0: continue
                 else:
-                    if np.random.rand() < np.sqrt(self.emissions):
+                    if np.random.rand() < self.emissions:
                         neighbors = self.getVonNeumannNeighbourhood(i,j, extent = 1)
                         random.shuffle(neighbors)
                         water_expansion_cell = neighbors[np.random.randint(len(neighbors))]
@@ -334,17 +341,25 @@ class PercolationModel2D(object):
         2. Cells do not make the attempt with probability 1-P
         '''
         
-        # Preparing Map and Values
-        #self.upd_available_water_map()
         # Find Utility and Initial Migration
-        self.update_fitness()
-        self.land_migration()
         # Emissions, Sea Rise
         self.emissions = 0
         self.growth()
         self.upd_water_level()
-        # Climate Migration
-        self.climate_emmigration()
+        self.update_fitness()
+
+        loop = 0
+        while True:
+            loop += 1
+            migrants_temp = 0
+            self.climate_emmigration()
+            self.land_migration()
+            migrants_temp += self.simple_migration[-1] + self.climate_migration_displaced[-1] + self.climate_migration_dead[-1]
+            if migrants_temp < 1: break
+            if loop > 100:
+                print("Overlooped")                
+                break
+
         # Replenishing energy
         self.spawn_energy()
         pop_dens_mean, energy_mean, fitness_mean = self.update_stats()
