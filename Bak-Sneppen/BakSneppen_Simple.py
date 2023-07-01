@@ -7,7 +7,7 @@ from esda.moran import Moran
 
 class BakSneppen2D(object):
     """
-    BakSneppen2D class that represents a 2D Bak-Sneppen model, a model of biological evolution.
+    BakSneppen2D class that represents a 2D Bak-Sneppen model
     """
 
     def __init__(self, size, save_folder):

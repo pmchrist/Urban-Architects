@@ -5,8 +5,21 @@ import matplotlib.pyplot as plt
 import os
 
 class BakSneppen2D(object):
+    """
+    A class representing a 2D Bak-Sneppen model with a defined population density,
+    accounting for various parameters that contribute to the evolution.
+    """
 
     def __init__(self, size, save_folder, alpha, beta, gamma, delta, labda):
+        """
+        Initializes the BakSneppen2D object with the given parameters.
+
+        Parameters:
+        size (int): The size of the 2D system.
+        save_folder (str): The directory to save output images.
+        alpha, beta, gamma, delta (float): Parameters contributing to the evolution of the system.
+        labda (float): The mutation rate of the system.
+        """
 
         # use a seed for repeatability
         # np.random.seed(2)
@@ -28,10 +41,16 @@ class BakSneppen2D(object):
         self.min_fitness = []
 
     def getMooreNeighbourhood(self, i,j, extent=1):
-        '''
-        Returns a set of indices corresponding to the Moore Neighbourhood
-        (These are the cells immediately adjacent to (i,j), plus those diagonally adjacent)
-        '''
+        """
+        Returns a set of indices corresponding to the Moore Neighbourhood.
+
+        Parameters:
+        i, j (int): The coordinates of the current cell.
+        extent (int): The range for the Moore Neighbourhood. Default is 1.
+
+        Returns:
+        list: A list of indices representing the Moore Neighbourhood.
+        """
 
         # Check for incorrect input
         # Make it a test later
@@ -57,18 +76,53 @@ class BakSneppen2D(object):
         return (1 / (std * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((val - mean)/ std)**2)
 
     def average_density(self, indices):
+        """
+        Calculates the average population density of a given set of cells.
+
+        Parameters:
+        indices (list): List of indices of cells.
+
+        Returns:
+        float: The average population density.
+        """
         neighbour_populations = [self.system[cell[0], cell[1]] for cell in indices]
         return sum(neighbour_populations) / len(neighbour_populations)
     
     def fitness(self, density_ij, average_density_ij):
+        """
+        Calculates the fitness of a cell given its density and the average density of the system.
+
+        Parameters:
+        density_ij (float): The density of the cell.
+        average_density_ij (float): The average density of the system.
+
+        Returns:
+        float: The calculated fitness.
+        """
         return 0 * np.exp(-self.labda * (density_ij - average_density_ij) ** 2) + 1 * self.gaussian(density_ij, 0.5, 0.1)
 
     def new_density(self, average_density, local_density, fitness, random_factor):
+        """
+        Calculates the new density of a cell given the average density of the system,
+        its current density, fitness, and a random factor.
+
+        Parameters:
+        average_density (float): The average density of the system.
+        local_density (float): The current density of the cell.
+        fitness (float): The fitness of the cell.
+        random_factor (float): A random factor contributing to the density.
+
+        Returns:
+        float: The new density of the cell.
+        """
         assert self.alpha + self.beta + self.gamma + self.delta == 1
         return self.alpha * average_density + self.beta * local_density + self.gamma * fitness + self.delta * random_factor
         
 
     def update_system(self):
+        """
+        Updates the system by recalculating the densities of the cells based on their fitness.
+        """
 
         # get the indices of the lowest fitness value
         min_indices = np.unravel_index(np.argmin(self.system), self.system.shape)
@@ -101,6 +155,12 @@ class BakSneppen2D(object):
         # self.system[i, (j + 1) % self.size] =  np.random.rand()
     
     def simulate(self, iterations):
+        """
+        Simulates the system for a given number of iterations, updating the system and storing its properties.
+
+        Parameters:
+        iterations (int): The number of iterations to run the simulation.
+        """
         self.plot_system(0, initial=True)
         for iteration in range(iterations):
             self.update_system()
@@ -110,6 +170,14 @@ class BakSneppen2D(object):
                 self.plot_system(iteration)
 
     def plot_system(self, iteration, initial=False, close=True):
+        """
+        Plots the system at a given iteration.
+
+        Parameters:
+        iteration (int): The iteration number.
+        initial (bool): A flag indicating whether the system is at its initial state. Default is False.
+        close (bool): A flag indicating whether to close the plot after saving. Default is True.
+        """
         plt.imshow(self.system, cmap='hot', origin='lower')
         plt.colorbar(label='Population density')
         plt.clim(0, 1)
@@ -128,6 +196,9 @@ class BakSneppen2D(object):
             plt.close()
 
     def store_system_properties(self):
+        """
+        Stores the system properties by appending the minimum fitness to the min_fitness list.
+        """
         self.min_fitness.append(np.min(self.system))
 
 

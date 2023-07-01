@@ -4,8 +4,18 @@ import os
 import powerlaw
 
 class BakSneppen2D(object):
+    """
+    A class representing a 2D Bak-Sneppen model, including avalanche calculations
+    """
     def __init__(self, size, save_folder):
-        # use a seed for repeatability
+        """
+        Initializes the BakSneppen2D object with the given size and save_folder.
+
+        Parameters:
+        size (int): The size of the 2D system.
+        save_folder (str): The directory to save output images.
+        """
+       
         np.random.seed(2)
 
         # initialize the system with random population density values
@@ -35,6 +45,10 @@ class BakSneppen2D(object):
 
 
     def update_system(self):
+        """
+        Updates the system by identifying the cell with the lowest fitness value and its neighbors
+        and replacing them with new random values. Also increments the ages of all cells.
+        """
         self.ages += 1
         min_indices = np.unravel_index(np.argmin(self.system), self.system.shape)
         i, j = min_indices
@@ -51,7 +65,10 @@ class BakSneppen2D(object):
 
     
     def get_min(self):
-    # Get the indices of the cell with the minimum fitness in the system
+        """
+        Calculates the minimum fitness in the system and updates the threshold list accordingly.
+        """
+        # Get the indices of the cell with the minimum fitness in the system
         min_indices = np.unravel_index(np.argmin(self.system), self.system.shape)
         # Get the minimum fitness value
         min_fitness = self.system[min_indices]
@@ -70,6 +87,9 @@ class BakSneppen2D(object):
 
 
     def get_avalanche_time(self):
+        """
+        Calculates the duration of an avalanche, an event where the minimum fitness increases.
+        """
         # If any cell in the system has a fitness less than the current threshold, increment the avalanche timer
         if not all(self.system.flat >= max(self.threshold_list['threshold'])):
             self.avalanche_timer += 1
@@ -82,6 +102,13 @@ class BakSneppen2D(object):
             self.avalanche_timer = 1
 
     def simulate(self, iterations):
+        """
+        Simulates the system for a given number of iterations, updating the system, 
+        storing its properties, and calculating avalanches.
+
+        Parameters:
+        iterations (int): The number of iterations to run the simulation.
+        """
         # Get the initial minimum fitness of the system
         prev_min_fitness = np.min(self.system)
         # Reset the time_step and set initial avalanche size
@@ -128,6 +155,12 @@ class BakSneppen2D(object):
 
 
     def plot_system(self, iteration):
+        """
+        Plots the system at a given iteration.
+
+        Parameters:
+        iteration (int): The iteration number.
+        """
         plt.imshow(self.system, cmap='hot', origin='lower')
         plt.colorbar(label='Fitness')
         plt.title(f'Bak-Sneppen model in 2D (iteration {iteration + 1})')
@@ -137,6 +170,9 @@ class BakSneppen2D(object):
         plt.close()
 
     def store_system_properties(self):
+        """
+        Stores the system properties such as avg_fitness, std_fitness, least_fit_location.
+        """
         
         self.avg_fitness.append(np.mean(self.system))  # Compute average fitness
         self.std_fitness.append(np.std(self.system))  # Compute std dev of fitness
@@ -285,21 +321,6 @@ if __name__=="__main__":
     print("p-value, duration: ", p5)
     print("Power-law exponent, duration: ", fit2.power_law.alpha)
 
-    # Age distribution
-    # Kolmogorov-Smirnov to check power
-    ages = model.ages.flatten()
-    fit = powerlaw.Fit(np.array(ages), discrete=True, verbose=False)
-    # comparing the power-law distribution to an exponential distribution
-    R, p = fit.distribution_compare('power_law', 'exponential', normalized_ratio=True)
-    print("Test statistic: ", R)
-    print("p-value: ", p)
-    print("Power-law exponent: ", fit.power_law.alpha)
-
-    # comparing the power-law distribution to a log-normal distribution
-    R, p = fit.distribution_compare('power_law', 'lognormal', normalized_ratio=True)
-    print("Test statistic: ", R)
-    print("p-value: ", p)
-    print("Power-law exponent: ", fit.power_law.alpha)
 
     
 
