@@ -46,9 +46,14 @@ Insert here
 
 Insert here
 
-## Percolation Model
+## Topographical (CA) Model
 ### Overview of some results
 We managed to create a model which shows complex dynamics. We can see how overpopulation leads to the collapse in the population or extreme overcrowding. Meanwhile, increase in emissions which is linked to the rising water level and following flooding exacerbates problem further and makes emmigration more extreme. We can see in the patterns that once critical capacity is achieved rising water becomes deadly, and more extreme occurences of people moving are much more common. (Results are on the slides)
+
+To run model based on population density go to "CA Model" folder and run:
+python __init__.py --function simple
+To run model based on fitness function and growth go to "CA Model" folder and run:
+python __init__.py --function complicated
 
 
 ## Visualization:  
