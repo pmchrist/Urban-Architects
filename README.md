@@ -2,12 +2,21 @@
 2023 Complex Systems Simulation Group 11
 
 Isabel Klennert, Christos Perchanidis, Frenk Klein Schiphorst, Chang Lin
-## Introduction:  
+## Motivation:  
 
 This project looks into the dynamics of the interactions between regional geography, population, climate, and energy.  
 A CA (cellular automata) model is used to simulate this complex system, and the Bak-Sneppen model is used as an inspiration.  
 The initial CA model follows the percolation model see Landis 1999, "The Fermi Paradox: An Approach Based on Percolation Theory", JBIS, 51, 163-166
 http://www.geoffreylandis.com/percolation.htp  
+
+
+## Research Questions
+
+Insert
+
+## Hypothesis
+
+Insert
 
 ## Project Plan
 1. Build simple Bak-Sneppen Model
