@@ -10,10 +10,10 @@ class PercolationModel2D(object):
     '''
 
     # Just keeping global variables for reference:
-    green_transition = 0.05         # Lower means lower emissions
+    green_transition = 0.1         # Lower means lower emissions
     migration_threshold = 1.0       # Threshold over which people want to migrate
-    growthrate = 1.2                # Multiplier for the population
-    view_distance = 2               # How far people can move (Increasing it creates more beautiful plots)
+    growthrate = 0.35                # Multiplier for the population
+    view_distance = 1               # How far people can move (Increasing it creates more beautiful plots)
 
     # Just describing global arrays of environment here:
     pop_dens = None     # Population density map
@@ -53,8 +53,8 @@ class PercolationModel2D(object):
         Each point has some unique parameters, on which something is determined
 
         '''
-        self.pop_dens = np.random.rand(self.N, self.N)         # Random Grid 
-        #self.pop_dens = np.zeros((self.N, self.N))              # Empty Grid
+        #self.pop_dens = np.random.rand(self.N, self.N)         # Random Grid 
+        self.pop_dens = np.zeros((self.N, self.N))              # Empty Grid
         self.type = init_water_map(self.N, 0.2, 2, 5, 1)        # Map with water
         #self.type = np.zeros((self.N, self.N))                 # Empty Map
 
@@ -120,9 +120,9 @@ class PercolationModel2D(object):
     def migration_simple(self, i, j):
         # Do we need to leave
         if self.pop_dens[i, j] < self.migration_threshold*1.5 and self.type[i,j] == 0:
-            return
-        if self.pop_dens[i, j] == 0 and self.type[i,j] != 0:
-            return
+            return 0
+        if self.pop_dens[i, j] <= 0:
+            return 0
         # How many
         if self.type[i,j] == 0:
             #size = self.pop_dens[i,j] - self.migration_threshold
@@ -134,12 +134,13 @@ class PercolationModel2D(object):
         destination_candidates = self.getMooreNeighbourhood(i, j, extent=self.view_distance)
         destinations = []
         for cell in destination_candidates:
-            if self.type[cell[0], cell[1]] == 0 and not(cell in self.used_cells):
+            if self.type[cell[0], cell[1]] == 0:
                 destinations.append(cell)
         # They die if no way to go
         if len(destinations) == 0:
             self.dead_migrants_current += size
             self.next_pop_dens[i, j] = 0
+            return 0
         else:
             self.used_cells.append([i,j])
             random.shuffle(destinations)
@@ -148,6 +149,7 @@ class PercolationModel2D(object):
                 self.next_pop_dens[destinations[k][0], destinations[k][1]] += size
                 self.next_pop_dens[i,j] -= size
                 self.migrants_current += size
+        return size
     
     # Growth over the map
     def growth_simple(self, size):
@@ -156,7 +158,7 @@ class PercolationModel2D(object):
             j = random.randint(0, self.N-1)
             # Only spawn on land
             if (self.type[i,j] == 0):
-                self.pop_dens[i,j] *= self.growthrate
+                self.pop_dens[i,j] += self.growthrate
     
     # Updating water level
     def upd_water_level(self):
@@ -200,29 +202,33 @@ class PercolationModel2D(object):
         # Updating water level and emissions
         self.upd_water_level()
         # Grow from Fixed Points
-        self.growth_simple(int(np.sqrt(self.N)))           # One Point
-        #self.pop_dens[int(self.N/2), int(self.N/2)] += 4   # Few Points
-        #self.pop_dens[int(self.N/4), int(self.N/4)] += 4
-        #self.pop_dens[int(self.N/4), int(self.N/2)] += 4
-        #self.pop_dens[int(self.N/2), int(self.N/4)] += 4
+        self.growth_simple(int(self.N))                                     # Random Points
+        #self.pop_dens[int(self.N/2), int(self.N/2)] += self.growthrate*np.sqrt(self.N)      # One Point Growth
 
         self.migrants_current = 0
         self.dead_migrants_current = 0
-        self.used_cells = []
+        loop = 0
         # Steps
-        for i in range(self.N):
-            for j in range(self.N):
-                self.migration_simple(i, j)
-                self.pop_dens = self.next_pop_dens
+        #for i in range(self.N):
+        #    for j in range(self.N):
+        #        self.migration_simple(i, j)
+        #        self.pop_dens = self.next_pop_dens
         # All together changed during the step, to show avalanches and patterns more clearly
-        #while True:
-        #    for i in range(self.N):
-        #        for j in range(self.N):
-        #            self.migration_simple(i, j)
-        #            self.pop_dens = self.next_pop_dens
-        #    if self.migrants_current - migrants_prev < self.N: break
-        #    migrants_prev = self.migrants_current
+        while True:
+            self.used_cells = []
+            loop += 1
+            migrants_temp = 0
+            for i in range(self.N):
+                for j in range(self.N):
+                    migrants_temp += self.migration_simple(i, j)
+                    self.pop_dens = self.next_pop_dens
+            if migrants_temp < 1: break
+            if loop > 100:
+                print("Overlooped")                
+                break
+        if self.migrants_current < 0.01: self.migrants_current = 0
         self.migrants.append(self.migrants_current) 
+        if self.dead_migrants_current < 0.01: self.dead_migrants_current = 0
         self.dead_migrants.append(self.dead_migrants_current)
         pop_dens_mean = self.update_stats()
 
@@ -232,5 +238,5 @@ class PercolationModel2D(object):
         if len(self.migrants) > 0:
             print("Displaced: ", self.migrants[-1])
         if len(self.dead_migrants) > 0:
-            print("Deseased: ", self.dead_migrants[-1])
+            print("Diseased: ", self.dead_migrants[-1])
         print("\n")

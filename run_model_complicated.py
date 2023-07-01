@@ -23,7 +23,7 @@ while istep < nsteps:
     print("Current Step: ", istep)
     # Draw the population automaton
     vis_param = cell.pop_dens
-    hist = ax.pcolor(vis_param, edgecolors='black', vmin=0, vmax=1)
+    hist = ax.pcolor(vis_param, edgecolors='black', vmin=0, vmax=2.0)
     #hist = ax.pcolor(cell.nextgrid,edgecolors='black', cmap='binary')
 
     plt.draw()
@@ -37,6 +37,15 @@ while istep < nsteps:
 
     plt.draw()
     plt.savefig('./results/results_complicated/energy/energy'+str(istep).zfill(nzeros)+".png")      # change address i have linux sorry :)
+
+
+    # Draw the energy automaton
+    vis_param = cell.fitness
+    hist = ax.pcolor(vis_param, edgecolors='black', vmin=0, vmax=1)
+    #hist = ax.pcolor(cell.nextgrid,edgecolors='black', cmap='binary')
+
+    plt.draw()
+    plt.savefig('./results/results_complicated/fitness/fitness'+str(istep).zfill(nzeros)+".png")      # change address i have linux sorry :)
 
 
     # Draw the energy automaton
@@ -57,9 +66,9 @@ while istep < nsteps:
         R, p = results.distribution_compare('power_law', 'lognormal')
         print("Powerlaw and Lognormal", R, p)
         x = np.linspace(0, istep, len(data))
-        y = sorted(data)
+        y = sorted(data, reverse=True)
         ax.clear()
-        plt.plot(x, y, 'o', color='black')
+        plt.loglog(x, y, 'o', color='black')
         plt.savefig('./results/results_complicated/land_migrants'+str(istep).zfill(nzeros)+".png", dpi=200)      # change address i have linux sorry :)
 
     # Making the fit for migrants
@@ -72,24 +81,24 @@ while istep < nsteps:
         R, p = results.distribution_compare('power_law', 'lognormal')
         print("Powerlaw and Lognormal", R, p)
         x = np.linspace(0, istep, len(data))
-        y = sorted(data)
+        y = sorted(data, reverse=True)
         ax.clear()
-        plt.plot(x, y, 'o', color='black')
+        plt.loglog(x, y, 'o', color='black')
         plt.savefig('./results/results_complicated/climate_survivor_migrants'+str(istep).zfill(nzeros)+".png", dpi=200)      # change address i have linux sorry :)
 
     # Making the fit for migrants
     data = cell.climate_migration_dead
     if ((istep+2) % 100) == 0:
-        print("\nResults of Fit for Climate Disease:")
+        print("\nResults of Fit for Climate Diseased:")
         results = powerlaw.Fit(data)
         print("alpha", results.power_law.alpha)
         print("xmin:", results.power_law.xmin)
         R, p = results.distribution_compare('power_law', 'lognormal')
         print("Powerlaw and Lognormal", R, p)
         x = np.linspace(0, istep, len(data))
-        y = sorted(data)
+        y = sorted(data, reverse=True)
         ax.clear()
-        plt.plot(x, y, 'o', color='black')
+        plt.loglog(x, y, 'o', color='black')
         plt.savefig('./results/results_complicated/climate_dead_migrants'+str(istep).zfill(nzeros)+".png", dpi=200)      # change address i have linux sorry :)
         
 

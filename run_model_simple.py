@@ -24,7 +24,7 @@ while istep < nsteps:
     print("Current Step: ", istep)
     # Draw the population automaton
     vis_param = cell.pop_dens
-    hist = ax.pcolor(vis_param, edgecolors='black', vmin=0, vmax=1)
+    hist = ax.pcolor(vis_param, edgecolors='black', vmin=0, vmax=1.2)
     #hist = ax.pcolor(cell.nextgrid,edgecolors='black', cmap='binary')
 
     plt.draw()
@@ -48,24 +48,24 @@ while istep < nsteps:
         R, p = results.distribution_compare('power_law', 'lognormal')
         print("Powerlaw and Lognormal", R, p)
         x = np.linspace(0, istep, len(data))
-        y = sorted(data)
+        y = sorted(data, reverse=True)
         ax.clear()
-        plt.plot(x, y, 'o', color='black')
+        plt.loglog(x, y, 'o', color='black')
         plt.savefig('./results/results_simple/survivor_migrants'+str(istep).zfill(nzeros)+".png", dpi=200)      # change address i have linux sorry :)
 
     # Making the fit for migrants
     data = cell.dead_migrants
     if ((istep+2) % 100) == 0:
-        print("\nResults of Climate Migration Fit:")
+        print("\nResults of Climate Diseased Fit:")
         results = powerlaw.Fit(data)
         print("alpha", results.power_law.alpha)
         print("xmin:", results.power_law.xmin)
         R, p = results.distribution_compare('power_law', 'lognormal')
         print("Powerlaw and Lognormal", R, p)
         x = np.linspace(0, istep, len(data))
-        y = sorted(data)
+        y = sorted(data, reverse=True)
         ax.clear()
-        plt.plot(x, y, 'o', color='black')
+        plt.loglog(x, y, 'o', color='black')
         plt.savefig('./results/results_simple/dead_migrants'+str(istep).zfill(nzeros)+".png", dpi=200)      # change address i have linux sorry :)
         
 
