@@ -6,10 +6,19 @@ from esda.moran import Moran
 
 
 class BakSneppen2D(object):
+    """
+    BakSneppen2D class that represents a 2D Bak-Sneppen model, a model of biological evolution.
+    """
 
     def __init__(self, size, save_folder):
+        """
+        Initializes the BakSneppen2D object with given size and save_folder.
 
-        # use a seed for repeatability
+        Parameters:
+        size (int): The size of the 2D system.
+        save_folder (str): The directory to save output images.
+        """
+
         np.random.seed(2)
 
         # initialize the system with random population density values
@@ -22,13 +31,16 @@ class BakSneppen2D(object):
         # initialize lists for storing interesting parameter values
         self.min_fitness = []
         self.avg_fitness = [] 
-        
         self.std_fitness = []
         self.least_fit_location = []
         self.distances = []
 
 
     def update_system(self):
+        """
+        Updates the system by identifying the cell with the lowest fitness value and replacing it with a new random value.
+        Also updates the fitness of neighboring cells.
+        """
 
         # get the indices of the lowest fitness value
         min_indices = np.unravel_index(np.argmin(self.system), self.system.shape)
@@ -45,6 +57,12 @@ class BakSneppen2D(object):
 
     
     def simulate(self, iterations):
+        """
+        Simulates the system for a given number of iterations.
+
+        Parameters:
+        iterations (int): The number of iterations to run the simulation.
+        """
         for iteration in range(iterations):
             self.update_system()
             self.store_system_properties()
@@ -53,6 +71,12 @@ class BakSneppen2D(object):
                 self.plot_system(iteration)
 
     def plot_system(self, iteration):
+        """
+        Plots the system at a given iteration.
+
+        Parameters:
+        iteration (int): The iteration number.
+        """
         plt.imshow(self.system, cmap='hot', origin='lower')
         plt.colorbar(label='Fitness')
         plt.title(f'Bak-Sneppen model in 2D (iteration {iteration + 1})')
@@ -62,28 +86,15 @@ class BakSneppen2D(object):
         plt.close()
 
     def store_system_properties(self):
+        """
+        Stores the system properties such as min_fitness, avg_fitness, std_fitness, least_fit_location and distances.
+        """
         self.min_fitness.append(np.min(self.system))
         self.avg_fitness.append(np.mean(self.system))  # Compute average fitness
         self.std_fitness.append(np.std(self.system))  # Compute std dev of fitness
         self.least_fit_location.append(np.unravel_index(np.argmin(self.system), self.system.shape))  # Store least fit location
         # Store distances between pixel pairs for Moran's I calculation
         self.distances.append(self.calculate_distances())
-
-    def calculate_distances(self):
-        distances = []
-        for i in range(self.size):
-            for j in range(self.size):
-                for k in range(i, self.size):
-                    for l in range(self.size):
-                        distance = np.sqrt((i - k)**2 + (j - l)**2)
-                        distances.append(distance)
-        return distances
-
-    def calculate_morans_i(self):
-        all_pixel_values = self.system.flatten()
-        all_distances = np.concatenate(self.distances)
-        morans_i = Moran(all_pixel_values, all_distances)
-        print("Moran's I:", morans_i.I)
 
 
 
@@ -97,8 +108,7 @@ if __name__=="__main__":
 
     model = BakSneppen2D(size, save_folder)
     model.simulate(iterations)
-    model.calculate_morans_i()
-    print("Final Moran's I:", model.morans_i)
+
 
     # Plot minimum fitness evolution
     plt.figure(figsize=(10, 8))
@@ -112,7 +122,7 @@ if __name__=="__main__":
     #Each time an avalanche occurs (i.e., the least fit cell is replaced), the minimum fitness increases 
     #because the least fit cell has been replaced by a new one with higher fitness.
     #However, over time, some scells fitness will decrease due to the random "mutations" you're applying, 
-    # causing the minimum fitness to decrease again. This results in the oscillating pattern
+    #causing the minimum fitness to decrease again. This results in the oscillating pattern
 
     # Plot average fitness evolution
     plt.subplot(2, 1, 2)
