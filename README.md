@@ -60,8 +60,8 @@ pip3 install -r requirements.txt
     ├── README.md          <- 
     ├── config.py          <- 
     ├── requirements.tex          <- 
-    ├── Bak-Sneppen                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
+    ├── Bak-Sneppen                <- 
+    │   ├── __init__.py    <- 
     │   │
     │   ├── Results          <- 
     │   │  
@@ -75,8 +75,8 @@ pip3 install -r requirements.txt
     │  
     │   
     │       
-    ├── CA Model               <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
+    ├── CA Model               <- 
+    │   ├── __init__.py    <- 
     │   │
     │   ├── historical_res  <-          
     │   │   
@@ -89,7 +89,7 @@ pip3 install -r requirements.txt
     │   ├── run_model_simple.py  
     │   └── visualization  
     │      
-    ├── Legacy Files            <- Source code for use in this project.
+    ├── Legacy Files            <- .
     │   
 
 --------
@@ -97,11 +97,11 @@ pip3 install -r requirements.txt
 
 ## References
 
-Siqin Wang, Yan Liu, Yongjiu Feng & Zhenkun Lei (2021) To move or stay? A cellular automata model to predict urban growth in coastal regions amidst rising sea levels, International Journal of Digital Earth, 14:9, 1213-1235, DOI: 10.1080/17538947.2021.1946178
+Siqin Wang, Yan Liu, Yongjiu Feng & Zhenkun Lei (2021) To move or stay? A cellular automata model to predict urban growth in coastal regions amidst rising sea levels, International Journal of Digital Earth, 14:9, 1213-1235
 
-Yang, Jianxin & Tang, Wenwu & Gong, Jian & Shi, Rui & Zheng, Minrui & Dai, Yunzhe. (2023). Simulating urban expansion using cellular automata model with spatiotemporally explicit representation of urban demand. Landscape and Urban Planning. 231. 104640. 10.1016/j.landurbplan.2022.104640. 
+Yang, Jianxin & Tang, Wenwu & Gong, Jian & Shi, Rui & Zheng, Minrui & Dai, Yunzhe. (2023). Simulating urban expansion using cellular automata model with spatiotemporally explicit representation of urban demand. Landscape and Urban Planning. 231. 104640. 
 
-Hainan Yang, Huizhen Su, Liangjie Yang, "Evolution of Urban Resilience from a Multiscale Perspective: Evidence from Five Provinces in Northwest China", Complexity, vol. 2023, Article ID 2352094, 23 pages, 2023. https://doi.org/10.1155/2023/2352094
+Hainan Yang, Huizhen Su, Liangjie Yang, "Evolution of Urban Resilience from a Multiscale Perspective: Evidence from Five Provinces in Northwest China", Complexity, vol. 2023, Article ID 2352094, 23 pages, 2023. 
 
 
 
