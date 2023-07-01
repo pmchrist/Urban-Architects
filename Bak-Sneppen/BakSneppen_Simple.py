@@ -18,12 +18,13 @@ class BakSneppen2D(object):
         size (int): The size of the 2D system.
         save_folder (str): The directory to save output images.
         """
-
+        
         np.random.seed(2)
-
+        assert isinstance(size, int), "Size should be an integer"
         # initialize the system with random population density values
         self.size = size
         self.system = np.random.rand(size, size)
+        
 
         # set global parameters
         self.save_folder = save_folder
@@ -33,7 +34,6 @@ class BakSneppen2D(object):
         self.avg_fitness = [] 
         self.std_fitness = []
         self.least_fit_location = []
-        self.distances = []
 
 
     def update_system(self):
@@ -44,10 +44,13 @@ class BakSneppen2D(object):
 
         # get the indices of the lowest fitness value
         min_indices = np.unravel_index(np.argmin(self.system), self.system.shape)
+        min_value = self.system[min_indices]
         i, j = min_indices
 
         # give a new fitness value to the cell with the lowest value
         self.system[i, j] = np.random.rand()
+
+        assert self.system[min_indices] != min_value, "System did not update"
 
         # # also update the neighbors, where we use periodic boundary conditions
         self.system[(i - 1) % self.size, j] =  np.random.rand()
@@ -77,6 +80,7 @@ class BakSneppen2D(object):
         Parameters:
         iteration (int): The iteration number.
         """
+
         plt.imshow(self.system, cmap='hot', origin='lower')
         plt.colorbar(label='Fitness')
         plt.title(f'Bak-Sneppen model in 2D (iteration {iteration + 1})')
@@ -89,19 +93,31 @@ class BakSneppen2D(object):
         """
         Stores the system properties such as min_fitness, avg_fitness, std_fitness, least_fit_location and distances.
         """
-        self.min_fitness.append(np.min(self.system))
-        self.avg_fitness.append(np.mean(self.system))  # Compute average fitness
-        self.std_fitness.append(np.std(self.system))  # Compute std dev of fitness
+        min_fitness = np.min(self.system)
+        avg_fitness = np.mean(self.system)
+        std_fitness = np.std(self.system)
+        
+        self.min_fitness.append(min_fitness)
+        self.avg_fitness.append(avg_fitness)
+        self.std_fitness.append(std_fitness)
+
         self.least_fit_location.append(np.unravel_index(np.argmin(self.system), self.system.shape))  # Store least fit location
-        # Store distances between pixel pairs for Moran's I calculation
-        self.distances.append(self.calculate_distances())
+
+        assert self.min_fitness[-1] == min_fitness, "Min fitness not stored correctly"
+        assert self.avg_fitness[-1] == avg_fitness, "Avg fitness not stored correctly"
+        assert self.std_fitness[-1] == std_fitness, "Std fitness not stored correctly"
 
 
 
 
 
 if __name__=="__main__":
-    save_folder = 'BakSneppen_results'
+    # Get the absolute path of the directory where the script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Define your save_folder relative to the script location
+    save_folder = os.path.join(script_dir, 'Results', 'BakSneppen_results')
+
     size = 100
 
     iterations = 100

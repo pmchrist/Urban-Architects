@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import os
 import powerlaw
 
-class BakSneppen2D(object):
+class BakSneppen2D_A(object):
     """
     A class representing a 2D Bak-Sneppen model, including avalanche calculations
     """
@@ -17,10 +17,11 @@ class BakSneppen2D(object):
         """
        
         np.random.seed(2)
-
+        assert isinstance(size, int), "Size should be an integer"
         # initialize the system with random population density values
         self.size = size
         self.system = np.random.rand(size, size)
+        assert isinstance(size, int), "Size should be an integer"
 
         # set global parameters
         self.save_folder = save_folder
@@ -43,6 +44,10 @@ class BakSneppen2D(object):
         # Ages: number of iterations it has gone through without mutating
         self.ages = np.zeros((size, size), dtype=int)
 
+        assert self.system.shape == (size, size), "System not initialized correctly"
+        assert np.all(0 <= self.system) and np.all(self.system <= 1), "System should be initialized with random values between 0 and 1"
+        assert np.all(self.ages == 0), "Ages should be initialized with zeros"
+
 
     def update_system(self):
         """
@@ -61,7 +66,9 @@ class BakSneppen2D(object):
             if 0 <= ni < self.size and 0 <= nj < self.size:
                 self.ages[ni, nj] = 0
                 self.system[ni, nj] = np.random.rand()
-
+        
+        assert not np.array_equal(old_system, self.system), "System should be updated"
+        assert not np.array_equal(old_ages, self.ages), "Ages should be updated"
 
     
     def get_min(self):
@@ -152,7 +159,7 @@ class BakSneppen2D(object):
             if iteration % 1000 == 0:
                 self.plot_system(iteration)
 
-
+        assert not np.array_equal(old_system, self.system), "System should be updated after simulation"
 
     def plot_system(self, iteration):
         """
@@ -182,12 +189,17 @@ class BakSneppen2D(object):
     
 
 if __name__=="__main__":
-    save_folder = 'BakSneppen_results2'
+    # Get the absolute path of the directory where the script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Define your save_folder relative to the script location
+    save_folder = os.path.join(script_dir, 'Results', 'BakSneppen_results2')
+
     size = 100
 
     iterations = 50000
 
-    model = BakSneppen2D(size, save_folder)
+    model = BakSneppen2D_A(size, save_folder)
     model.simulate(iterations)
 
     # Plot minimum fitness evolution
