@@ -80,8 +80,8 @@ class PercolationModel2D(object):
 
         # Check for incorrect input
         # Make it a test later
-        if (i<0 or i>=self.N or j<0 or j>self.N):
-            return ValueError
+        assert i>=0 or i<self.N, "Error: Incorrect coordinates"
+        assert j>=0 or j<self.N, "Error: Incorrect coordinates" 
         
         indices = []
         
@@ -111,8 +111,8 @@ class PercolationModel2D(object):
 
         # Check for incorrect input
         # Make it a test later
-        if (i<0 or i>=self.N or j<0 or j>self.N):
-            return ValueError
+        assert i>=0 or i<self.N, "Error: Incorrect coordinates"
+        assert j>=0 or j<self.N, "Error: Incorrect coordinates" 
         
         indices = []
         
