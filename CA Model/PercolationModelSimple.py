@@ -6,7 +6,7 @@ import sys
 
 class PercolationModel2D(object):    
     '''
-    Object that calculates and displays behaviour of 2D cellular automata
+    Class that calculates and displays behaviour of 2D cellular automata
     '''
 
     # Just keeping global variables for reference:
@@ -30,11 +30,13 @@ class PercolationModel2D(object):
 
     def __init__(self, ni, temp):
         '''
-        Constructor reads:
-        N = side of grid
+        Initializes a PercolationModel2D with a specific grid size and temperature.
         
-        produces N x N blank grid
+        Parameters:
+        ni (int): Size of the grid.
+        temp (float): Initial temperature of the system.
         '''
+    
 
         # Set environment
         self.temp = temp                # temperature
@@ -68,8 +70,14 @@ class PercolationModel2D(object):
     # We assume that neighborhoods stop at border (it is not rolling from another side)
     def getMooreNeighbourhood(self, i,j, extent=1):
         '''
-        Returns a set of indices corresponding to the Moore Neighbourhood
-        (These are the cells immediately adjacent to (i,j), plus those diagonally adjacent)
+        Returns a set of indices corresponding to the Moore Neighbourhood around a given cell.
+        
+        Parameters:
+        i, j (int): The coordinates of the cell.
+        extent (int): The extent of the neighborhood. Default is 1.
+
+        Returns:
+        list: A list of indices representing the Moore Neighbourhood around the cell.
         '''
 
         # Check for incorrect input
@@ -93,8 +101,14 @@ class PercolationModel2D(object):
     
     def getVonNeumannNeighbourhood(self,i,j,extent=1):
         '''
-        Returns a set of indices corresponding to the Von Neumann Neighbourhood
-        (These are the cells immediately adjacent to (i,j), but not diagonally adjacent)
+        Returns a set of indices corresponding to the Von Neumann Neighbourhood around a given cell.
+        
+        Parameters:
+        i, j (int): The coordinates of the cell.
+        extent (int): The extent of the neighborhood. Default is 1.
+
+        Returns:
+        list: A list of indices representing the Von Neumann Neighbourhood around the cell.
         '''
 
         # Check for incorrect input
@@ -118,6 +132,15 @@ class PercolationModel2D(object):
 
     # Migration function both Climate and Overpopulation
     def migration_simple(self, i, j):
+        '''
+        Simulates migration of population from a given cell.
+
+        Parameters:
+        i, j (int): The coordinates of the cell.
+
+        Returns:
+        float: The size of the population that migrates from the cell.
+        '''
         # Do we need to leave
         if self.pop_dens[i, j] < self.migration_threshold*1.5 and self.type[i,j] == 0:
             return 0
@@ -153,6 +176,12 @@ class PercolationModel2D(object):
     
     # Growth over the map
     def growth_simple(self, size):
+        '''
+        Simulates growth of population in the grid.
+
+        Parameters:
+        size (int): The size of population to grow.
+        '''
         for k in range(size):
             i = random.randint(0, self.N-1)
             j = random.randint(0, self.N-1)
@@ -178,6 +207,12 @@ class PercolationModel2D(object):
     
     # Updates stats for console
     def update_stats(self):
+        '''
+        Updates the statistics of the grid.
+
+        Returns:
+        float: The mean population density of the grid.
+        '''
         pop_dens_sum = 0
         pop_dens_amount = 0
         for i in range(self.N):

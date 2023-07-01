@@ -5,7 +5,7 @@ from init_map2 import *
 
 class PercolationModel2D(object):    
     '''
-    Object that calculates and displays behaviour of 2D cellular automata
+    Class that calculates and displays behaviour of 2D cellular automata
     '''
 
     # Just keeping global variables for reference:
@@ -37,12 +37,10 @@ class PercolationModel2D(object):
 
 
     def init_grid(self):
-        '''
-        Initializes grid, which is a set of vectors which describe environment (for now randomly)
-        
-        Each point has some unique parameters, on which something is determined
-
-        '''
+        """
+        Initializes the grid for the cellular automata model.
+        The grid contains population density, energy, type of cell and fitness of each cell.
+        """
 
         #self.pop_dens = np.random.rand(self.N, self.N)       # population grid [0, 1]
         self.pop_dens = np.zeros((self.N, self.N))       # population grid [0, 1]
@@ -62,12 +60,13 @@ class PercolationModel2D(object):
                     #self.water[i, j] = np.random.rand()
 
     def __init__(self, ni, temp):
-        '''
-        Constructor reads:
-        N = side of grid
-        
-        produces N x N blank grid
-        '''
+        """
+        Constructor of the class.
+
+        Parameters:
+        ni (int): The size of the 2D grid.
+        temp (float): The initial temperature of the system.
+        """
 
         # Set environment
         self.temp = temp                # temperature
@@ -85,10 +84,16 @@ class PercolationModel2D(object):
     # Helper Functions
     # We assume that neighborhoods stop at border (it is not rolling from another side)
     def getMooreNeighbourhood(self, i,j, extent=1):
-        '''
-        Returns a set of indices corresponding to the Moore Neighbourhood
-        (These are the cells immediately adjacent to (i,j), plus those diagonally adjacent)
-        '''
+        """
+        Returns the Moore Neighbourhood for a cell at location (i, j).
+
+        Parameters:
+        i, j (int): The x and y coordinates of a cell.
+        extent (int): The extent of the neighbourhood. Default is 1.
+
+        Returns:
+        list: The Moore Neighbourhood for the cell.
+        """
 
         # Check for incorrect input
         # Make it a test later
@@ -110,10 +115,16 @@ class PercolationModel2D(object):
         return indices
     
     def getVonNeumannNeighbourhood(self,i,j,extent=1):
-        '''
-        Returns a set of indices corresponding to the Von Neumann Neighbourhood
-        (These are the cells immediately adjacent to (i,j), but not diagonally adjacent)
-        '''
+        """
+        Returns the Von Neumann Neighbourhood for a cell at location (i, j).
+
+        Parameters:
+        i, j (int): The x and y coordinates of a cell.
+        extent (int): The extent of the neighbourhood. Default is 1.
+
+        Returns:
+        list: The Von Neumann Neighbourhood for the cell.
+        """
 
         # Check for incorrect input
         # Make it a test later
@@ -136,24 +147,57 @@ class PercolationModel2D(object):
 
     # Function which values higher high values
     def inverse_poly(self, val):
+        """
+        Returns the result of the inverse polynomial function for a given value.
+
+        Parameters:
+        val (float): The input value for the function.
+
+        Returns:
+        float: The result of the function.
+        """
         return 4*val-4*val**2
 
     # Function which values higher middle value
     def gaussian(self, val):
+        """
+        Returns the result of the Gaussian function for a given value.
+
+        Parameters:
+        val (float): The input value for the function.
+
+        Returns:
+        float: The result of the function.
+        """
         return 1*np.exp((-(val - 0.5)**2/(0.05)))
 
     # Function which values higher high values
     def sigmoid(self, val):
+        """
+        Returns the result of the sigmoid function for a given value.
+
+        Parameters:
+        val (float): The input value for the function.
+
+        Returns:
+        float: The result of the function.
+        """
         return 1/(1 + np.exp(-(val-0.5)/0.2))
 
 
     # Fitness functions
     # Returns neighbors based on their fitness
     def neighbour_feature(self, i, j, extent=5):
-        '''
-        output: cells sorted (descending) by fitness values.
+        """
+        Returns the features of the neighbours for a cell at location (i, j).
 
-        '''
+        Parameters:
+        i, j (int): The x and y coordinates of a cell.
+        extent (int): The extent of the neighbourhood. Default is 5.
+
+        Returns:
+        list: The features of the neighbours of the cell, sorted by descending fitness
+        """
         neighbors = self.getMooreNeighbourhood(i,j, extent)
         values = []
         for neighbor in neighbors:
@@ -167,6 +211,7 @@ class PercolationModel2D(object):
     # Function which creates map of water availability for fitness function
     def upd_available_water_map(self):
         '''
+        Updates the map of water availability for each cell.
         This is a helper function to calculate Fitness. It assigns score based on water quality and availability
         '''
         self.water_score = np.zeros((self.N, self.N))
@@ -185,6 +230,9 @@ class PercolationModel2D(object):
 
     # Can be easily improved
     def update_fitness(self):
+        """
+        Updates the fitness of each cell in the grid based on the current environmental conditions.
+        """
         # It is just made up for now
         # We are combining available energy/density/water availabiltiy
         self.fitness = np.zeros((self.N, self.N))   # Fitness map
@@ -213,6 +261,9 @@ class PercolationModel2D(object):
 
     # Emigration which covers land to land
     def land_migration(self):
+        """
+        Simulates land migration in the grid based on the fitness of each cell.
+        """
         simple_migration = 0
         for i in range(self.N):
             for j in range(self.N):
@@ -234,6 +285,7 @@ class PercolationModel2D(object):
 
     def climate_emmigration(self):
         '''
+        Simulates climate emigration in the grid. 
         size - is proportion of people who wants to leave
         People have to be displaced because of water rise, If there is no spot to go, they die
 
@@ -301,9 +353,9 @@ class PercolationModel2D(object):
         self.type = self.next_type
 
     def spawn_energy(self):
-        '''
-        Just replenishes energy on the map, the higher the consumption, lower the replenishment
-        '''
+        """
+        Replenishes energy on the map, the higher the consumption, lower the replenishment.
+        """
         for i in range(self.N):
             for j in range(self.N):
                 if np.random.rand() < self.energy_replenish_chance and self.energy[i,j]<self.energy_barrier:
@@ -311,6 +363,12 @@ class PercolationModel2D(object):
         self.energy = self.next_energy
 
     def update_stats(self):
+        """
+        Updates the statistics of the grid.
+
+        Returns:
+        tuple: The mean population density, mean energy, and mean fitness.
+        """
         fitness_sum = 0
         fitness_amount = 0
         pop_dens_sum = 0
@@ -333,13 +391,14 @@ class PercolationModel2D(object):
 
     # the part we can change later
     def step(self):
-        '''
+        """
+        Executes one time step of the simulation. 
         Constructs the self.nextgrid matrix based on the properties of self.grid
         Applies the Percolation Model Rules:
         
         1. Cells attempt to colonise their Moore Neighbourhood with probability P
         2. Cells do not make the attempt with probability 1-P
-        '''
+        """
         
         # Find Utility and Initial Migration
         # Emissions, Sea Rise
