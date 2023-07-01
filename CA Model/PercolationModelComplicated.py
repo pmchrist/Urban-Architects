@@ -50,26 +50,21 @@ class PercolationModel2D(object):
         self.fitness = np.zeros((self.N, self.N))
 
         # I believe this is too much, we can model existence/non existence of water just by changing cell type to land/toxic water etc.
-        #self.water = np.zeros((self.N, self.N)) # grid to save water volumn value
         # loop to purge population values in water area
-        # also loop to initialize water 'volumn' values
         for i in range(self.N):
             for j in range(self.N):
                 if self.type[i, j]!=0:
                     self.pop_dens[i, j] = 0
-                    #self.water[i, j] = np.random.rand()
 
-    def __init__(self, ni, temp):
+    def __init__(self, ni):
         """
         Constructor of the class.
 
         Parameters:
         ni (int): The size of the 2D grid.
-        temp (float): The initial temperature of the system.
         """
 
         # Set environment
-        self.temp = temp                # temperature
         self.emissions = 0              # current emissions
         self.N = ni                     # Size of 1 side
         self.Ntot = self.N*self.N       # Overall size

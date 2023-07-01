@@ -28,18 +28,16 @@ class PercolationModel2D(object):
     dead_migrants = []
 
 
-    def __init__(self, ni, temp):
+    def __init__(self, ni):
         '''
         Initializes a PercolationModel2D with a specific grid size and temperature.
         
         Parameters:
         ni (int): Size of the grid.
-        temp (float): Initial temperature of the system.
         '''
     
 
         # Set environment
-        self.temp = temp                # temperature
         self.emissions = 0              # current emissions
         self.N = ni                     # Size of 1 side
         self.Ntot = self.N*self.N       # Overall size
