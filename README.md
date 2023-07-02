@@ -16,9 +16,9 @@ http://www.geoffreylandis.com/percolation.htp
 How do climate change factors (such as emission increase, rising sea levels, etc.) influence the patterns and dynamics of urban expansion, and what emergent behaviours can we observe from these interactions? 
 
 ## Hypothesis
- 
-We assume that the climate change will have a significant impact on urban expansion. Climate change can alter the distribution of suitable habitats, potentially making previously uninhabitable areas more desirable for urban development. The increasing frequency and severity of extreme weather events due to climate change can render urban areas more vulnerable, leading to a redirection of urban expansion away from high-risk regions. And the socioeconomic effects of climate change, such as changes in agricultural productivity and employment, can influence the economic viability of urban expansion plans and contribute to population pressures on cities. 
-If our system exhibits SOC, we expect that small changes and increased pressure will lead to large changes in the environment’s state, while we can conclude that the system does not exhibit SOC if it follows more linear correlations.
+
+We predict that the simple Bak-Sneppen model will exhibit properties of SOC and give an overall idea of the dynamical behaviour surrounding this simple concept of evolution. 
+.... (insert)
 
 ## Project Plan
 0. We used Lean approach with tasks on Trello: https://trello.com/invite/b/ZNRiOvnC/ATTIae3881ca7cba479d31b5ae92f84997cd8DB6631B/urban-architects
@@ -34,8 +34,7 @@ If our system exhibits SOC, we expect that small changes and increased pressure 
 
  ## Bak-Sneppen Simple
 ### Overview of some results
-
-Insert here
+We tried to recreate a simple Bak-Sneppen model. We see over time the average fitness is increasing as expetced. The histograms of avalanche time gives an indication of power law due to frequent smaller avalanches, and less frequent larger avalanches, however we found a negative R value when comparing to Lognormal. The model balances stability and instability. So the Small, frequent changes  represent minor evolutionary adaptations and are necessary for the system to evolve and adapt. At the same time, larger, less frequent changes represent more significant evolutionary shifts. This prevents the ecosystem from reaching a stable state where no further evolution occurs - in other words, they keep the system dynamic and evolving.
 
 ## Bak-Sneppen Population Dynamics Conserved
 ### Overview of some results
@@ -72,21 +71,19 @@ pip3 install -r requirements.txt
 ------------
 
 
-    ├── README.md          <- 
-    ├── config.py          <- 
-    ├── requirements.tex          <- 
-    ├── Bak-Sneppen                <- 
-    │   ├── __init__.py    <- 
+    ├── README.md                               <- 
+    ├── requirements.tex                        <- Packages and versions required
+    ├── Bak-Sneppen                             <- All code and results related to Bak-Sneppen
+    │   ├── __init__.py    
     │   │
-    │   ├── Results          <- 
+    │   ├── Results          
     │   │  
     │   │
-    │   ├── BS_simple_avalanche.py      
-    │   ├── BakSneppen_PopulationDynamics.py   
-    │   ├── BakSneppen_PopulationDynamics_Conserved.py
-    │   ├── BakSneppen_Research.ipynb
-    │   ├── BakSneppen_Simple.py  
-    │   └──test_BakSneppen2D.py
+    │   ├── BS_simple_avalanche.py                       <- simple 2D Bak Sneppen with avalanche calculation  
+    │   ├── BakSneppen_PopulationDynamics_Conserved.py   <- Bak-sneppen with population dynamics  
+    │   ├── BakSneppen_Research.ipynb                    <- 
+    │   ├── BakSneppen_Simple.py                         <- Bak-Sneppen without avalanche calculations
+    │   └── test_BakSneppen2D.py                         <- pytest
     │  
     │   
     │       
