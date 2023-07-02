@@ -1,9 +1,5 @@
 seaborn==0.9.0
-<<<<<<< HEAD
-matplotlib==3.0.3
-numpy==1.16.3
-=======
-numpy==1.16.3
-matplotlib==3.0.3
+matplotlib
+numpy
+matplotlib
 powerlaw==1.5
->>>>>>> fe0a600fc4e82769be67acf499b87e941180c090

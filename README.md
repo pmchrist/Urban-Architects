@@ -2,6 +2,7 @@
 2023 Complex Systems Simulation Group 11
 
 Isabel Klennert, Christos Perchanidis, Frenk Klein Schiphorst, Chang Lin
+
 ## Motivation:  
 
 This project looks into the dynamics of the interactions between regional geography, population, climate, and energy.  
@@ -12,13 +13,15 @@ http://www.geoffreylandis.com/percolation.htp
 
 ## Research Questions
 
-Insert
+How do climate change factors (such as emission increase, rising sea levels, etc.) influence the patterns and dynamics of urban expansion, and what emergent behaviours can we observe from these interactions? 
 
 ## Hypothesis
-
-Insert
+ 
+We assume that the climate change will have a significant impact on urban expansion. Climate change can alter the distribution of suitable habitats, potentially making previously uninhabitable areas more desirable for urban development. The increasing frequency and severity of extreme weather events due to climate change can render urban areas more vulnerable, leading to a redirection of urban expansion away from high-risk regions. And the socioeconomic effects of climate change, such as changes in agricultural productivity and employment, can influence the economic viability of urban expansion plans and contribute to population pressures on cities. 
+If our system exhibits SOC, we expect that small changes and increased pressure will lead to large changes in the environment’s state, while we can conclude that the system does not exhibit SOC if it follows more linear correlations.
 
 ## Project Plan
+0. We used Lean approach with tasks on Trello: https://trello.com/invite/b/ZNRiOvnC/ATTIae3881ca7cba479d31b5ae92f84997cd8DB6631B/urban-architects
 1. Build simple Bak-Sneppen Model
     * Avalanche Time
     * Age
@@ -27,6 +30,7 @@ Insert
     * Avalanche Time
     * Check Power Law
 4. Complicated CA Model using water map
+
 
  ## Bak-Sneppen Simple
 ### Overview of some results
@@ -43,9 +47,14 @@ Insert here
 
 Insert here
 
-## Percolation Model
+## Topographical (CA) Model
 ### Overview of some results
-Insert here
+We managed to create a model which shows complex dynamics. We can see how overpopulation leads to the collapse in the population or extreme overcrowding. Meanwhile, increase in emissions which is linked to the rising water level and following flooding exacerbates problem further and makes emmigration more extreme. We can see in the patterns that once critical capacity is achieved rising water becomes deadly, and more extreme occurences of people moving are much more common. (Results are on the slides)
+
+To run model based on population density go to "CA Model" folder and run:
+"python __init__.py --function simple"
+To run model based on fitness function and growth go to "CA Model" folder and run:
+"python __init__.py --function complicated"
 
 
 ## Visualization:  
@@ -84,21 +93,23 @@ pip3 install -r requirements.txt
     │  
     │   
     │       
-    ├── CA Model               <- 
-    │   ├── __init__.py    <- 
+    ├── CA Model                                  <- 
+    │   ├── __init__.py    
     │   │
-    │   ├── historical_res  <-          
+    │   ├── historical_res                        <- Some statistical runs from the complicated model
     │   │   
-    │   ├── results       <- 
+    │   ├── results                               <- Folder with results
     │   │   
-    │   ├── PercolationModelComplicated.py        <- 
-    │   ├── PercolationModelSimple.py              
-    │   ├── init_map2.py
-    │   ├── run_model_complicated.py    
-    │   ├── run_model_simple.py  
-    │   └── visualization  
+    │   ├── results_presentation                  <- Folder with results for presentation
+    │   
+    │   ├── PercolationModelComplicated.py        <- Model that we did not manage to run
+    │   ├── PercolationModelSimple.py             <- Topological Model where people move based on Population Density
+    │   ├── init_map2.py                          <- Topography Map Generator
+    │   ├── run_model_complicated.py              <- Runs overcomplicated model
+    │   ├── run_model_simple.py                   <- Runs Simple Cellular Automata model
+    │   └── visualization                         <- File with some of our statistical results
     │      
-    ├── Legacy Files            <- .
+    ├── Legacy Files                              <- (Unused files, and files used for inspiration)
     │   
 
 --------

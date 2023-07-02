@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 from time import sleep
 from numpy import log10
 import numpy as np
-from config import N, temp, nsteps, nzeros
+from config import N, nsteps, nzeros
 import powerlaw
 
 # Create the percolation model, and seed four colony sites at the centre
-cell= PercolationModel2D(N, temp)
+cell= PercolationModel2D(N)
 
 # Set up interactive plotting
 
@@ -18,7 +18,6 @@ ax = fig1.add_subplot(111)
 
 istep = 0
 while istep < nsteps:    
-
 
     ax.clear()
     print("Current Step: ", istep)
@@ -73,11 +72,6 @@ while istep < nsteps:
     cell.step()
     
     istep+=1
-
- 
-# plt.ioff()
-
-# hist = ax.pcolor(cell.pop,edgecolors='black',vmin=-1,vmax=1)
 
 # plt.show()
 print("Simulation complete!")

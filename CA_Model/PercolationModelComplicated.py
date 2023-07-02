@@ -50,26 +50,21 @@ class PercolationModel2D(object):
         self.fitness = np.zeros((self.N, self.N))
 
         # I believe this is too much, we can model existence/non existence of water just by changing cell type to land/toxic water etc.
-        #self.water = np.zeros((self.N, self.N)) # grid to save water volumn value
         # loop to purge population values in water area
-        # also loop to initialize water 'volumn' values
         for i in range(self.N):
             for j in range(self.N):
                 if self.type[i, j]!=0:
                     self.pop_dens[i, j] = 0
-                    #self.water[i, j] = np.random.rand()
 
-    def __init__(self, ni, temp):
+    def __init__(self, ni):
         """
         Constructor of the class.
 
         Parameters:
         ni (int): The size of the 2D grid.
-        temp (float): The initial temperature of the system.
         """
 
         # Set environment
-        self.temp = temp                # temperature
         self.emissions = 0              # current emissions
         self.N = ni                     # Size of 1 side
         self.Ntot = self.N*self.N       # Overall size
@@ -96,10 +91,8 @@ class PercolationModel2D(object):
         """
 
         # Check for incorrect input
-        # Make it a test later
-        if (i<0 or i>=self.N or j<0 or j>self.N):
-            return ValueError
-        
+        assert i>=0 or i<self.N, "Error: Incorrect coordinates"
+        assert j>=0 or j<self.N, "Error: Incorrect coordinates"       
         indices = []
         
         for iadd in range(i-extent,i+extent+1):
@@ -127,9 +120,8 @@ class PercolationModel2D(object):
         """
 
         # Check for incorrect input
-        # Make it a test later
-        if (i<0 or i>=self.N or j<0 or j>self.N):
-            return ValueError
+        assert i>=0 or i<self.N, "Error: Incorrect coordinates"
+        assert j>=0 or j<self.N, "Error: Incorrect coordinates"    
         
         indices = []
         
@@ -198,6 +190,9 @@ class PercolationModel2D(object):
         Returns:
         list: The features of the neighbours of the cell, sorted by descending fitness
         """
+        assert i>=0 or i<self.N, "Error: Incorrect index for x axis"
+        assert j>=0 or j<self.N, "Error: Incorrect index for y axis" 
+
         neighbors = self.getMooreNeighbourhood(i,j, extent)
         values = []
         for neighbor in neighbors:
@@ -208,7 +203,7 @@ class PercolationModel2D(object):
             sorted_neighbors.append(neighbors[k][:])
         return(sorted_neighbors)
     
-    # Function which creates map of water availability for fitness function
+    # Function which creates map of water availability for fitness function (Not used)
     def upd_available_water_map(self):
         '''
         Updates the map of water availability for each cell.
@@ -226,6 +221,7 @@ class PercolationModel2D(object):
                         w_counter += 1.0
                     if self.type[neighbor[0], neighbor[1]] == 2:
                         w_counter += 0.5    # Sea water counts as half
+                assert w_counter >= 0, "Error: Negative water score"
                 self.water_score[i, j] = w_counter/(self.view_distance**4)
 
     # Can be easily improved
@@ -258,6 +254,7 @@ class PercolationModel2D(object):
                     #fitness = fitness/3 # Getting Average
                     fitness = fitness/2 # Getting Average
                     self.fitness[i,j] = fitness
+                assert self.fitness[i,j] >= -1, "Error: Fitness value is invalid"
 
     # Emigration which covers land to land
     def land_migration(self):
@@ -278,7 +275,7 @@ class PercolationModel2D(object):
                                 self.next_pop_dens[i,j] = 0
                             break
                         if k == len(destinations)-1:       # loop ended = nowhere to leave, they die :(
-                            climate_migration_dead += size
+                            self.climate_migration_dead += self.emmigration_size
                             self.next_pop_dens[i, j] = 0
         self.simple_migration.append(simple_migration)
         self.pop_dens = self.next_pop_dens

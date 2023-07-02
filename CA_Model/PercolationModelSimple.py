@@ -28,18 +28,16 @@ class PercolationModel2D(object):
     dead_migrants = []
 
 
-    def __init__(self, ni, temp):
+    def __init__(self, ni):
         '''
         Initializes a PercolationModel2D with a specific grid size and temperature.
         
         Parameters:
         ni (int): Size of the grid.
-        temp (float): Initial temperature of the system.
         '''
     
 
         # Set environment
-        self.temp = temp                # temperature
         self.emissions = 0              # current emissions
         self.N = ni                     # Size of 1 side
         self.Ntot = self.N*self.N       # Overall size
@@ -82,8 +80,8 @@ class PercolationModel2D(object):
 
         # Check for incorrect input
         # Make it a test later
-        if (i<0 or i>=self.N or j<0 or j>self.N):
-            return ValueError
+        assert i>=0 or i<self.N, "Error: Incorrect coordinates"
+        assert j>=0 or j<self.N, "Error: Incorrect coordinates" 
         
         indices = []
         
@@ -113,8 +111,8 @@ class PercolationModel2D(object):
 
         # Check for incorrect input
         # Make it a test later
-        if (i<0 or i>=self.N or j<0 or j>self.N):
-            return ValueError
+        assert i>=0 or i<self.N, "Error: Incorrect coordinates"
+        assert j>=0 or j<self.N, "Error: Incorrect coordinates" 
         
         indices = []
         
