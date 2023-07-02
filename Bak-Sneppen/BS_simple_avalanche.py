@@ -21,7 +21,7 @@ class BakSneppen2D_A(object):
         # initialize the system with random population density values
         self.size = size
         self.system = np.random.rand(size, size)
-        assert isinstance(size, int), "Size should be an integer"
+        
 
         # set global parameters
         self.save_folder = save_folder
