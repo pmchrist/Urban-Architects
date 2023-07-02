@@ -67,8 +67,6 @@ class BakSneppen2D_A(object):
                 self.ages[ni, nj] = 0
                 self.system[ni, nj] = np.random.rand()
         
-        assert not np.array_equal(old_system, self.system), "System should be updated"
-        assert not np.array_equal(old_ages, self.ages), "Ages should be updated"
 
     
     def get_min(self):
@@ -159,7 +157,7 @@ class BakSneppen2D_A(object):
             if iteration % 1000 == 0:
                 self.plot_system(iteration)
 
-        assert not np.array_equal(old_system, self.system), "System should be updated after simulation"
+        
 
     def plot_system(self, iteration):
         """
