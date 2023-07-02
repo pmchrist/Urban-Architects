@@ -76,7 +76,6 @@ def function_one():
         
         istep+=1
 
-
 def function_two():
     print("Starting Complicated Spatial Simulation!")
     # Create the percolation model, and seed four colony sites at the centre
@@ -181,21 +180,3 @@ def function_two():
         cell.step()
         
         istep+=1
-
-
-def main():
-    parser = argparse.ArgumentParser(description="Example program")
-    parser.add_argument('--function', choices=['simple', 'complicated'], help='Specify function to execute')
-
-    args = parser.parse_args()
-
-    if args.function == 'simple':
-        function_one()
-    elif args.function == 'complicated':
-        function_two()
-    else:
-        print("Invalid function choice!")
-
-if __name__ == '__main__':
-    main()
-    print("Simulation complete!")

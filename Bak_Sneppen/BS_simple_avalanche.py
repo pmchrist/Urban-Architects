@@ -182,9 +182,7 @@ class BakSneppen2D_A(object):
         self.avg_fitness.append(np.mean(self.system))  # Compute average fitness
         self.std_fitness.append(np.std(self.system))  # Compute std dev of fitness
         self.least_fit_location.append(np.unravel_index(np.argmin(self.system), self.system.shape))  # Store least fit location
-
-
-    
+   
 
 if __name__=="__main__":
     # Get the absolute path of the directory where the script is located

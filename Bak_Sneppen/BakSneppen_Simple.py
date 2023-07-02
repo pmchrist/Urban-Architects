@@ -108,9 +108,6 @@ class BakSneppen2D(object):
         assert self.std_fitness[-1] == std_fitness, "Std fitness not stored correctly"
 
 
-
-
-
 if __name__=="__main__":
     # Get the absolute path of the directory where the script is located
     script_dir = os.path.dirname(os.path.abspath(__file__))
