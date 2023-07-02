@@ -37,15 +37,12 @@ If our system exhibits SOC, we expect that small changes and increased pressure 
 
 Insert here
 
-## Bak-Sneppen Population Dynamics
-### Overview of some results
-
-Insert here
-
 ## Bak-Sneppen Population Dynamics Conserved
 ### Overview of some results
 
-Insert here
+We extended the simple Bak-Sneppen model to include population migration. We did this by letting the system update the lowest non-zero population density at each iteration, based on the current density of that cell, the average density of its neighbors, and the fitness of the cell.
+We found some clustering behavior by setting specific parameter settings for the fitness function. These parameter settings can be interpreted as the tendency for people to live together, but not in regions that are too overcrowded.
+We calculated avalanche sizes and durations, and found that they follow a distribution that seemed to resemble a power-law distribution. On closer inspection, however, it turned out that it more closely resembled a log-normal distribution. This can be explained by the fact that our update functions are not linear, which causes the emergent behavior to follow slightly different patterns than the simple Bak-Sneppen model.
 
 ## Topographical (CA) Model
 ### Overview of some results
