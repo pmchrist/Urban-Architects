@@ -48,9 +48,9 @@ We calculated avalanche sizes and durations, and found that they follow a distri
 We managed to create a model which shows complex dynamics. We can see how overpopulation leads to the collapse in the population or extreme overcrowding. Meanwhile, increase in emissions which is linked to the rising water level and following flooding exacerbates problem further and makes emmigration more extreme. We can see in the patterns that once critical capacity is achieved rising water becomes deadly, and more extreme occurences of people moving are much more common. (Results are on the slides)
 
 To run model based on population density go to "CA Model" folder and run:
-"python __init__.py --function simple"
+"python main_CA.py --function simple"
 To run model based on fitness function and growth go to "CA Model" folder and run:
-"python __init__.py --function complicated"
+"python main_CA.py --function complicated"
 
 
 ## Visualization:  
@@ -116,14 +116,3 @@ Siqin Wang, Yan Liu, Yongjiu Feng & Zhenkun Lei (2021) To move or stay? A cellul
 Yang, Jianxin & Tang, Wenwu & Gong, Jian & Shi, Rui & Zheng, Minrui & Dai, Yunzhe. (2023). Simulating urban expansion using cellular automata model with spatiotemporally explicit representation of urban demand. Landscape and Urban Planning. 231. 104640. 
 
 Hainan Yang, Huizhen Su, Liangjie Yang, "Evolution of Urban Resilience from a Multiscale Perspective: Evidence from Five Provinces in Northwest China", Complexity, vol. 2023, Article ID 2352094, 23 pages, 2023. 
-
-
-
-
-
-
-
-
-
-
-
