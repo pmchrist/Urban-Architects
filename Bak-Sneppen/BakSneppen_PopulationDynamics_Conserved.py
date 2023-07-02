@@ -4,7 +4,7 @@ import random
 import matplotlib.pyplot as plt
 import os
 
-class BakSneppen2D_PDC(object):
+class BakSneppen2D_ConservedPopulation(object):
     """
     A class representing a 2D Bak-Sneppen model with a conserved population density.
     It considers various parameters that contribute to the evolution of the system and fitness function.
@@ -15,14 +15,16 @@ class BakSneppen2D_PDC(object):
         Initializes the BakSneppen2D_ConservedPopulation object with the given parameters.
 
         Parameters:
-        size (int): The size of the 2D system.
+        size (int): The size L of the 2D (LxL) system.
         save_folder (str): The directory to save output images.
-        alpha, beta, gamma, delta (float): Parameters contributing to the evolution of the system.
-        labda (float): The mutation rate of the system.
+        alpha, beta, gamma, delta (float): Weights for the different components of the update function. These should sum to 1.
+        labda (float): Parameter governing the behavior of the exponential part of the fitness function.
         fitness_mean (float): The mean for the Gaussian function used in fitness calculation.
         fitness_std (float): The standard deviation for the Gaussian function used in fitness calculation.
         gaussian_weight (float): The weight for the Gaussian function in the fitness calculation.
         """
+
+        assert alpha + beta + gamma + delta == 1.
 
         # use a seed for repeatability
         # np.random.seed(2)
@@ -44,7 +46,6 @@ class BakSneppen2D_PDC(object):
         self.fitness_mean = fitness_mean
         self.fitness_std = fitness_std
         self.gaussian_weight = gaussian_weight
-
 
         # initialize lists for storing interesting parameter values
         self.min_fitness = []
@@ -106,7 +107,7 @@ class BakSneppen2D_PDC(object):
 
         Parameters:
         density_ij (float): The density of the cell.
-        average_density_ij (float): The average density of the system.
+        average_density_ij (float): The average density of the neighbors of the cell.
 
         Returns:
         float: The calculated fitness.
@@ -127,56 +128,59 @@ class BakSneppen2D_PDC(object):
         Returns:
         float: The new density of the cell.
         """
-        assert self.alpha + self.beta + self.gamma + self.delta == 1
         return self.alpha * average_density + self.beta * local_density + self.gamma * fitness + self.delta * random_factor
         
 
     def update_system(self):
         """
-        Updates the system by recalculating the densities of the cells based on their fitness.
+        Performs one iteration of updating the system. It chooses the lowest non-zero population density and
+        proposes a new density based on the local density, average density of the neighbors, and the fitness of the cell.
         Considers the migrations between neighbouring cells and preserves the overall population.
         """
 
-        # get the indices of the lowest fitness value
+        # get the indices of the lowest non-zero population density
         min_value = np.min(self.system[self.system != 0])
         i, j = np.where(self.system == min_value)
 
+        # get neighbouring cells
         neighbours = self.getMooreNeighbourhood(i[0], j[0])
-        # print(f"Neighbours: {neighbours}")
-        average_density = self.average_density(neighbours)
-        # print(f"Average density: {average_density}")
-        local_density = self.system[i, j]
-        # print(f"Local density: {local_density}")
-        fitness = self.fitness(local_density, average_density)
-        # print(f"Fitness: {fitness}")
 
+        # get average density of neighbours, local density and fitness of current cell
+        average_density = self.average_density(neighbours)
+        local_density = self.system[i, j]
+        fitness = self.fitness(local_density, average_density)
+
+        # generate factor for random fluctuations
         random_factor = np.random.rand()
 
+        # store number of neighbours and neighbouring cell values for use in updating
         number_of_neighbours = len(neighbours)
         neighbour_values = [self.system[neighbour[0], neighbour[1]] for neighbour in neighbours]
-        # print(f"Neighbour_values: {neighbour_values}")
 
+        # calculate new density of current cell
         next_density = max(self.new_density(average_density, local_density, fitness, random_factor), 0)
+
+        # calculate difference with current density, and calculate change that neighbouring cells need to undergo to provide new density
         density_difference = self.system[i, j] - next_density
-        # print(f"Density difference: {density_difference}")
         neighbour_change = (density_difference) / number_of_neighbours
-        # print(f"Neighbour change: {neighbour_change}")
 
         # if density_difference > 0: people move out of the cell into neighbouring cells
         # if density_difference < 0: people from neighbouring cells move into our current cell
         if density_difference < 0:
-            # we have _ cases:
+            # we have 3 cases:
                 # 1. all neighbouring cells have high enough densities, in which case we'll just move the same number of people from each cell
                 # 2. a few neighbouring cells have probability less than required, but the sum of the neighbours is still enough to cover the change
                 # 3. the sum is not enough to cover the change, in which case we'll move all people from neighbouring states to the cell
 
+            # if all neighbours have high enough densities, take even amount from all neighbours
             if all(neighbour_value >= abs(neighbour_change) for neighbour_value in neighbour_values):
-                # print("Case 1: all neighbour values are high enough")
                 for neighbour in neighbours:
                     self.system[neighbour[0], neighbour[1]] += neighbour_change
                 
+            # if not all neighbours have high enough density, but their sum is high enough to cover the change:
+            # sort the neighbouring cells from lowest to highest and start taking maximally large amounts from the cells that have not enough density
+            # if a cell has too low density, take everything and calculate how much is left to take. Take that from the next cell
             elif not all(neighbour_value >= abs(neighbour_change) for neighbour_value in neighbour_values) and sum(neighbour_values) >= abs(density_difference):
-                # print(f"Case 2: not all high enough, but the sum is: {sum(neighbour_values)}")
                 neighbour_values, neighbours = zip(*sorted(zip(neighbour_values, neighbours)))
                 neighbour_changes = [neighbour_change for _ in range(len(neighbours))]
                 for neighbour_index in range(len(neighbours)):
@@ -186,18 +190,22 @@ class BakSneppen2D_PDC(object):
                     else:
                         self.system[neighbours[neighbour_index][0], neighbours[neighbour_index][1]] -= neighbour_changes[neighbour_index]
             
+            # if the neighbours don't have enough to cover the change, take all people that are available and move them into the current cell
+            # and keep track of the number of people moved
             else:
-                # print(f"Case 3: sum is not high enough: {sum(neighbour_values)}")
                 next_density = self.system[i, j] + sum(neighbour_values)
                 for neighbour in neighbours:
                     self.system[neighbour[0], neighbour[1]] = 0
 
+        # distribute the people that are leaving the cell equally over its neighbours
         else:
             for neighbour in neighbours:
                 self.system[neighbour[0], neighbour[1]] += neighbour_change
         
-        # do we need to see the absolute values?
+        # keep track of number of migrated people
         self.migrations.append(abs(self.system[i, j] - next_density)[0])
+
+        # update cell value
         self.system[i, j] = next_density
     
     def simulate(self, iterations):
@@ -257,7 +265,7 @@ if __name__=="__main__":
 
     iterations = 10001
 
-    model = BakSneppen2D_PDC(size, save_folder, 0, 0, 1, 0, 10, 0.5, 0.19, 1)
+    model = BakSneppen2D_ConservedPopulation(size, save_folder, 0, 0, 1, 0, 10, 0.5, 0.19, 1)
     # print(model.system)
     model.simulate(iterations)
     # print(model.system)
