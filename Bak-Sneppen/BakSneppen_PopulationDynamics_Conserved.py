@@ -4,7 +4,7 @@ import random
 import matplotlib.pyplot as plt
 import os
 
-class BakSneppen2D_ConservedPopulation(object):
+class BakSneppen2D_PDC(object):
     """
     A class representing a 2D Bak-Sneppen model with a conserved population density.
     It considers various parameters that contribute to the evolution of the system and fitness function.
@@ -257,7 +257,7 @@ if __name__=="__main__":
 
     iterations = 10001
 
-    model = BakSneppen2D_ConservedPopulation(size, save_folder, 0, 0, 1, 0, 10, 0.5, 0.19, 1)
+    model = BakSneppen2D_PDC(size, save_folder, 0, 0, 1, 0, 10, 0.5, 0.19, 1)
     # print(model.system)
     model.simulate(iterations)
     # print(model.system)

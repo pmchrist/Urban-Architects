@@ -3,9 +3,6 @@
 # supplies patterns to be added to a cellular automaton obeying
 # Conway's Game of Life Rules
 
-from PercolationModel import PercolationModel2D
-
-
 
 def add_block(cell, icentre,jcentre):
     '''

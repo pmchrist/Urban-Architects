@@ -3,14 +3,14 @@ import matplotlib.pyplot as plt
 from time import sleep
 from numpy import log10
 import numpy as np
-from config import N, nsteps, nzeros
+from .config import N, nsteps, nzeros
 import powerlaw
 
 
 def function_one():
     print("Starting Simple Spatial Simulation!")
     # Create the percolation model, and seed four colony sites at the centre
-    from PercolationModelSimple import PercolationModel2D
+    from .PercolationModelSimple import PercolationModel2D
     cell = PercolationModel2D(N)
 
     # Set up interactive plotting
@@ -80,7 +80,7 @@ def function_one():
 def function_two():
     print("Starting Complicated Spatial Simulation!")
     # Create the percolation model, and seed four colony sites at the centre
-    from PercolationModelComplicated import PercolationModel2D
+    from .PercolationModelComplicated import PercolationModel2D
     cell= PercolationModel2D(N)
 
     # Set up interactive plotting

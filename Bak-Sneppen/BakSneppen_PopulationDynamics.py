@@ -4,7 +4,7 @@ import random
 import matplotlib.pyplot as plt
 import os
 
-class BakSneppen2D(object):
+class BakSneppen2D_PD(object):
     """
     A class representing a 2D Bak-Sneppen model with a defined population density,
     accounting for various parameters that contribute to the evolution.
@@ -208,7 +208,7 @@ if __name__=="__main__":
 
     iterations = 1000
 
-    model = BakSneppen2D(size, save_folder, 0, 0, 0.9, 0.1, 10)
+    model = BakSneppen2D_PD(size, save_folder, 0, 0, 0.9, 0.1, 10)
     print(model.system)
     model.simulate(iterations)
     print(model.system)

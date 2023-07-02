@@ -1,9 +1,9 @@
 import os
 import shutil
-from BakSneppen_Simple import BakSneppen2D
-from BS_simple_avalanche import BakSneppen2D_A
-from BakSneppen_PopulationDynamics import BakSneppen2D_PD
-from BakSneppen_PopulationDynamics_Conserved import BakSneppen2D_PDC
+from .BakSneppen_Simple import BakSneppen2D
+from .BS_simple_avalanche import BakSneppen2D_A
+from .BakSneppen_PopulationDynamics import BakSneppen2D_PD
+from .BakSneppen_PopulationDynamics_Conserved import BakSneppen2D_PDC
 
 def test_BakSneppen2D_simulation():
     # The test folder is 'test_folder'

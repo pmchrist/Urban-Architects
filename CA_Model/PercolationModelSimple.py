@@ -1,6 +1,6 @@
 import numpy as np
 import copy
-from init_map2 import *
+from .init_map2 import *
 import sys
 
 
