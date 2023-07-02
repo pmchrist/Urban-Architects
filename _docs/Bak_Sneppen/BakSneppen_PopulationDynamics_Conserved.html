@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from threading import local
+import numpy as np
+import random
+import matplotlib.pyplot as plt
+import os
+
+class BakSneppen2D_ConservedPopulation(object):
+    &#34;&#34;&#34;
+    A class representing a 2D Bak-Sneppen model with a conserved population density.
+    It considers various parameters that contribute to the evolution of the system and fitness function.
+    &#34;&#34;&#34;
+
+    def __init__(self, size, save_folder, alpha, beta, gamma, delta, labda, fitness_mean, fitness_std, gaussian_weight):
+        &#34;&#34;&#34;
+        Initializes the BakSneppen2D_ConservedPopulation object with the given parameters.
+
+        Parameters:
+        size (int): The size L of the 2D (LxL) system.
+        save_folder (str): The directory to save output images.
+        alpha, beta, gamma, delta (float): Weights for the different components of the update function. These should sum to 1.
+        labda (float): Parameter governing the behavior of the exponential part of the fitness function.
+        fitness_mean (float): The mean for the Gaussian function used in fitness calculation.
+        fitness_std (float): The standard deviation for the Gaussian function used in fitness calculation.
+        gaussian_weight (float): The weight for the Gaussian function in the fitness calculation.
+        &#34;&#34;&#34;
+
+        assert alpha + beta + gamma + delta == 1.
+
+        # use a seed for repeatability
+        # np.random.seed(2)
+
+        # initialize the system with random population density values
+        self.size = size
+        self.system = np.random.rand(size, size)
+
+        # set global parameters
+        self.save_folder = save_folder
+
+        self.alpha = alpha
+        self.beta = beta
+        self.gamma = gamma
+        self.delta = delta
+
+        # set parameters for fitness function
+        self.labda = labda
+        self.fitness_mean = fitness_mean
+        self.fitness_std = fitness_std
+        self.gaussian_weight = gaussian_weight
+
+        # initialize lists for storing interesting parameter values
+        self.min_fitness = []
+        self.system_size = []
+
+        self.migrations = []
+
+    def getMooreNeighbourhood(self, i,j, extent=1):
+        &#34;&#34;&#34;
+        Returns a set of indices corresponding to the Moore Neighbourhood.
+
+        Parameters:
+        i, j (int): The coordinates of the current cell.
+        extent (int): The range for the Moore Neighbourhood. Default is 1.
+
+        Returns:
+        list: A list of indices representing the Moore Neighbourhood.
+        &#34;&#34;&#34;
+
+        # Check for incorrect input
+        # Make it a test later
+        assert i &gt;= 0 and i &lt;= self.size
+        assert j &gt;= 0 and j &lt;= self.size
+        
+        indices = []
+        
+        for iadd in range(i-extent,i+extent+1):
+            for jadd in range(j-extent, j+extent+1):        
+                if(iadd==i and jadd == j):  # If is not the same cell
+                    continue
+                if (iadd &lt; 0 or iadd&gt;=self.size):          # If is not in bounds
+                    continue                
+                if (jadd &lt; 0 or jadd&gt;=self.size):          # If is not in bounds
+                    continue
+                indices.append([iadd,jadd])
+
+        return indices
+
+    # Function which values higher middle value
+    def gaussian(self, val, mean, std):
+        return (1 / (std * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((val - mean)/ std)**2)
+
+    def average_density(self, indices):
+        &#34;&#34;&#34;
+        Calculates the average population density of a given set of cells.
+
+        Parameters:
+        indices (list): List of indices of cells.
+
+        Returns:
+        float: The average population density.
+        &#34;&#34;&#34;
+        neighbour_populations = [self.system[cell[0], cell[1]] for cell in indices]
+        return sum(neighbour_populations) / len(neighbour_populations)
+    
+    def fitness(self, density_ij, average_density_ij):
+        &#34;&#34;&#34;
+        Calculates the fitness of a cell given its density and the average density of the system.
+
+        Parameters:
+        density_ij (float): The density of the cell.
+        average_density_ij (float): The average density of the neighbors of the cell.
+
+        Returns:
+        float: The calculated fitness.
+        &#34;&#34;&#34;
+        return (1 - self.gaussian_weight) * np.exp(-self.labda * (density_ij - average_density_ij) ** 2) + self.gaussian_weight * self.gaussian(density_ij, self.fitness_mean, self.fitness_std)
+
+    def new_density(self, average_density, local_density, fitness, random_factor):
+        &#34;&#34;&#34;
+        Calculates the new density of a cell given the average density of the system,
+        its current density, fitness, and a random factor.
+
+        Parameters:
+        average_density (float): The average density of the system.
+        local_density (float): The current density of the cell.
+        fitness (float): The fitness of the cell.
+        random_factor (float): A random factor contributing to the density.
+
+        Returns:
+        float: The new density of the cell.
+        &#34;&#34;&#34;
+        return self.alpha * average_density + self.beta * local_density + self.gamma * fitness + self.delta * random_factor
+        
+
+    def update_system(self):
+        &#34;&#34;&#34;
+        Performs one iteration of updating the system. It chooses the lowest non-zero population density and
+        proposes a new density based on the local density, average density of the neighbors, and the fitness of the cell.
+        Considers the migrations between neighbouring cells and preserves the overall population.
+        &#34;&#34;&#34;
+
+        # get the indices of the lowest non-zero population density
+        min_value = np.min(self.system[self.system != 0])
+        i, j = np.where(self.system == min_value)
+
+        # get neighbouring cells
+        neighbours = self.getMooreNeighbourhood(i[0], j[0])
+
+        # get average density of neighbours, local density and fitness of current cell
+        average_density = self.average_density(neighbours)
+        local_density = self.system[i, j]
+        fitness = self.fitness(local_density, average_density)
+
+        # generate factor for random fluctuations
+        random_factor = np.random.rand()
+
+        # store number of neighbours and neighbouring cell values for use in updating
+        number_of_neighbours = len(neighbours)
+        neighbour_values = [self.system[neighbour[0], neighbour[1]] for neighbour in neighbours]
+
+        # calculate new density of current cell
+        next_density = max(self.new_density(average_density, local_density, fitness, random_factor), 0)
+
+        # calculate difference with current density, and calculate change that neighbouring cells need to undergo to provide new density
+        density_difference = self.system[i, j] - next_density
+        neighbour_change = (density_difference) / number_of_neighbours
+
+        # if density_difference &gt; 0: people move out of the cell into neighbouring cells
+        # if density_difference &lt; 0: people from neighbouring cells move into our current cell
+        if density_difference &lt; 0:
+            # we have 3 cases:
+                # 1. all neighbouring cells have high enough densities, in which case we&#39;ll just move the same number of people from each cell
+                # 2. a few neighbouring cells have probability less than required, but the sum of the neighbours is still enough to cover the change
+                # 3. the sum is not enough to cover the change, in which case we&#39;ll move all people from neighbouring states to the cell
+
+            # if all neighbours have high enough densities, take even amount from all neighbours
+            if all(neighbour_value &gt;= abs(neighbour_change) for neighbour_value in neighbour_values):
+                for neighbour in neighbours:
+                    self.system[neighbour[0], neighbour[1]] += neighbour_change
+                
+            # if not all neighbours have high enough density, but their sum is high enough to cover the change:
+            # sort the neighbouring cells from lowest to highest and start taking maximally large amounts from the cells that have not enough density
+            # if a cell has too low density, take everything and calculate how much is left to take. Take that from the next cell
+            elif not all(neighbour_value &gt;= abs(neighbour_change) for neighbour_value in neighbour_values) and sum(neighbour_values) &gt;= abs(density_difference):
+                neighbour_values, neighbours = zip(*sorted(zip(neighbour_values, neighbours)))
+                neighbour_changes = [neighbour_change for _ in range(len(neighbours))]
+                for neighbour_index in range(len(neighbours)):
+                    if neighbour_values[neighbour_index] &lt; neighbour_changes[neighbour_index]:
+                        neighbour_changes[neighbour_index + 1] -= (neighbour_changes[neighbour_index] - neighbour_values[neighbour_index])
+                        self.system[neighbours[neighbour_index][0], neighbours[neighbour_index][1]] = 0
+                    else:
+                        self.system[neighbours[neighbour_index][0], neighbours[neighbour_index][1]] -= neighbour_changes[neighbour_index]
+            
+            # if the neighbours don&#39;t have enough to cover the change, take all people that are available and move them into the current cell
+            # and keep track of the number of people moved
+            else:
+                next_density = self.system[i, j] + sum(neighbour_values)
+                for neighbour in neighbours:
+                    self.system[neighbour[0], neighbour[1]] = 0
+
+        # distribute the people that are leaving the cell equally over its neighbours
+        else:
+            for neighbour in neighbours:
+                self.system[neighbour[0], neighbour[1]] += neighbour_change
+        
+        # keep track of number of migrated people
+        self.migrations.append(abs(self.system[i, j] - next_density)[0])
+
+        # update cell value
+        self.system[i, j] = next_density
+    
+    def simulate(self, iterations):
+        &#34;&#34;&#34;
+        Simulates the system for a given number of iterations, updating the system and storing its properties.
+
+        Parameters:
+        iterations (int): The number of iterations to run the simulation.
+        &#34;&#34;&#34;
+        self.plot_system(0, initial=True)
+        for iteration in range(iterations):
+            self.update_system()
+            self.store_system_properties()
+
+            if iteration % 100 == 0:
+                self.plot_system(iteration)
+
+    def plot_system(self, iteration, initial=False, close=True):
+        &#34;&#34;&#34;
+        Plots the system at a given iteration.
+
+        Parameters:
+        iteration (int): The current iteration.
+        initial (bool): Whether the plot is for the initial configuration of the system. Default is False.
+        close (bool): Whether to close the plot after saving. Default is True.
+        &#34;&#34;&#34;
+        plt.imshow(self.system, cmap=&#39;hot&#39;, origin=&#39;lower&#39;)
+        plt.colorbar(label=&#39;Population density&#39;)
+        plt.clim(0, 1)
+        if initial:
+            plt.title(&#34;Initial configuration&#34;)
+        else:
+            plt.title(f&#39;Bak-Sneppen model in 2D (iteration {iteration + 1})&#39;)
+        plt.xlabel(&#39;Column&#39;)
+        plt.ylabel(&#39;Row&#39;)
+        if initial:
+            plt.savefig(os.path.join(self.save_folder, f&#39;iteration_{iteration}.png&#39;))
+        else:
+            plt.savefig(os.path.join(self.save_folder, f&#39;iteration_{iteration + 1}.png&#39;))
+        
+        if close:
+            plt.close()
+        else:
+            plt.show()
+
+    def store_system_properties(self):
+        &#34;&#34;&#34;
+        Stores the current properties of the system.
+        &#34;&#34;&#34;
+        self.min_fitness.append(np.min(self.system))
+        self.system_size.append(np.sum(self.system))
+
+
+if __name__==&#34;__main__&#34;:
+    save_folder = &#39;BakSneppen_population_conserved_results&#39;
+    size = 100
+
+    iterations = 10001
+
+    model = BakSneppen2D_ConservedPopulation(size, save_folder, 0, 0, 1, 0, 10, 0.5, 0.19, 1)
+    # print(model.system)
+    model.simulate(iterations)
+    # print(model.system)
+
+    plt.plot(range(iterations), model.min_fitness)
+    plt.show()
+
+    plt.plot(range(iterations), model.system_size)
+    plt.show()
+
+    plt.plot(range(iterations), model.migrations)
+    plt.show()
+
+    # print(model.migrations)
+    plt.hist(model.migrations, bins=40)
+    plt.show()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation"><code class="flex name class">
+<span>class <span class="ident">BakSneppen2D_ConservedPopulation</span></span>
+<span>(</span><span>size, save_folder, alpha, beta, gamma, delta, labda, fitness_mean, fitness_std, gaussian_weight)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class representing a 2D Bak-Sneppen model with a conserved population density.
+It considers various parameters that contribute to the evolution of the system and fitness function.</p>
+<p>Initializes the BakSneppen2D_ConservedPopulation object with the given parameters.</p>
+<p>Parameters:
+size (int): The size L of the 2D (LxL) system.
+save_folder (str): The directory to save output images.
+alpha, beta, gamma, delta (float): Weights for the different components of the update function. These should sum to 1.
+labda (float): Parameter governing the behavior of the exponential part of the fitness function.
+fitness_mean (float): The mean for the Gaussian function used in fitness calculation.
+fitness_std (float): The standard deviation for the Gaussian function used in fitness calculation.
+gaussian_weight (float): The weight for the Gaussian function in the fitness calculation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class BakSneppen2D_ConservedPopulation(object):
+    &#34;&#34;&#34;
+    A class representing a 2D Bak-Sneppen model with a conserved population density.
+    It considers various parameters that contribute to the evolution of the system and fitness function.
+    &#34;&#34;&#34;
+
+    def __init__(self, size, save_folder, alpha, beta, gamma, delta, labda, fitness_mean, fitness_std, gaussian_weight):
+        &#34;&#34;&#34;
+        Initializes the BakSneppen2D_ConservedPopulation object with the given parameters.
+
+        Parameters:
+        size (int): The size L of the 2D (LxL) system.
+        save_folder (str): The directory to save output images.
+        alpha, beta, gamma, delta (float): Weights for the different components of the update function. These should sum to 1.
+        labda (float): Parameter governing the behavior of the exponential part of the fitness function.
+        fitness_mean (float): The mean for the Gaussian function used in fitness calculation.
+        fitness_std (float): The standard deviation for the Gaussian function used in fitness calculation.
+        gaussian_weight (float): The weight for the Gaussian function in the fitness calculation.
+        &#34;&#34;&#34;
+
+        assert alpha + beta + gamma + delta == 1.
+
+        # use a seed for repeatability
+        # np.random.seed(2)
+
+        # initialize the system with random population density values
+        self.size = size
+        self.system = np.random.rand(size, size)
+
+        # set global parameters
+        self.save_folder = save_folder
+
+        self.alpha = alpha
+        self.beta = beta
+        self.gamma = gamma
+        self.delta = delta
+
+        # set parameters for fitness function
+        self.labda = labda
+        self.fitness_mean = fitness_mean
+        self.fitness_std = fitness_std
+        self.gaussian_weight = gaussian_weight
+
+        # initialize lists for storing interesting parameter values
+        self.min_fitness = []
+        self.system_size = []
+
+        self.migrations = []
+
+    def getMooreNeighbourhood(self, i,j, extent=1):
+        &#34;&#34;&#34;
+        Returns a set of indices corresponding to the Moore Neighbourhood.
+
+        Parameters:
+        i, j (int): The coordinates of the current cell.
+        extent (int): The range for the Moore Neighbourhood. Default is 1.
+
+        Returns:
+        list: A list of indices representing the Moore Neighbourhood.
+        &#34;&#34;&#34;
+
+        # Check for incorrect input
+        # Make it a test later
+        assert i &gt;= 0 and i &lt;= self.size
+        assert j &gt;= 0 and j &lt;= self.size
+        
+        indices = []
+        
+        for iadd in range(i-extent,i+extent+1):
+            for jadd in range(j-extent, j+extent+1):        
+                if(iadd==i and jadd == j):  # If is not the same cell
+                    continue
+                if (iadd &lt; 0 or iadd&gt;=self.size):          # If is not in bounds
+                    continue                
+                if (jadd &lt; 0 or jadd&gt;=self.size):          # If is not in bounds
+                    continue
+                indices.append([iadd,jadd])
+
+        return indices
+
+    # Function which values higher middle value
+    def gaussian(self, val, mean, std):
+        return (1 / (std * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((val - mean)/ std)**2)
+
+    def average_density(self, indices):
+        &#34;&#34;&#34;
+        Calculates the average population density of a given set of cells.
+
+        Parameters:
+        indices (list): List of indices of cells.
+
+        Returns:
+        float: The average population density.
+        &#34;&#34;&#34;
+        neighbour_populations = [self.system[cell[0], cell[1]] for cell in indices]
+        return sum(neighbour_populations) / len(neighbour_populations)
+    
+    def fitness(self, density_ij, average_density_ij):
+        &#34;&#34;&#34;
+        Calculates the fitness of a cell given its density and the average density of the system.
+
+        Parameters:
+        density_ij (float): The density of the cell.
+        average_density_ij (float): The average density of the neighbors of the cell.
+
+        Returns:
+        float: The calculated fitness.
+        &#34;&#34;&#34;
+        return (1 - self.gaussian_weight) * np.exp(-self.labda * (density_ij - average_density_ij) ** 2) + self.gaussian_weight * self.gaussian(density_ij, self.fitness_mean, self.fitness_std)
+
+    def new_density(self, average_density, local_density, fitness, random_factor):
+        &#34;&#34;&#34;
+        Calculates the new density of a cell given the average density of the system,
+        its current density, fitness, and a random factor.
+
+        Parameters:
+        average_density (float): The average density of the system.
+        local_density (float): The current density of the cell.
+        fitness (float): The fitness of the cell.
+        random_factor (float): A random factor contributing to the density.
+
+        Returns:
+        float: The new density of the cell.
+        &#34;&#34;&#34;
+        return self.alpha * average_density + self.beta * local_density + self.gamma * fitness + self.delta * random_factor
+        
+
+    def update_system(self):
+        &#34;&#34;&#34;
+        Performs one iteration of updating the system. It chooses the lowest non-zero population density and
+        proposes a new density based on the local density, average density of the neighbors, and the fitness of the cell.
+        Considers the migrations between neighbouring cells and preserves the overall population.
+        &#34;&#34;&#34;
+
+        # get the indices of the lowest non-zero population density
+        min_value = np.min(self.system[self.system != 0])
+        i, j = np.where(self.system == min_value)
+
+        # get neighbouring cells
+        neighbours = self.getMooreNeighbourhood(i[0], j[0])
+
+        # get average density of neighbours, local density and fitness of current cell
+        average_density = self.average_density(neighbours)
+        local_density = self.system[i, j]
+        fitness = self.fitness(local_density, average_density)
+
+        # generate factor for random fluctuations
+        random_factor = np.random.rand()
+
+        # store number of neighbours and neighbouring cell values for use in updating
+        number_of_neighbours = len(neighbours)
+        neighbour_values = [self.system[neighbour[0], neighbour[1]] for neighbour in neighbours]
+
+        # calculate new density of current cell
+        next_density = max(self.new_density(average_density, local_density, fitness, random_factor), 0)
+
+        # calculate difference with current density, and calculate change that neighbouring cells need to undergo to provide new density
+        density_difference = self.system[i, j] - next_density
+        neighbour_change = (density_difference) / number_of_neighbours
+
+        # if density_difference &gt; 0: people move out of the cell into neighbouring cells
+        # if density_difference &lt; 0: people from neighbouring cells move into our current cell
+        if density_difference &lt; 0:
+            # we have 3 cases:
+                # 1. all neighbouring cells have high enough densities, in which case we&#39;ll just move the same number of people from each cell
+                # 2. a few neighbouring cells have probability less than required, but the sum of the neighbours is still enough to cover the change
+                # 3. the sum is not enough to cover the change, in which case we&#39;ll move all people from neighbouring states to the cell
+
+            # if all neighbours have high enough densities, take even amount from all neighbours
+            if all(neighbour_value &gt;= abs(neighbour_change) for neighbour_value in neighbour_values):
+                for neighbour in neighbours:
+                    self.system[neighbour[0], neighbour[1]] += neighbour_change
+                
+            # if not all neighbours have high enough density, but their sum is high enough to cover the change:
+            # sort the neighbouring cells from lowest to highest and start taking maximally large amounts from the cells that have not enough density
+            # if a cell has too low density, take everything and calculate how much is left to take. Take that from the next cell
+            elif not all(neighbour_value &gt;= abs(neighbour_change) for neighbour_value in neighbour_values) and sum(neighbour_values) &gt;= abs(density_difference):
+                neighbour_values, neighbours = zip(*sorted(zip(neighbour_values, neighbours)))
+                neighbour_changes = [neighbour_change for _ in range(len(neighbours))]
+                for neighbour_index in range(len(neighbours)):
+                    if neighbour_values[neighbour_index] &lt; neighbour_changes[neighbour_index]:
+                        neighbour_changes[neighbour_index + 1] -= (neighbour_changes[neighbour_index] - neighbour_values[neighbour_index])
+                        self.system[neighbours[neighbour_index][0], neighbours[neighbour_index][1]] = 0
+                    else:
+                        self.system[neighbours[neighbour_index][0], neighbours[neighbour_index][1]] -= neighbour_changes[neighbour_index]
+            
+            # if the neighbours don&#39;t have enough to cover the change, take all people that are available and move them into the current cell
+            # and keep track of the number of people moved
+            else:
+                next_density = self.system[i, j] + sum(neighbour_values)
+                for neighbour in neighbours:
+                    self.system[neighbour[0], neighbour[1]] = 0
+
+        # distribute the people that are leaving the cell equally over its neighbours
+        else:
+            for neighbour in neighbours:
+                self.system[neighbour[0], neighbour[1]] += neighbour_change
+        
+        # keep track of number of migrated people
+        self.migrations.append(abs(self.system[i, j] - next_density)[0])
+
+        # update cell value
+        self.system[i, j] = next_density
+    
+    def simulate(self, iterations):
+        &#34;&#34;&#34;
+        Simulates the system for a given number of iterations, updating the system and storing its properties.
+
+        Parameters:
+        iterations (int): The number of iterations to run the simulation.
+        &#34;&#34;&#34;
+        self.plot_system(0, initial=True)
+        for iteration in range(iterations):
+            self.update_system()
+            self.store_system_properties()
+
+            if iteration % 100 == 0:
+                self.plot_system(iteration)
+
+    def plot_system(self, iteration, initial=False, close=True):
+        &#34;&#34;&#34;
+        Plots the system at a given iteration.
+
+        Parameters:
+        iteration (int): The current iteration.
+        initial (bool): Whether the plot is for the initial configuration of the system. Default is False.
+        close (bool): Whether to close the plot after saving. Default is True.
+        &#34;&#34;&#34;
+        plt.imshow(self.system, cmap=&#39;hot&#39;, origin=&#39;lower&#39;)
+        plt.colorbar(label=&#39;Population density&#39;)
+        plt.clim(0, 1)
+        if initial:
+            plt.title(&#34;Initial configuration&#34;)
+        else:
+            plt.title(f&#39;Bak-Sneppen model in 2D (iteration {iteration + 1})&#39;)
+        plt.xlabel(&#39;Column&#39;)
+        plt.ylabel(&#39;Row&#39;)
+        if initial:
+            plt.savefig(os.path.join(self.save_folder, f&#39;iteration_{iteration}.png&#39;))
+        else:
+            plt.savefig(os.path.join(self.save_folder, f&#39;iteration_{iteration + 1}.png&#39;))
+        
+        if close:
+            plt.close()
+        else:
+            plt.show()
+
+    def store_system_properties(self):
+        &#34;&#34;&#34;
+        Stores the current properties of the system.
+        &#34;&#34;&#34;
+        self.min_fitness.append(np.min(self.system))
+        self.system_size.append(np.sum(self.system))</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.average_density"><code class="name flex">
+<span>def <span class="ident">average_density</span></span>(<span>self, indices)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculates the average population density of a given set of cells.</p>
+<p>Parameters:
+indices (list): List of indices of cells.</p>
+<p>Returns:
+float: The average population density.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def average_density(self, indices):
+    &#34;&#34;&#34;
+    Calculates the average population density of a given set of cells.
+
+    Parameters:
+    indices (list): List of indices of cells.
+
+    Returns:
+    float: The average population density.
+    &#34;&#34;&#34;
+    neighbour_populations = [self.system[cell[0], cell[1]] for cell in indices]
+    return sum(neighbour_populations) / len(neighbour_populations)</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.fitness"><code class="name flex">
+<span>def <span class="ident">fitness</span></span>(<span>self, density_ij, average_density_ij)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculates the fitness of a cell given its density and the average density of the system.</p>
+<p>Parameters:
+density_ij (float): The density of the cell.
+average_density_ij (float): The average density of the neighbors of the cell.</p>
+<p>Returns:
+float: The calculated fitness.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fitness(self, density_ij, average_density_ij):
+    &#34;&#34;&#34;
+    Calculates the fitness of a cell given its density and the average density of the system.
+
+    Parameters:
+    density_ij (float): The density of the cell.
+    average_density_ij (float): The average density of the neighbors of the cell.
+
+    Returns:
+    float: The calculated fitness.
+    &#34;&#34;&#34;
+    return (1 - self.gaussian_weight) * np.exp(-self.labda * (density_ij - average_density_ij) ** 2) + self.gaussian_weight * self.gaussian(density_ij, self.fitness_mean, self.fitness_std)</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.gaussian"><code class="name flex">
+<span>def <span class="ident">gaussian</span></span>(<span>self, val, mean, std)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def gaussian(self, val, mean, std):
+    return (1 / (std * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((val - mean)/ std)**2)</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.getMooreNeighbourhood"><code class="name flex">
+<span>def <span class="ident">getMooreNeighbourhood</span></span>(<span>self, i, j, extent=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a set of indices corresponding to the Moore Neighbourhood.</p>
+<p>Parameters:
+i, j (int): The coordinates of the current cell.
+extent (int): The range for the Moore Neighbourhood. Default is 1.</p>
+<p>Returns:
+list: A list of indices representing the Moore Neighbourhood.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getMooreNeighbourhood(self, i,j, extent=1):
+    &#34;&#34;&#34;
+    Returns a set of indices corresponding to the Moore Neighbourhood.
+
+    Parameters:
+    i, j (int): The coordinates of the current cell.
+    extent (int): The range for the Moore Neighbourhood. Default is 1.
+
+    Returns:
+    list: A list of indices representing the Moore Neighbourhood.
+    &#34;&#34;&#34;
+
+    # Check for incorrect input
+    # Make it a test later
+    assert i &gt;= 0 and i &lt;= self.size
+    assert j &gt;= 0 and j &lt;= self.size
+    
+    indices = []
+    
+    for iadd in range(i-extent,i+extent+1):
+        for jadd in range(j-extent, j+extent+1):        
+            if(iadd==i and jadd == j):  # If is not the same cell
+                continue
+            if (iadd &lt; 0 or iadd&gt;=self.size):          # If is not in bounds
+                continue                
+            if (jadd &lt; 0 or jadd&gt;=self.size):          # If is not in bounds
+                continue
+            indices.append([iadd,jadd])
+
+    return indices</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.new_density"><code class="name flex">
+<span>def <span class="ident">new_density</span></span>(<span>self, average_density, local_density, fitness, random_factor)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculates the new density of a cell given the average density of the system,
+its current density, fitness, and a random factor.</p>
+<p>Parameters:
+average_density (float): The average density of the system.
+local_density (float): The current density of the cell.
+fitness (float): The fitness of the cell.
+random_factor (float): A random factor contributing to the density.</p>
+<p>Returns:
+float: The new density of the cell.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def new_density(self, average_density, local_density, fitness, random_factor):
+    &#34;&#34;&#34;
+    Calculates the new density of a cell given the average density of the system,
+    its current density, fitness, and a random factor.
+
+    Parameters:
+    average_density (float): The average density of the system.
+    local_density (float): The current density of the cell.
+    fitness (float): The fitness of the cell.
+    random_factor (float): A random factor contributing to the density.
+
+    Returns:
+    float: The new density of the cell.
+    &#34;&#34;&#34;
+    return self.alpha * average_density + self.beta * local_density + self.gamma * fitness + self.delta * random_factor</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.plot_system"><code class="name flex">
+<span>def <span class="ident">plot_system</span></span>(<span>self, iteration, initial=False, close=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plots the system at a given iteration.</p>
+<p>Parameters:
+iteration (int): The current iteration.
+initial (bool): Whether the plot is for the initial configuration of the system. Default is False.
+close (bool): Whether to close the plot after saving. Default is True.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plot_system(self, iteration, initial=False, close=True):
+    &#34;&#34;&#34;
+    Plots the system at a given iteration.
+
+    Parameters:
+    iteration (int): The current iteration.
+    initial (bool): Whether the plot is for the initial configuration of the system. Default is False.
+    close (bool): Whether to close the plot after saving. Default is True.
+    &#34;&#34;&#34;
+    plt.imshow(self.system, cmap=&#39;hot&#39;, origin=&#39;lower&#39;)
+    plt.colorbar(label=&#39;Population density&#39;)
+    plt.clim(0, 1)
+    if initial:
+        plt.title(&#34;Initial configuration&#34;)
+    else:
+        plt.title(f&#39;Bak-Sneppen model in 2D (iteration {iteration + 1})&#39;)
+    plt.xlabel(&#39;Column&#39;)
+    plt.ylabel(&#39;Row&#39;)
+    if initial:
+        plt.savefig(os.path.join(self.save_folder, f&#39;iteration_{iteration}.png&#39;))
+    else:
+        plt.savefig(os.path.join(self.save_folder, f&#39;iteration_{iteration + 1}.png&#39;))
+    
+    if close:
+        plt.close()
+    else:
+        plt.show()</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.simulate"><code class="name flex">
+<span>def <span class="ident">simulate</span></span>(<span>self, iterations)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Simulates the system for a given number of iterations, updating the system and storing its properties.</p>
+<p>Parameters:
+iterations (int): The number of iterations to run the simulation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def simulate(self, iterations):
+    &#34;&#34;&#34;
+    Simulates the system for a given number of iterations, updating the system and storing its properties.
+
+    Parameters:
+    iterations (int): The number of iterations to run the simulation.
+    &#34;&#34;&#34;
+    self.plot_system(0, initial=True)
+    for iteration in range(iterations):
+        self.update_system()
+        self.store_system_properties()
+
+        if iteration % 100 == 0:
+            self.plot_system(iteration)</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.store_system_properties"><code class="name flex">
+<span>def <span class="ident">store_system_properties</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Stores the current properties of the system.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def store_system_properties(self):
+    &#34;&#34;&#34;
+    Stores the current properties of the system.
+    &#34;&#34;&#34;
+    self.min_fitness.append(np.min(self.system))
+    self.system_size.append(np.sum(self.system))</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.update_system"><code class="name flex">
+<span>def <span class="ident">update_system</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Performs one iteration of updating the system. It chooses the lowest non-zero population density and
+proposes a new density based on the local density, average density of the neighbors, and the fitness of the cell.
+Considers the migrations between neighbouring cells and preserves the overall population.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_system(self):
+    &#34;&#34;&#34;
+    Performs one iteration of updating the system. It chooses the lowest non-zero population density and
+    proposes a new density based on the local density, average density of the neighbors, and the fitness of the cell.
+    Considers the migrations between neighbouring cells and preserves the overall population.
+    &#34;&#34;&#34;
+
+    # get the indices of the lowest non-zero population density
+    min_value = np.min(self.system[self.system != 0])
+    i, j = np.where(self.system == min_value)
+
+    # get neighbouring cells
+    neighbours = self.getMooreNeighbourhood(i[0], j[0])
+
+    # get average density of neighbours, local density and fitness of current cell
+    average_density = self.average_density(neighbours)
+    local_density = self.system[i, j]
+    fitness = self.fitness(local_density, average_density)
+
+    # generate factor for random fluctuations
+    random_factor = np.random.rand()
+
+    # store number of neighbours and neighbouring cell values for use in updating
+    number_of_neighbours = len(neighbours)
+    neighbour_values = [self.system[neighbour[0], neighbour[1]] for neighbour in neighbours]
+
+    # calculate new density of current cell
+    next_density = max(self.new_density(average_density, local_density, fitness, random_factor), 0)
+
+    # calculate difference with current density, and calculate change that neighbouring cells need to undergo to provide new density
+    density_difference = self.system[i, j] - next_density
+    neighbour_change = (density_difference) / number_of_neighbours
+
+    # if density_difference &gt; 0: people move out of the cell into neighbouring cells
+    # if density_difference &lt; 0: people from neighbouring cells move into our current cell
+    if density_difference &lt; 0:
+        # we have 3 cases:
+            # 1. all neighbouring cells have high enough densities, in which case we&#39;ll just move the same number of people from each cell
+            # 2. a few neighbouring cells have probability less than required, but the sum of the neighbours is still enough to cover the change
+            # 3. the sum is not enough to cover the change, in which case we&#39;ll move all people from neighbouring states to the cell
+
+        # if all neighbours have high enough densities, take even amount from all neighbours
+        if all(neighbour_value &gt;= abs(neighbour_change) for neighbour_value in neighbour_values):
+            for neighbour in neighbours:
+                self.system[neighbour[0], neighbour[1]] += neighbour_change
+            
+        # if not all neighbours have high enough density, but their sum is high enough to cover the change:
+        # sort the neighbouring cells from lowest to highest and start taking maximally large amounts from the cells that have not enough density
+        # if a cell has too low density, take everything and calculate how much is left to take. Take that from the next cell
+        elif not all(neighbour_value &gt;= abs(neighbour_change) for neighbour_value in neighbour_values) and sum(neighbour_values) &gt;= abs(density_difference):
+            neighbour_values, neighbours = zip(*sorted(zip(neighbour_values, neighbours)))
+            neighbour_changes = [neighbour_change for _ in range(len(neighbours))]
+            for neighbour_index in range(len(neighbours)):
+                if neighbour_values[neighbour_index] &lt; neighbour_changes[neighbour_index]:
+                    neighbour_changes[neighbour_index + 1] -= (neighbour_changes[neighbour_index] - neighbour_values[neighbour_index])
+                    self.system[neighbours[neighbour_index][0], neighbours[neighbour_index][1]] = 0
+                else:
+                    self.system[neighbours[neighbour_index][0], neighbours[neighbour_index][1]] -= neighbour_changes[neighbour_index]
+        
+        # if the neighbours don&#39;t have enough to cover the change, take all people that are available and move them into the current cell
+        # and keep track of the number of people moved
+        else:
+            next_density = self.system[i, j] + sum(neighbour_values)
+            for neighbour in neighbours:
+                self.system[neighbour[0], neighbour[1]] = 0
+
+    # distribute the people that are leaving the cell equally over its neighbours
+    else:
+        for neighbour in neighbours:
+            self.system[neighbour[0], neighbour[1]] += neighbour_change
+    
+    # keep track of number of migrated people
+    self.migrations.append(abs(self.system[i, j] - next_density)[0])
+
+    # update cell value
+    self.system[i, j] = next_density</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Urban-Architects.Bak_Sneppen" href="index.html">Urban-Architects.Bak_Sneppen</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation" href="#Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation">BakSneppen2D_ConservedPopulation</a></code></h4>
+<ul class="">
+<li><code><a title="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.average_density" href="#Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.average_density">average_density</a></code></li>
+<li><code><a title="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.fitness" href="#Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.fitness">fitness</a></code></li>
+<li><code><a title="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.gaussian" href="#Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.gaussian">gaussian</a></code></li>
+<li><code><a title="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.getMooreNeighbourhood" href="#Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.getMooreNeighbourhood">getMooreNeighbourhood</a></code></li>
+<li><code><a title="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.new_density" href="#Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.new_density">new_density</a></code></li>
+<li><code><a title="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.plot_system" href="#Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.plot_system">plot_system</a></code></li>
+<li><code><a title="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.simulate" href="#Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.simulate">simulate</a></code></li>
+<li><code><a title="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.store_system_properties" href="#Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.store_system_properties">store_system_properties</a></code></li>
+<li><code><a title="Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.update_system" href="#Urban-Architects.Bak_Sneppen.BakSneppen_PopulationDynamics_Conserved.BakSneppen2D_ConservedPopulation.update_system">update_system</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

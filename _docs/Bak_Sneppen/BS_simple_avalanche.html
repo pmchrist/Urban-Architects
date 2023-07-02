@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>Urban-Architects.Bak_Sneppen.BS_simple_avalanche API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Urban-Architects.Bak_Sneppen.BS_simple_avalanche</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+import os
+import powerlaw
+
+class BakSneppen2D_A(object):
+    &#34;&#34;&#34;
+    A class representing a 2D Bak-Sneppen model, including avalanche calculations
+    &#34;&#34;&#34;
+    def __init__(self, size, save_folder):
+        &#34;&#34;&#34;
+        Initializes the BakSneppen2D object with the given size and save_folder.
+
+        Parameters:
+        size (int): The size of the 2D system.
+        save_folder (str): The directory to save output images.
+        &#34;&#34;&#34;
+       
+        np.random.seed(2)
+        assert isinstance(size, int), &#34;Size should be an integer&#34;
+        # initialize the system with random population density values
+        self.size = size
+        self.system = np.random.rand(size, size)
+        
+
+        # set global parameters
+        self.save_folder = save_folder
+
+        # initialize lists for storing interesting parameter values
+        self.min_fitness = []
+        self.avg_fitness = [] 
+        self.std_fitness = []
+        self.least_fit_location = []
+        
+        # initialize variables to track avalanches
+        self.threshold_list = {&#39;threshold&#39;: [], &#39;time_step&#39;: []}
+        self.avalanche_time_list = {&#39;avalanche_time&#39;: [], &#39;time_step&#39;: []}
+        self.avalanche_timer = 1
+        self.in_avalanche = False
+        self.avalanche_sizes = []  
+        self.avalanche_durations = []
+        self.time_step = 0 
+
+        # Ages: number of iterations it has gone through without mutating
+        self.ages = np.zeros((size, size), dtype=int)
+
+        assert self.system.shape == (size, size), &#34;System not initialized correctly&#34;
+        assert np.all(0 &lt;= self.system) and np.all(self.system &lt;= 1), &#34;System should be initialized with random values between 0 and 1&#34;
+        assert np.all(self.ages == 0), &#34;Ages should be initialized with zeros&#34;
+
+
+    def update_system(self):
+        &#34;&#34;&#34;
+        Updates the system by identifying the cell with the lowest fitness value and its neighbors
+        and replacing them with new random values. Also increments the ages of all cells.
+        &#34;&#34;&#34;
+        self.ages += 1
+        min_indices = np.unravel_index(np.argmin(self.system), self.system.shape)
+        i, j = min_indices
+        self.ages[i, j] = 0
+        self.system[i, j] = np.random.rand()
+
+        # update neighbors without periodic boundary conditions
+        neighbors = [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]
+        for ni, nj in neighbors:
+            if 0 &lt;= ni &lt; self.size and 0 &lt;= nj &lt; self.size:
+                self.ages[ni, nj] = 0
+                self.system[ni, nj] = np.random.rand()
+        
+
+    
+    def get_min(self):
+        &#34;&#34;&#34;
+        Calculates the minimum fitness in the system and updates the threshold list accordingly.
+        &#34;&#34;&#34;
+        # Get the indices of the cell with the minimum fitness in the system
+        min_indices = np.unravel_index(np.argmin(self.system), self.system.shape)
+        # Get the minimum fitness value
+        min_fitness = self.system[min_indices]
+
+        # Append the minimum fitness to the min_fitness list
+        self.min_fitness.append(min_fitness)
+
+        # If there are no thresholds set yet, or if the current min_fitness is
+        # higher than all previous thresholds, append it to the threshold list
+        if not self.threshold_list[&#39;threshold&#39;]:
+            self.threshold_list[&#39;threshold&#39;].append(min_fitness)
+            self.threshold_list[&#39;time_step&#39;].append(self.time_step)
+        elif min_fitness &gt; max(self.threshold_list[&#39;threshold&#39;]):
+            self.threshold_list[&#39;threshold&#39;].append(min_fitness)
+            self.threshold_list[&#39;time_step&#39;].append(self.time_step)
+
+
+    def get_avalanche_time(self):
+        &#34;&#34;&#34;
+        Calculates the duration of an avalanche, an event where the minimum fitness increases.
+        &#34;&#34;&#34;
+        # If any cell in the system has a fitness less than the current threshold, increment the avalanche timer
+        if not all(self.system.flat &gt;= max(self.threshold_list[&#39;threshold&#39;])):
+            self.avalanche_timer += 1
+        # If all cells in the system have a fitness greater than or equal to the current threshold,
+        # then the avalanche has ended. Record the duration of the avalanche and the time_step it ended at
+        else:
+            self.avalanche_time_list[&#39;avalanche_time&#39;].append(self.avalanche_timer)
+            self.avalanche_time_list[&#39;time_step&#39;].append(self.time_step)
+            # reset avalanche_timer
+            self.avalanche_timer = 1
+
+    def simulate(self, iterations):
+        &#34;&#34;&#34;
+        Simulates the system for a given number of iterations, updating the system, 
+        storing its properties, and calculating avalanches.
+
+        Parameters:
+        iterations (int): The number of iterations to run the simulation.
+        &#34;&#34;&#34;
+        # Get the initial minimum fitness of the system
+        prev_min_fitness = np.min(self.system)
+        # Reset the time_step and set initial avalanche size
+        self.time_step = 0  
+        avalanche_size = 0
+
+        for iteration in range(iterations):
+            # Record the minimum fitness before updating the system
+            min_before = np.min(self.system)
+            # Update the system
+            self.update_system()
+            # Record the minimum fitness after updating the system
+            min_after = np.min(self.system)
+
+            # If the new minimum fitness is higher than the previous one...
+            if min_after &gt; prev_min_fitness:
+                # ...and we&#39;re not currently in an avalanche, start a new one
+                if not self.in_avalanche:
+                    self.in_avalanche = True
+                    self.avalanche_timer = 1
+                    avalanche_size = 5
+                 # ...and we&#39;re already in an avalanche, continue it
+                else:
+                    self.avalanche_timer += 1
+                    avalanche_size += 1
+
+            # If the new minimum fitness is not higher and we&#39;re in an avalanche, the avalanche has ended
+            elif self.in_avalanche:
+                self.get_avalanche_time()
+                self.avalanche_durations.append(self.avalanche_timer)
+                self.avalanche_sizes.append(avalanche_size)
+                self.in_avalanche = False
+                avalanche_size = 0 
+
+            # Get the minimum fitness and store the system properties at this time step
+            self.get_min() 
+            self.store_system_properties()
+            # Set the previous minimum fitness for the next iteration
+            prev_min_fitness = min_after
+
+            if iteration % 1000 == 0:
+                self.plot_system(iteration)
+
+        
+
+    def plot_system(self, iteration):
+        &#34;&#34;&#34;
+        Plots the system at a given iteration.
+
+        Parameters:
+        iteration (int): The iteration number.
+        &#34;&#34;&#34;
+        plt.imshow(self.system, cmap=&#39;hot&#39;, origin=&#39;lower&#39;)
+        plt.colorbar(label=&#39;Fitness&#39;)
+        plt.title(f&#39;Bak-Sneppen model in 2D (iteration {iteration + 1})&#39;)
+        plt.xlabel(&#39;Column&#39;)
+        plt.ylabel(&#39;Row&#39;)
+        plt.savefig(os.path.join(self.save_folder, f&#39;iteration_{iteration + 1}.png&#39;))
+        plt.close()
+
+    def store_system_properties(self):
+        &#34;&#34;&#34;
+        Stores the system properties such as avg_fitness, std_fitness, least_fit_location.
+        &#34;&#34;&#34;
+        
+        self.avg_fitness.append(np.mean(self.system))  # Compute average fitness
+        self.std_fitness.append(np.std(self.system))  # Compute std dev of fitness
+        self.least_fit_location.append(np.unravel_index(np.argmin(self.system), self.system.shape))  # Store least fit location
+   
+
+if __name__==&#34;__main__&#34;:
+    # Get the absolute path of the directory where the script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Define your save_folder relative to the script location
+    save_folder = os.path.join(script_dir, &#39;Results&#39;, &#39;BakSneppen_results2&#39;)
+
+    size = 100
+
+    iterations = 50000
+
+    model = BakSneppen2D_A(size, save_folder)
+    model.simulate(iterations)
+
+    # Plot minimum fitness evolution
+    plt.figure(figsize=(10, 8))
+    plt.subplot(2, 1, 1)
+
+    plt.plot(range(iterations), model.min_fitness)
+    plt.xlabel(&#39;Iteration Number&#39;)  
+    plt.ylabel(&#39;Minimum Fitness&#39;)  
+    plt.title(&#39;Minimum Fitness Evolution in the Bak-Sneppen Model&#39;)  
+
+    #Each time the least fit cell gets replaced, the minimum fitness increases 
+    #because the least fit cell has been replaced by a new one with higher fitness.
+    #However, over time, some scells fitness will decrease due to the random &#34;mutations&#34; you&#39;re applying, 
+    #causing the minimum fitness to decrease again. This results in the oscillating pattern
+
+    # Plot average fitness evolution
+    plt.subplot(2, 1, 2)
+    plt.plot(range(iterations), model.avg_fitness)
+    plt.xlabel(&#39;Iteration Number&#39;)
+    plt.ylabel(&#39;Average Fitness&#39;)
+    plt.title(&#39;Average Fitness Evolution in the Bak-Sneppen Model&#39;)
+
+    plt.tight_layout()
+    plt.show()
+
+    #Over time, the replacement of the least fit cell and its neighbors
+    #leads to an overall increase in fitness throughout the system, so
+    #the average fitness should increase gradually.
+    
+
+    # Create a histogram of the final fitness values
+    # Can see a threshold at approx 0.22, distribution is skewed to higher values?
+    final_fitness_values = model.system.flatten()
+    plt.hist(final_fitness_values, bins=30, edgecolor=&#39;black&#39;)
+    plt.xlabel(&#39;Fitness Value&#39;)
+    plt.ylabel(&#39;Frequency&#39;)
+    plt.title(&#39;Histogram of Final Fitness Values&#39;)
+    #plt.show()
+
+    # Plot standard deviation of fitness evolution
+    # If the model leads to a homogeneous distribution, the standard deviation should decrease over time.
+    plt.figure(figsize=(10, 8))
+    plt.plot(range(iterations), model.std_fitness)
+    plt.xlabel(&#39;Iteration Number&#39;)
+    plt.ylabel(&#39;Standard Deviation of Fitness&#39;)
+    plt.title(&#39;Fitness Variability Evolution in the Bak-Sneppen Model&#39;)
+    plt.show()
+
+     # Create a histogram of the avalanche sizes
+    # If exhibits self-organized criticality, should see smaller avalanches much more frequent than larger
+    plt.figure()
+    plt.hist(model.avalanche_sizes, bins=30, edgecolor=&#39;black&#39;)
+    plt.xlabel(&#39;Avalanche Size&#39;)
+    plt.ylabel(&#39;Frequency&#39;)
+    plt.title(&#39;Histogram of Avalanche Sizes&#39;)
+    plt.show()
+
+    # Loglog
+    sizes, counts = np.unique(model.avalanche_sizes, return_counts=True)
+    plt.loglog(sizes, counts, &#39;o&#39;)
+    plt.xlabel(&#39;Avalanche Size (log scale)&#39;)
+    plt.ylabel(&#39;Frequency (log scale)&#39;)
+    plt.title(&#39;Histogram of Avalanche Sizes&#39;)
+    plt.show()
+
+    # Create a histogram of the avalanche durations
+    # short-lived avalanches are more common than long-lasting ones
+    plt.figure()
+    plt.hist(model.avalanche_durations, bins=30, edgecolor=&#39;black&#39;)
+    plt.xlabel(&#39;Avalanche Duration&#39;)
+    plt.ylabel(&#39;Frequency&#39;)
+    plt.title(&#39;Histogram of Avalanche Durations&#39;)
+    plt.show()
+
+    # Loglog
+    durations, counts = np.unique(model.avalanche_durations, return_counts=True)
+    plt.loglog(durations, counts, &#39;o&#39;)
+    plt.xlabel(&#39;Avalanche Duration (log scale)&#39;)
+    plt.ylabel(&#39;Frequency (log scale)&#39;)
+    plt.title(&#39;Histogram of Avalanche Durations&#39;)
+    plt.show()
+
+    # Create a scatter plot of avalanche size vs duration
+    # Larger avalanches tend to last longer
+    plt.figure()
+    plt.scatter(model.avalanche_durations, model.avalanche_sizes)
+    plt.xlabel(&#39;Avalanche Duration&#39;)
+    plt.ylabel(&#39;Avalanche Size&#39;)
+    plt.title(&#39;Avalanche Size vs Duration&#39;)
+    plt.show()
+    
+    # expect to see a straight line on a log-log plot if correlation is perfect
+    plt.loglog(model.avalanche_durations, model.avalanche_sizes, &#39;o&#39;)
+    plt.xlabel(&#39;Avalanche Duration (log scale)&#39;)
+    plt.ylabel(&#39;Avalanche Size (log scale)&#39;)
+    plt.title(&#39;Avalanche Size vs Duration&#39;)
+    plt.show()
+
+    # Ages
+    # higher age therefore means that a cell has remained stable for a longer period of time
+    plt.imshow(model.ages, cmap=&#39;viridis&#39;)
+    plt.colorbar(label=&#39;Age&#39;)
+    plt.title(&#39;Age distribution after 50000 iterations&#39;)
+    plt.xlabel(&#39;Column&#39;)
+    plt.ylabel(&#39;Row&#39;)
+    plt.show()
+
+    # Kolmogorov-Smirnov to check power
+    avalanche_sizes = model.avalanche_sizes
+    avalanche_durations = model.avalanche_durations
+    fit1 = powerlaw.Fit(np.array(avalanche_sizes), discrete=True, verbose=False)
+    fit2 = powerlaw.Fit(np.array(avalanche_durations), discrete=True, verbose=False)
+    # comparing the power-law distribution to an exponential distribution
+    R1, p1 = fit1.distribution_compare(&#39;power_law&#39;, &#39;exponential&#39;, normalized_ratio=True)
+    R2, p2 = fit2.distribution_compare(&#39;power_law&#39;, &#39;exponential&#39;, normalized_ratio=True)
+    print(&#34;Test statistic, size : &#34;, R1)
+    print(&#34;p-value, size: &#34;, p1)
+    print(&#34;Power-law exponent, size: &#34;, fit1.power_law.alpha)
+    print(&#34;Test statistic, duration: &#34;, R2)
+    print(&#34;p-value, duration: &#34;, p2)
+    print(&#34;Power-law exponent duration: &#34;, fit2.power_law.alpha)
+
+    # comparing the power-law distribution to a log-normal distribution
+    R3, p3 = fit1.distribution_compare(&#39;power_law&#39;, &#39;lognormal&#39;, normalized_ratio=True)
+    R4, p5 = fit2.distribution_compare(&#39;power_law&#39;, &#39;lognormal&#39;, normalized_ratio=True)
+    print(&#34;Test statistic, size: &#34;, R3)
+    print(&#34;p-value, size: &#34;, p3)
+    print(&#34;Power-law exponent, size: &#34;, fit1.power_law.alpha)
+    print(&#34;Test statistic, duration: &#34;, R4)
+    print(&#34;p-value, duration: &#34;, p5)
+    print(&#34;Power-law exponent, duration: &#34;, fit2.power_law.alpha)
+
+
+    </code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A"><code class="flex name class">
+<span>class <span class="ident">BakSneppen2D_A</span></span>
+<span>(</span><span>size, save_folder)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class representing a 2D Bak-Sneppen model, including avalanche calculations</p>
+<p>Initializes the BakSneppen2D object with the given size and save_folder.</p>
+<p>Parameters:
+size (int): The size of the 2D system.
+save_folder (str): The directory to save output images.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class BakSneppen2D_A(object):
+    &#34;&#34;&#34;
+    A class representing a 2D Bak-Sneppen model, including avalanche calculations
+    &#34;&#34;&#34;
+    def __init__(self, size, save_folder):
+        &#34;&#34;&#34;
+        Initializes the BakSneppen2D object with the given size and save_folder.
+
+        Parameters:
+        size (int): The size of the 2D system.
+        save_folder (str): The directory to save output images.
+        &#34;&#34;&#34;
+       
+        np.random.seed(2)
+        assert isinstance(size, int), &#34;Size should be an integer&#34;
+        # initialize the system with random population density values
+        self.size = size
+        self.system = np.random.rand(size, size)
+        
+
+        # set global parameters
+        self.save_folder = save_folder
+
+        # initialize lists for storing interesting parameter values
+        self.min_fitness = []
+        self.avg_fitness = [] 
+        self.std_fitness = []
+        self.least_fit_location = []
+        
+        # initialize variables to track avalanches
+        self.threshold_list = {&#39;threshold&#39;: [], &#39;time_step&#39;: []}
+        self.avalanche_time_list = {&#39;avalanche_time&#39;: [], &#39;time_step&#39;: []}
+        self.avalanche_timer = 1
+        self.in_avalanche = False
+        self.avalanche_sizes = []  
+        self.avalanche_durations = []
+        self.time_step = 0 
+
+        # Ages: number of iterations it has gone through without mutating
+        self.ages = np.zeros((size, size), dtype=int)
+
+        assert self.system.shape == (size, size), &#34;System not initialized correctly&#34;
+        assert np.all(0 &lt;= self.system) and np.all(self.system &lt;= 1), &#34;System should be initialized with random values between 0 and 1&#34;
+        assert np.all(self.ages == 0), &#34;Ages should be initialized with zeros&#34;
+
+
+    def update_system(self):
+        &#34;&#34;&#34;
+        Updates the system by identifying the cell with the lowest fitness value and its neighbors
+        and replacing them with new random values. Also increments the ages of all cells.
+        &#34;&#34;&#34;
+        self.ages += 1
+        min_indices = np.unravel_index(np.argmin(self.system), self.system.shape)
+        i, j = min_indices
+        self.ages[i, j] = 0
+        self.system[i, j] = np.random.rand()
+
+        # update neighbors without periodic boundary conditions
+        neighbors = [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]
+        for ni, nj in neighbors:
+            if 0 &lt;= ni &lt; self.size and 0 &lt;= nj &lt; self.size:
+                self.ages[ni, nj] = 0
+                self.system[ni, nj] = np.random.rand()
+        
+
+    
+    def get_min(self):
+        &#34;&#34;&#34;
+        Calculates the minimum fitness in the system and updates the threshold list accordingly.
+        &#34;&#34;&#34;
+        # Get the indices of the cell with the minimum fitness in the system
+        min_indices = np.unravel_index(np.argmin(self.system), self.system.shape)
+        # Get the minimum fitness value
+        min_fitness = self.system[min_indices]
+
+        # Append the minimum fitness to the min_fitness list
+        self.min_fitness.append(min_fitness)
+
+        # If there are no thresholds set yet, or if the current min_fitness is
+        # higher than all previous thresholds, append it to the threshold list
+        if not self.threshold_list[&#39;threshold&#39;]:
+            self.threshold_list[&#39;threshold&#39;].append(min_fitness)
+            self.threshold_list[&#39;time_step&#39;].append(self.time_step)
+        elif min_fitness &gt; max(self.threshold_list[&#39;threshold&#39;]):
+            self.threshold_list[&#39;threshold&#39;].append(min_fitness)
+            self.threshold_list[&#39;time_step&#39;].append(self.time_step)
+
+
+    def get_avalanche_time(self):
+        &#34;&#34;&#34;
+        Calculates the duration of an avalanche, an event where the minimum fitness increases.
+        &#34;&#34;&#34;
+        # If any cell in the system has a fitness less than the current threshold, increment the avalanche timer
+        if not all(self.system.flat &gt;= max(self.threshold_list[&#39;threshold&#39;])):
+            self.avalanche_timer += 1
+        # If all cells in the system have a fitness greater than or equal to the current threshold,
+        # then the avalanche has ended. Record the duration of the avalanche and the time_step it ended at
+        else:
+            self.avalanche_time_list[&#39;avalanche_time&#39;].append(self.avalanche_timer)
+            self.avalanche_time_list[&#39;time_step&#39;].append(self.time_step)
+            # reset avalanche_timer
+            self.avalanche_timer = 1
+
+    def simulate(self, iterations):
+        &#34;&#34;&#34;
+        Simulates the system for a given number of iterations, updating the system, 
+        storing its properties, and calculating avalanches.
+
+        Parameters:
+        iterations (int): The number of iterations to run the simulation.
+        &#34;&#34;&#34;
+        # Get the initial minimum fitness of the system
+        prev_min_fitness = np.min(self.system)
+        # Reset the time_step and set initial avalanche size
+        self.time_step = 0  
+        avalanche_size = 0
+
+        for iteration in range(iterations):
+            # Record the minimum fitness before updating the system
+            min_before = np.min(self.system)
+            # Update the system
+            self.update_system()
+            # Record the minimum fitness after updating the system
+            min_after = np.min(self.system)
+
+            # If the new minimum fitness is higher than the previous one...
+            if min_after &gt; prev_min_fitness:
+                # ...and we&#39;re not currently in an avalanche, start a new one
+                if not self.in_avalanche:
+                    self.in_avalanche = True
+                    self.avalanche_timer = 1
+                    avalanche_size = 5
+                 # ...and we&#39;re already in an avalanche, continue it
+                else:
+                    self.avalanche_timer += 1
+                    avalanche_size += 1
+
+            # If the new minimum fitness is not higher and we&#39;re in an avalanche, the avalanche has ended
+            elif self.in_avalanche:
+                self.get_avalanche_time()
+                self.avalanche_durations.append(self.avalanche_timer)
+                self.avalanche_sizes.append(avalanche_size)
+                self.in_avalanche = False
+                avalanche_size = 0 
+
+            # Get the minimum fitness and store the system properties at this time step
+            self.get_min() 
+            self.store_system_properties()
+            # Set the previous minimum fitness for the next iteration
+            prev_min_fitness = min_after
+
+            if iteration % 1000 == 0:
+                self.plot_system(iteration)
+
+        
+
+    def plot_system(self, iteration):
+        &#34;&#34;&#34;
+        Plots the system at a given iteration.
+
+        Parameters:
+        iteration (int): The iteration number.
+        &#34;&#34;&#34;
+        plt.imshow(self.system, cmap=&#39;hot&#39;, origin=&#39;lower&#39;)
+        plt.colorbar(label=&#39;Fitness&#39;)
+        plt.title(f&#39;Bak-Sneppen model in 2D (iteration {iteration + 1})&#39;)
+        plt.xlabel(&#39;Column&#39;)
+        plt.ylabel(&#39;Row&#39;)
+        plt.savefig(os.path.join(self.save_folder, f&#39;iteration_{iteration + 1}.png&#39;))
+        plt.close()
+
+    def store_system_properties(self):
+        &#34;&#34;&#34;
+        Stores the system properties such as avg_fitness, std_fitness, least_fit_location.
+        &#34;&#34;&#34;
+        
+        self.avg_fitness.append(np.mean(self.system))  # Compute average fitness
+        self.std_fitness.append(np.std(self.system))  # Compute std dev of fitness
+        self.least_fit_location.append(np.unravel_index(np.argmin(self.system), self.system.shape))  # Store least fit location</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.get_avalanche_time"><code class="name flex">
+<span>def <span class="ident">get_avalanche_time</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculates the duration of an avalanche, an event where the minimum fitness increases.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_avalanche_time(self):
+    &#34;&#34;&#34;
+    Calculates the duration of an avalanche, an event where the minimum fitness increases.
+    &#34;&#34;&#34;
+    # If any cell in the system has a fitness less than the current threshold, increment the avalanche timer
+    if not all(self.system.flat &gt;= max(self.threshold_list[&#39;threshold&#39;])):
+        self.avalanche_timer += 1
+    # If all cells in the system have a fitness greater than or equal to the current threshold,
+    # then the avalanche has ended. Record the duration of the avalanche and the time_step it ended at
+    else:
+        self.avalanche_time_list[&#39;avalanche_time&#39;].append(self.avalanche_timer)
+        self.avalanche_time_list[&#39;time_step&#39;].append(self.time_step)
+        # reset avalanche_timer
+        self.avalanche_timer = 1</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.get_min"><code class="name flex">
+<span>def <span class="ident">get_min</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculates the minimum fitness in the system and updates the threshold list accordingly.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_min(self):
+    &#34;&#34;&#34;
+    Calculates the minimum fitness in the system and updates the threshold list accordingly.
+    &#34;&#34;&#34;
+    # Get the indices of the cell with the minimum fitness in the system
+    min_indices = np.unravel_index(np.argmin(self.system), self.system.shape)
+    # Get the minimum fitness value
+    min_fitness = self.system[min_indices]
+
+    # Append the minimum fitness to the min_fitness list
+    self.min_fitness.append(min_fitness)
+
+    # If there are no thresholds set yet, or if the current min_fitness is
+    # higher than all previous thresholds, append it to the threshold list
+    if not self.threshold_list[&#39;threshold&#39;]:
+        self.threshold_list[&#39;threshold&#39;].append(min_fitness)
+        self.threshold_list[&#39;time_step&#39;].append(self.time_step)
+    elif min_fitness &gt; max(self.threshold_list[&#39;threshold&#39;]):
+        self.threshold_list[&#39;threshold&#39;].append(min_fitness)
+        self.threshold_list[&#39;time_step&#39;].append(self.time_step)</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.plot_system"><code class="name flex">
+<span>def <span class="ident">plot_system</span></span>(<span>self, iteration)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plots the system at a given iteration.</p>
+<p>Parameters:
+iteration (int): The iteration number.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plot_system(self, iteration):
+    &#34;&#34;&#34;
+    Plots the system at a given iteration.
+
+    Parameters:
+    iteration (int): The iteration number.
+    &#34;&#34;&#34;
+    plt.imshow(self.system, cmap=&#39;hot&#39;, origin=&#39;lower&#39;)
+    plt.colorbar(label=&#39;Fitness&#39;)
+    plt.title(f&#39;Bak-Sneppen model in 2D (iteration {iteration + 1})&#39;)
+    plt.xlabel(&#39;Column&#39;)
+    plt.ylabel(&#39;Row&#39;)
+    plt.savefig(os.path.join(self.save_folder, f&#39;iteration_{iteration + 1}.png&#39;))
+    plt.close()</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.simulate"><code class="name flex">
+<span>def <span class="ident">simulate</span></span>(<span>self, iterations)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Simulates the system for a given number of iterations, updating the system,
+storing its properties, and calculating avalanches.</p>
+<p>Parameters:
+iterations (int): The number of iterations to run the simulation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def simulate(self, iterations):
+    &#34;&#34;&#34;
+    Simulates the system for a given number of iterations, updating the system, 
+    storing its properties, and calculating avalanches.
+
+    Parameters:
+    iterations (int): The number of iterations to run the simulation.
+    &#34;&#34;&#34;
+    # Get the initial minimum fitness of the system
+    prev_min_fitness = np.min(self.system)
+    # Reset the time_step and set initial avalanche size
+    self.time_step = 0  
+    avalanche_size = 0
+
+    for iteration in range(iterations):
+        # Record the minimum fitness before updating the system
+        min_before = np.min(self.system)
+        # Update the system
+        self.update_system()
+        # Record the minimum fitness after updating the system
+        min_after = np.min(self.system)
+
+        # If the new minimum fitness is higher than the previous one...
+        if min_after &gt; prev_min_fitness:
+            # ...and we&#39;re not currently in an avalanche, start a new one
+            if not self.in_avalanche:
+                self.in_avalanche = True
+                self.avalanche_timer = 1
+                avalanche_size = 5
+             # ...and we&#39;re already in an avalanche, continue it
+            else:
+                self.avalanche_timer += 1
+                avalanche_size += 1
+
+        # If the new minimum fitness is not higher and we&#39;re in an avalanche, the avalanche has ended
+        elif self.in_avalanche:
+            self.get_avalanche_time()
+            self.avalanche_durations.append(self.avalanche_timer)
+            self.avalanche_sizes.append(avalanche_size)
+            self.in_avalanche = False
+            avalanche_size = 0 
+
+        # Get the minimum fitness and store the system properties at this time step
+        self.get_min() 
+        self.store_system_properties()
+        # Set the previous minimum fitness for the next iteration
+        prev_min_fitness = min_after
+
+        if iteration % 1000 == 0:
+            self.plot_system(iteration)</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.store_system_properties"><code class="name flex">
+<span>def <span class="ident">store_system_properties</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Stores the system properties such as avg_fitness, std_fitness, least_fit_location.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def store_system_properties(self):
+    &#34;&#34;&#34;
+    Stores the system properties such as avg_fitness, std_fitness, least_fit_location.
+    &#34;&#34;&#34;
+    
+    self.avg_fitness.append(np.mean(self.system))  # Compute average fitness
+    self.std_fitness.append(np.std(self.system))  # Compute std dev of fitness
+    self.least_fit_location.append(np.unravel_index(np.argmin(self.system), self.system.shape))  # Store least fit location</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.update_system"><code class="name flex">
+<span>def <span class="ident">update_system</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates the system by identifying the cell with the lowest fitness value and its neighbors
+and replacing them with new random values. Also increments the ages of all cells.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_system(self):
+    &#34;&#34;&#34;
+    Updates the system by identifying the cell with the lowest fitness value and its neighbors
+    and replacing them with new random values. Also increments the ages of all cells.
+    &#34;&#34;&#34;
+    self.ages += 1
+    min_indices = np.unravel_index(np.argmin(self.system), self.system.shape)
+    i, j = min_indices
+    self.ages[i, j] = 0
+    self.system[i, j] = np.random.rand()
+
+    # update neighbors without periodic boundary conditions
+    neighbors = [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]
+    for ni, nj in neighbors:
+        if 0 &lt;= ni &lt; self.size and 0 &lt;= nj &lt; self.size:
+            self.ages[ni, nj] = 0
+            self.system[ni, nj] = np.random.rand()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Urban-Architects.Bak_Sneppen" href="index.html">Urban-Architects.Bak_Sneppen</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A" href="#Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A">BakSneppen2D_A</a></code></h4>
+<ul class="">
+<li><code><a title="Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.get_avalanche_time" href="#Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.get_avalanche_time">get_avalanche_time</a></code></li>
+<li><code><a title="Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.get_min" href="#Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.get_min">get_min</a></code></li>
+<li><code><a title="Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.plot_system" href="#Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.plot_system">plot_system</a></code></li>
+<li><code><a title="Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.simulate" href="#Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.simulate">simulate</a></code></li>
+<li><code><a title="Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.store_system_properties" href="#Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.store_system_properties">store_system_properties</a></code></li>
+<li><code><a title="Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.update_system" href="#Urban-Architects.Bak_Sneppen.BS_simple_avalanche.BakSneppen2D_A.update_system">update_system</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

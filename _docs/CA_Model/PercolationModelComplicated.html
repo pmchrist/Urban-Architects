@@ -1,0 +1,1629 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>Urban-Architects.CA_Model.PercolationModelComplicated API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Urban-Architects.CA_Model.PercolationModelComplicated</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import numpy as np
+import copy
+from .init_map2 import *
+
+
+class PercolationModel2D(object):    
+    &#39;&#39;&#39;
+    Class that calculates and displays behaviour of 2D cellular automata
+    &#39;&#39;&#39;
+
+    # Just keeping global variables for reference:
+    migration_threshold = 0.1       # Without simple migration all of the environment events much more clear
+    growthrate = 0.1    # Energy Consumptio/Growth Value
+    emissions = 0.0     # Current emissions, NOT Additive 
+    emmigration_size = 0.1
+    energy_replenish_chance = 0.4
+    energy_replenish_size = 0.4
+    energy_barrier = 0.8
+    view_distance = 3    # Quarter Map
+
+    # Just describing global arrays of environment here:
+    pop_dens = None     # Population density map
+    energy = None       # Amount of energy map
+    type = None         # Type of cell map
+    fitness = None      # Fitness map
+    # Maps for next step
+    next_pop_dens = None
+    next_energy = None
+    next_type = None
+
+    # Some helper arrays for utility function
+    water_score = None
+
+    climate_migration_displaced = []
+    climate_migration_dead = []
+    simple_migration = []
+
+
+    def init_grid(self):
+        &#34;&#34;&#34;
+        Initializes the grid for the cellular automata model.
+        The grid contains population density, energy, type of cell and fitness of each cell.
+        &#34;&#34;&#34;
+
+        #self.pop_dens = np.random.rand(self.N, self.N)       # population grid [0, 1]
+        self.pop_dens = np.zeros((self.N, self.N))       # population grid [0, 1]
+        self.energy = np.random.rand(self.N, self.N)    # energy grid [0, 1]
+        self.type = init_water_map(self.N, 0.2 , 2, 5, 1)
+        #self.type = np.zeros((self.N, self.N))       # population grid [0, 1]
+        self.fitness = np.zeros((self.N, self.N))
+
+        # I believe this is too much, we can model existence/non existence of water just by changing cell type to land/toxic water etc.
+        # loop to purge population values in water area
+        for i in range(self.N):
+            for j in range(self.N):
+                if self.type[i, j]!=0:
+                    self.pop_dens[i, j] = 0
+
+    def __init__(self, ni):
+        &#34;&#34;&#34;
+        Constructor of the class.
+
+        Parameters:
+        ni (int): The size of the 2D grid.
+        &#34;&#34;&#34;
+
+        # Set environment
+        self.emissions = 0              # current emissions
+        self.N = ni                     # Size of 1 side
+        self.Ntot = self.N*self.N       # Overall size
+        self.init_grid()                # Initialize environment grid
+        self.upd_available_water_map()  # Stores water availability score for utility function
+        # Init grids for next step
+        self.next_pop_dens = copy.deepcopy(self.pop_dens)
+        self.next_energy = copy.deepcopy(self.energy)
+        self.next_type = copy.deepcopy(self.type)
+
+
+    # Helper Functions
+    # We assume that neighborhoods stop at border (it is not rolling from another side)
+    def getMooreNeighbourhood(self, i,j, extent=1):
+        &#34;&#34;&#34;
+        Returns the Moore Neighbourhood for a cell at location (i, j).
+
+        Parameters:
+        i, j (int): The x and y coordinates of a cell.
+        extent (int): The extent of the neighbourhood. Default is 1.
+
+        Returns:
+        list: The Moore Neighbourhood for the cell.
+        &#34;&#34;&#34;
+
+        # Check for incorrect input
+        assert i&gt;=0 or i&lt;self.N, &#34;Error: Incorrect coordinates&#34;
+        assert j&gt;=0 or j&lt;self.N, &#34;Error: Incorrect coordinates&#34;       
+        indices = []
+        
+        for iadd in range(i-extent,i+extent+1):
+            for jadd in range(j-extent, j+extent+1):        
+                if(iadd==i and jadd == j):  # If is not the same cell
+                    continue
+                if (iadd &lt; 0 or iadd&gt;=self.N):          # If is not in bounds
+                    continue                
+                if (jadd &lt; 0 or jadd&gt;=self.N):          # If is not in bounds
+                    continue
+                indices.append([iadd,jadd])
+        
+        return indices
+    
+    def getVonNeumannNeighbourhood(self,i,j,extent=1):
+        &#34;&#34;&#34;
+        Returns the Von Neumann Neighbourhood for a cell at location (i, j).
+
+        Parameters:
+        i, j (int): The x and y coordinates of a cell.
+        extent (int): The extent of the neighbourhood. Default is 1.
+
+        Returns:
+        list: The Von Neumann Neighbourhood for the cell.
+        &#34;&#34;&#34;
+
+        # Check for incorrect input
+        assert i&gt;=0 or i&lt;self.N, &#34;Error: Incorrect coordinates&#34;
+        assert j&gt;=0 or j&lt;self.N, &#34;Error: Incorrect coordinates&#34;    
+        
+        indices = []
+        
+        for iadd in range(i-extent,i+extent+1):
+            if(iadd==i): continue
+            if(iadd &lt; 0 or iadd&gt;=self.N): continue       # If is not in bounds                
+            indices.append([iadd,j])
+            
+        for jadd in range(j-extent,j+extent+1):
+            if(jadd==j): continue
+            if(jadd &lt; 0 or jadd&gt;=self.N): continue       # If is not in bounds                            
+            indices.append([i,jadd])
+            
+        return indices    
+
+    # Function which values higher high values
+    def inverse_poly(self, val):
+        &#34;&#34;&#34;
+        Returns the result of the inverse polynomial function for a given value.
+
+        Parameters:
+        val (float): The input value for the function.
+
+        Returns:
+        float: The result of the function.
+        &#34;&#34;&#34;
+        return 4*val-4*val**2
+
+    # Function which values higher middle value
+    def gaussian(self, val):
+        &#34;&#34;&#34;
+        Returns the result of the Gaussian function for a given value.
+
+        Parameters:
+        val (float): The input value for the function.
+
+        Returns:
+        float: The result of the function.
+        &#34;&#34;&#34;
+        return 1*np.exp((-(val - 0.5)**2/(0.05)))
+
+    # Function which values higher high values
+    def sigmoid(self, val):
+        &#34;&#34;&#34;
+        Returns the result of the sigmoid function for a given value.
+
+        Parameters:
+        val (float): The input value for the function.
+
+        Returns:
+        float: The result of the function.
+        &#34;&#34;&#34;
+        return 1/(1 + np.exp(-(val-0.5)/0.2))
+
+
+    # Fitness functions
+    # Returns neighbors based on their fitness
+    def neighbour_feature(self, i, j, extent=5):
+        &#34;&#34;&#34;
+        Returns the features of the neighbours for a cell at location (i, j).
+
+        Parameters:
+        i, j (int): The x and y coordinates of a cell.
+        extent (int): The extent of the neighbourhood. Default is 5.
+
+        Returns:
+        list: The features of the neighbours of the cell, sorted by descending fitness
+        &#34;&#34;&#34;
+        assert i&gt;=0 or i&lt;self.N, &#34;Error: Incorrect index for x axis&#34;
+        assert j&gt;=0 or j&lt;self.N, &#34;Error: Incorrect index for y axis&#34; 
+
+        neighbors = self.getMooreNeighbourhood(i,j, extent)
+        values = []
+        for neighbor in neighbors:
+            values.append(-self.fitness[neighbor[0], neighbor[1]])
+        sort = np.argsort(values)
+        sorted_neighbors = []
+        for k in sort:
+            sorted_neighbors.append(neighbors[k][:])
+        return(sorted_neighbors)
+    
+    # Function which creates map of water availability for fitness function (Not used)
+    def upd_available_water_map(self):
+        &#39;&#39;&#39;
+        Updates the map of water availability for each cell.
+        This is a helper function to calculate Fitness. It assigns score based on water quality and availability
+        &#39;&#39;&#39;
+        self.water_score = np.zeros((self.N, self.N))
+        for i in range(self.N):
+            for j in range(self.N):
+                # Getting neighbours
+                neighbors = self.getMooreNeighbourhood(i,j, extent=self.view_distance*2)
+                w_counter = 0
+                for neighbor in neighbors:
+                    # Counting available water
+                    if self.type[neighbor[0], neighbor[1]] == 1:
+                        w_counter += 1.0
+                    if self.type[neighbor[0], neighbor[1]] == 2:
+                        w_counter += 0.5    # Sea water counts as half
+                assert w_counter &gt;= 0, &#34;Error: Negative water score&#34;
+                self.water_score[i, j] = w_counter/(self.view_distance**4)
+
+    # Can be easily improved
+    def update_fitness(self):
+        &#34;&#34;&#34;
+        Updates the fitness of each cell in the grid based on the current environmental conditions.
+        &#34;&#34;&#34;
+        # It is just made up for now
+        # We are combining available energy/density/water availabiltiy
+        self.fitness = np.zeros((self.N, self.N))   # Fitness map
+        for i in range(self.N):
+            for j in range(self.N):
+                fitness = 0
+                if self.type[i,j] != 0: self.fitness[i,j] = 0      # people can&#39;t live on water
+                else:
+                    neighbors = self.getMooreNeighbourhood(i,j, extent=self.view_distance)
+                    pop_dens_temp = 0
+                    energy_temp = 0
+                    #water_temp = 0
+                    for neighbor in neighbors:
+                        pop_dens_temp += self.pop_dens[neighbor[0], neighbor[1]]
+                        energy_temp += self.energy[neighbor[0], neighbor[1]]
+                        #water_temp += self.water_score[neighbor[0], neighbor[1]]
+                    pop_dens_temp /= len(neighbors)
+                    energy_temp /= len(neighbors)
+                    #water_temp /= len(neighbors)
+                    fitness += self.gaussian(pop_dens_temp)
+                    fitness += self.sigmoid(energy_temp)
+                    #fitness += self.sigmoid(water_temp)
+                    #fitness = fitness/3 # Getting Average
+                    fitness = fitness/2 # Getting Average
+                    self.fitness[i,j] = fitness
+                assert self.fitness[i,j] &gt;= -1, &#34;Error: Fitness value is invalid&#34;
+
+    # Emigration which covers land to land
+    def land_migration(self):
+        &#34;&#34;&#34;
+        Simulates land migration in the grid based on the fitness of each cell.
+        &#34;&#34;&#34;
+        simple_migration = 0
+        for i in range(self.N):
+            for j in range(self.N):
+                if self.type[i,j] == 0 and self.fitness[i,j] &lt; self.migration_threshold and self.pop_dens[i,j] &gt; self.emmigration_size:
+                    destinations = self.neighbour_feature(i, j, extent=self.view_distance)
+                    for k in range(len(destinations)):
+                        if self.type[destinations[k][0], destinations[k][1]] == 0:
+                            self.next_pop_dens[destinations[k][0], destinations[k][1]] += self.emmigration_size
+                            self.next_pop_dens[i,j] -= self.emmigration_size
+                            simple_migration += self.emmigration_size
+                            if self.next_pop_dens[i,j] &lt; 0:       # So that we do not have negative people
+                                self.next_pop_dens[i,j] = 0
+                            break
+                        if k == len(destinations)-1:       # loop ended = nowhere to leave, they die :(
+                            self.climate_migration_dead += self.emmigration_size
+                            self.next_pop_dens[i, j] = 0
+        self.simple_migration.append(simple_migration)
+        self.pop_dens = self.next_pop_dens
+
+    def climate_emmigration(self):
+        &#39;&#39;&#39;
+        Simulates climate emigration in the grid. 
+        size - is proportion of people who wants to leave
+        People have to be displaced because of water rise, If there is no spot to go, they die
+
+        &#39;&#39;&#39;
+        climate_migration_displaced = 0
+        climate_migration_dead = 0
+        for i in range(self.N):
+            for j in range(self.N):
+                if self.type[i,j] != 0 and self.pop_dens[i,j] &gt; 0:     # Only people in the water are eligible
+                    size = self.pop_dens[i,j]
+                    destinations = self.neighbour_feature(i, j, extent=self.view_distance)
+                    for k in range(len(destinations)):
+                        # Should play with border for capacity
+                        if self.type[destinations[k][0], destinations[k][1]] == 0:
+                            self.next_pop_dens[destinations[k][0], destinations[k][1]] += size
+                            self.next_pop_dens[i,j] -= size
+                            climate_migration_displaced += size
+                            if self.next_pop_dens[i,j] &lt; 0:       # So that we do not have negative people
+                                self.next_pop_dens[i,j] = 0
+                            break
+                        if k == len(destinations)-1:       # loop ended = nowhere to leave, they die :(
+                            climate_migration_dead += size
+                            self.next_pop_dens[i, j] = 0
+        # Saving Changes
+        self.climate_migration_displaced.append(climate_migration_displaced)
+        self.climate_migration_dead.append(climate_migration_dead)
+        self.pop_dens = self.next_pop_dens
+
+    # Step Update
+    def growth(self):
+        &#39;&#39;&#39;
+        Simulates population growth/decline based on the available resources
+
+        growthrate = proportion of energy used by population
+        growthrate = proportion of population growth if energy is sufficient
+        &#39;&#39;&#39;
+        emissions = 0
+        for i in range(self.N):
+            for j in range(self.N):
+                # Growth
+                if self.energy[i,j] &gt; self.growthrate:
+                    self.next_energy[i,j] -= self.growthrate
+                    self.next_pop_dens[i,j] += self.growthrate
+                    emissions += self.growthrate
+                # Decline
+                else:
+                    self.next_pop_dens[i,j] /= 2
+        self.emissions = emissions/self.Ntot
+        self.energy = self.next_energy
+        self.pop_dens = self.next_pop_dens  # Update Map
+
+    def upd_water_level(self):
+        &#39;&#39;&#39;
+        Raises water level with probability proportional to the emissions
+        &#39;&#39;&#39;
+        for i in range(self.N):
+            for j in range(self.N):
+                if self.type[i,j] == 0: continue
+                else:
+                    if np.random.rand() &lt; self.emissions:
+                        neighbors = self.getVonNeumannNeighbourhood(i,j, extent = 1)
+                        random.shuffle(neighbors)
+                        water_expansion_cell = neighbors[np.random.randint(len(neighbors))]
+                        self.next_type[water_expansion_cell[0], water_expansion_cell[1]] = self.type[i,j]   # Pick random adjacent cell
+        self.type = self.next_type
+
+    def spawn_energy(self):
+        &#34;&#34;&#34;
+        Replenishes energy on the map, the higher the consumption, lower the replenishment.
+        &#34;&#34;&#34;
+        for i in range(self.N):
+            for j in range(self.N):
+                if np.random.rand() &lt; self.energy_replenish_chance and self.energy[i,j]&lt;self.energy_barrier:
+                    self.next_energy[i,j] += self.energy_replenish_size * (1-self.emissions)
+        self.energy = self.next_energy
+
+    def update_stats(self):
+        &#34;&#34;&#34;
+        Updates the statistics of the grid.
+
+        Returns:
+        tuple: The mean population density, mean energy, and mean fitness.
+        &#34;&#34;&#34;
+        fitness_sum = 0
+        fitness_amount = 0
+        pop_dens_sum = 0
+        pop_dens_amount = 0
+        energy_sum = 0
+        energy_amount = 0
+        for i in range(self.N):
+            for j in range(self.N):
+                # we have to calculate stats per each cell as some of them are filled with water
+                if self.type[i,j] == 0:
+                    fitness_sum += self.fitness[i,j]
+                    fitness_amount += 1
+                    pop_dens_sum += self.pop_dens[i,j]
+                    pop_dens_amount += 1
+                    energy_sum += self.energy[i,j]
+                    energy_amount += 1
+        # Check for zero division
+        return pop_dens_sum/pop_dens_amount, energy_sum/energy_amount, fitness_sum/fitness_amount
+
+
+    # the part we can change later
+    def step(self):
+        &#34;&#34;&#34;
+        Executes one time step of the simulation. 
+        Constructs the self.nextgrid matrix based on the properties of self.grid
+        Applies the Percolation Model Rules:
+        
+        1. Cells attempt to colonise their Moore Neighbourhood with probability P
+        2. Cells do not make the attempt with probability 1-P
+        &#34;&#34;&#34;
+        
+        # Find Utility and Initial Migration
+        # Emissions, Sea Rise
+        self.emissions = 0
+        self.growth()
+        self.upd_water_level()
+        self.update_fitness()
+
+        loop = 0
+        while True:
+            loop += 1
+            migrants_temp = 0
+            self.climate_emmigration()
+            self.land_migration()
+            migrants_temp += self.simple_migration[-1] + self.climate_migration_displaced[-1] + self.climate_migration_dead[-1]
+            if migrants_temp &lt; 1: break
+            if loop &gt; 100:
+                print(&#34;Overlooped&#34;)                
+                break
+
+        # Replenishing energy
+        self.spawn_energy()
+        pop_dens_mean, energy_mean, fitness_mean = self.update_stats()
+
+        print()
+        print(&#34;Population: &#34;, pop_dens_mean)
+        print(&#34;Energy: &#34;, energy_mean)
+        print(&#34;Fitness: &#34;, fitness_mean)
+        print(&#34;Emissions: &#34;, self.emissions)
+        if len(self.simple_migration) &gt; 0:
+            print(&#34;Displaced by Fitness: &#34;, self.simple_migration[-1])
+        if len(self.climate_migration_displaced) &gt; 0:
+            print(&#34;Displaced by Climate: &#34;, self.climate_migration_displaced[-1])
+        if len(self.climate_migration_dead) &gt; 0:
+            print(&#34;Killed by Climate: &#34;, self.climate_migration_dead[-1])
+        print(&#34;\n&#34;)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D"><code class="flex name class">
+<span>class <span class="ident">PercolationModel2D</span></span>
+<span>(</span><span>ni)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class that calculates and displays behaviour of 2D cellular automata</p>
+<p>Constructor of the class.</p>
+<p>Parameters:
+ni (int): The size of the 2D grid.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PercolationModel2D(object):    
+    &#39;&#39;&#39;
+    Class that calculates and displays behaviour of 2D cellular automata
+    &#39;&#39;&#39;
+
+    # Just keeping global variables for reference:
+    migration_threshold = 0.1       # Without simple migration all of the environment events much more clear
+    growthrate = 0.1    # Energy Consumptio/Growth Value
+    emissions = 0.0     # Current emissions, NOT Additive 
+    emmigration_size = 0.1
+    energy_replenish_chance = 0.4
+    energy_replenish_size = 0.4
+    energy_barrier = 0.8
+    view_distance = 3    # Quarter Map
+
+    # Just describing global arrays of environment here:
+    pop_dens = None     # Population density map
+    energy = None       # Amount of energy map
+    type = None         # Type of cell map
+    fitness = None      # Fitness map
+    # Maps for next step
+    next_pop_dens = None
+    next_energy = None
+    next_type = None
+
+    # Some helper arrays for utility function
+    water_score = None
+
+    climate_migration_displaced = []
+    climate_migration_dead = []
+    simple_migration = []
+
+
+    def init_grid(self):
+        &#34;&#34;&#34;
+        Initializes the grid for the cellular automata model.
+        The grid contains population density, energy, type of cell and fitness of each cell.
+        &#34;&#34;&#34;
+
+        #self.pop_dens = np.random.rand(self.N, self.N)       # population grid [0, 1]
+        self.pop_dens = np.zeros((self.N, self.N))       # population grid [0, 1]
+        self.energy = np.random.rand(self.N, self.N)    # energy grid [0, 1]
+        self.type = init_water_map(self.N, 0.2 , 2, 5, 1)
+        #self.type = np.zeros((self.N, self.N))       # population grid [0, 1]
+        self.fitness = np.zeros((self.N, self.N))
+
+        # I believe this is too much, we can model existence/non existence of water just by changing cell type to land/toxic water etc.
+        # loop to purge population values in water area
+        for i in range(self.N):
+            for j in range(self.N):
+                if self.type[i, j]!=0:
+                    self.pop_dens[i, j] = 0
+
+    def __init__(self, ni):
+        &#34;&#34;&#34;
+        Constructor of the class.
+
+        Parameters:
+        ni (int): The size of the 2D grid.
+        &#34;&#34;&#34;
+
+        # Set environment
+        self.emissions = 0              # current emissions
+        self.N = ni                     # Size of 1 side
+        self.Ntot = self.N*self.N       # Overall size
+        self.init_grid()                # Initialize environment grid
+        self.upd_available_water_map()  # Stores water availability score for utility function
+        # Init grids for next step
+        self.next_pop_dens = copy.deepcopy(self.pop_dens)
+        self.next_energy = copy.deepcopy(self.energy)
+        self.next_type = copy.deepcopy(self.type)
+
+
+    # Helper Functions
+    # We assume that neighborhoods stop at border (it is not rolling from another side)
+    def getMooreNeighbourhood(self, i,j, extent=1):
+        &#34;&#34;&#34;
+        Returns the Moore Neighbourhood for a cell at location (i, j).
+
+        Parameters:
+        i, j (int): The x and y coordinates of a cell.
+        extent (int): The extent of the neighbourhood. Default is 1.
+
+        Returns:
+        list: The Moore Neighbourhood for the cell.
+        &#34;&#34;&#34;
+
+        # Check for incorrect input
+        assert i&gt;=0 or i&lt;self.N, &#34;Error: Incorrect coordinates&#34;
+        assert j&gt;=0 or j&lt;self.N, &#34;Error: Incorrect coordinates&#34;       
+        indices = []
+        
+        for iadd in range(i-extent,i+extent+1):
+            for jadd in range(j-extent, j+extent+1):        
+                if(iadd==i and jadd == j):  # If is not the same cell
+                    continue
+                if (iadd &lt; 0 or iadd&gt;=self.N):          # If is not in bounds
+                    continue                
+                if (jadd &lt; 0 or jadd&gt;=self.N):          # If is not in bounds
+                    continue
+                indices.append([iadd,jadd])
+        
+        return indices
+    
+    def getVonNeumannNeighbourhood(self,i,j,extent=1):
+        &#34;&#34;&#34;
+        Returns the Von Neumann Neighbourhood for a cell at location (i, j).
+
+        Parameters:
+        i, j (int): The x and y coordinates of a cell.
+        extent (int): The extent of the neighbourhood. Default is 1.
+
+        Returns:
+        list: The Von Neumann Neighbourhood for the cell.
+        &#34;&#34;&#34;
+
+        # Check for incorrect input
+        assert i&gt;=0 or i&lt;self.N, &#34;Error: Incorrect coordinates&#34;
+        assert j&gt;=0 or j&lt;self.N, &#34;Error: Incorrect coordinates&#34;    
+        
+        indices = []
+        
+        for iadd in range(i-extent,i+extent+1):
+            if(iadd==i): continue
+            if(iadd &lt; 0 or iadd&gt;=self.N): continue       # If is not in bounds                
+            indices.append([iadd,j])
+            
+        for jadd in range(j-extent,j+extent+1):
+            if(jadd==j): continue
+            if(jadd &lt; 0 or jadd&gt;=self.N): continue       # If is not in bounds                            
+            indices.append([i,jadd])
+            
+        return indices    
+
+    # Function which values higher high values
+    def inverse_poly(self, val):
+        &#34;&#34;&#34;
+        Returns the result of the inverse polynomial function for a given value.
+
+        Parameters:
+        val (float): The input value for the function.
+
+        Returns:
+        float: The result of the function.
+        &#34;&#34;&#34;
+        return 4*val-4*val**2
+
+    # Function which values higher middle value
+    def gaussian(self, val):
+        &#34;&#34;&#34;
+        Returns the result of the Gaussian function for a given value.
+
+        Parameters:
+        val (float): The input value for the function.
+
+        Returns:
+        float: The result of the function.
+        &#34;&#34;&#34;
+        return 1*np.exp((-(val - 0.5)**2/(0.05)))
+
+    # Function which values higher high values
+    def sigmoid(self, val):
+        &#34;&#34;&#34;
+        Returns the result of the sigmoid function for a given value.
+
+        Parameters:
+        val (float): The input value for the function.
+
+        Returns:
+        float: The result of the function.
+        &#34;&#34;&#34;
+        return 1/(1 + np.exp(-(val-0.5)/0.2))
+
+
+    # Fitness functions
+    # Returns neighbors based on their fitness
+    def neighbour_feature(self, i, j, extent=5):
+        &#34;&#34;&#34;
+        Returns the features of the neighbours for a cell at location (i, j).
+
+        Parameters:
+        i, j (int): The x and y coordinates of a cell.
+        extent (int): The extent of the neighbourhood. Default is 5.
+
+        Returns:
+        list: The features of the neighbours of the cell, sorted by descending fitness
+        &#34;&#34;&#34;
+        assert i&gt;=0 or i&lt;self.N, &#34;Error: Incorrect index for x axis&#34;
+        assert j&gt;=0 or j&lt;self.N, &#34;Error: Incorrect index for y axis&#34; 
+
+        neighbors = self.getMooreNeighbourhood(i,j, extent)
+        values = []
+        for neighbor in neighbors:
+            values.append(-self.fitness[neighbor[0], neighbor[1]])
+        sort = np.argsort(values)
+        sorted_neighbors = []
+        for k in sort:
+            sorted_neighbors.append(neighbors[k][:])
+        return(sorted_neighbors)
+    
+    # Function which creates map of water availability for fitness function (Not used)
+    def upd_available_water_map(self):
+        &#39;&#39;&#39;
+        Updates the map of water availability for each cell.
+        This is a helper function to calculate Fitness. It assigns score based on water quality and availability
+        &#39;&#39;&#39;
+        self.water_score = np.zeros((self.N, self.N))
+        for i in range(self.N):
+            for j in range(self.N):
+                # Getting neighbours
+                neighbors = self.getMooreNeighbourhood(i,j, extent=self.view_distance*2)
+                w_counter = 0
+                for neighbor in neighbors:
+                    # Counting available water
+                    if self.type[neighbor[0], neighbor[1]] == 1:
+                        w_counter += 1.0
+                    if self.type[neighbor[0], neighbor[1]] == 2:
+                        w_counter += 0.5    # Sea water counts as half
+                assert w_counter &gt;= 0, &#34;Error: Negative water score&#34;
+                self.water_score[i, j] = w_counter/(self.view_distance**4)
+
+    # Can be easily improved
+    def update_fitness(self):
+        &#34;&#34;&#34;
+        Updates the fitness of each cell in the grid based on the current environmental conditions.
+        &#34;&#34;&#34;
+        # It is just made up for now
+        # We are combining available energy/density/water availabiltiy
+        self.fitness = np.zeros((self.N, self.N))   # Fitness map
+        for i in range(self.N):
+            for j in range(self.N):
+                fitness = 0
+                if self.type[i,j] != 0: self.fitness[i,j] = 0      # people can&#39;t live on water
+                else:
+                    neighbors = self.getMooreNeighbourhood(i,j, extent=self.view_distance)
+                    pop_dens_temp = 0
+                    energy_temp = 0
+                    #water_temp = 0
+                    for neighbor in neighbors:
+                        pop_dens_temp += self.pop_dens[neighbor[0], neighbor[1]]
+                        energy_temp += self.energy[neighbor[0], neighbor[1]]
+                        #water_temp += self.water_score[neighbor[0], neighbor[1]]
+                    pop_dens_temp /= len(neighbors)
+                    energy_temp /= len(neighbors)
+                    #water_temp /= len(neighbors)
+                    fitness += self.gaussian(pop_dens_temp)
+                    fitness += self.sigmoid(energy_temp)
+                    #fitness += self.sigmoid(water_temp)
+                    #fitness = fitness/3 # Getting Average
+                    fitness = fitness/2 # Getting Average
+                    self.fitness[i,j] = fitness
+                assert self.fitness[i,j] &gt;= -1, &#34;Error: Fitness value is invalid&#34;
+
+    # Emigration which covers land to land
+    def land_migration(self):
+        &#34;&#34;&#34;
+        Simulates land migration in the grid based on the fitness of each cell.
+        &#34;&#34;&#34;
+        simple_migration = 0
+        for i in range(self.N):
+            for j in range(self.N):
+                if self.type[i,j] == 0 and self.fitness[i,j] &lt; self.migration_threshold and self.pop_dens[i,j] &gt; self.emmigration_size:
+                    destinations = self.neighbour_feature(i, j, extent=self.view_distance)
+                    for k in range(len(destinations)):
+                        if self.type[destinations[k][0], destinations[k][1]] == 0:
+                            self.next_pop_dens[destinations[k][0], destinations[k][1]] += self.emmigration_size
+                            self.next_pop_dens[i,j] -= self.emmigration_size
+                            simple_migration += self.emmigration_size
+                            if self.next_pop_dens[i,j] &lt; 0:       # So that we do not have negative people
+                                self.next_pop_dens[i,j] = 0
+                            break
+                        if k == len(destinations)-1:       # loop ended = nowhere to leave, they die :(
+                            self.climate_migration_dead += self.emmigration_size
+                            self.next_pop_dens[i, j] = 0
+        self.simple_migration.append(simple_migration)
+        self.pop_dens = self.next_pop_dens
+
+    def climate_emmigration(self):
+        &#39;&#39;&#39;
+        Simulates climate emigration in the grid. 
+        size - is proportion of people who wants to leave
+        People have to be displaced because of water rise, If there is no spot to go, they die
+
+        &#39;&#39;&#39;
+        climate_migration_displaced = 0
+        climate_migration_dead = 0
+        for i in range(self.N):
+            for j in range(self.N):
+                if self.type[i,j] != 0 and self.pop_dens[i,j] &gt; 0:     # Only people in the water are eligible
+                    size = self.pop_dens[i,j]
+                    destinations = self.neighbour_feature(i, j, extent=self.view_distance)
+                    for k in range(len(destinations)):
+                        # Should play with border for capacity
+                        if self.type[destinations[k][0], destinations[k][1]] == 0:
+                            self.next_pop_dens[destinations[k][0], destinations[k][1]] += size
+                            self.next_pop_dens[i,j] -= size
+                            climate_migration_displaced += size
+                            if self.next_pop_dens[i,j] &lt; 0:       # So that we do not have negative people
+                                self.next_pop_dens[i,j] = 0
+                            break
+                        if k == len(destinations)-1:       # loop ended = nowhere to leave, they die :(
+                            climate_migration_dead += size
+                            self.next_pop_dens[i, j] = 0
+        # Saving Changes
+        self.climate_migration_displaced.append(climate_migration_displaced)
+        self.climate_migration_dead.append(climate_migration_dead)
+        self.pop_dens = self.next_pop_dens
+
+    # Step Update
+    def growth(self):
+        &#39;&#39;&#39;
+        Simulates population growth/decline based on the available resources
+
+        growthrate = proportion of energy used by population
+        growthrate = proportion of population growth if energy is sufficient
+        &#39;&#39;&#39;
+        emissions = 0
+        for i in range(self.N):
+            for j in range(self.N):
+                # Growth
+                if self.energy[i,j] &gt; self.growthrate:
+                    self.next_energy[i,j] -= self.growthrate
+                    self.next_pop_dens[i,j] += self.growthrate
+                    emissions += self.growthrate
+                # Decline
+                else:
+                    self.next_pop_dens[i,j] /= 2
+        self.emissions = emissions/self.Ntot
+        self.energy = self.next_energy
+        self.pop_dens = self.next_pop_dens  # Update Map
+
+    def upd_water_level(self):
+        &#39;&#39;&#39;
+        Raises water level with probability proportional to the emissions
+        &#39;&#39;&#39;
+        for i in range(self.N):
+            for j in range(self.N):
+                if self.type[i,j] == 0: continue
+                else:
+                    if np.random.rand() &lt; self.emissions:
+                        neighbors = self.getVonNeumannNeighbourhood(i,j, extent = 1)
+                        random.shuffle(neighbors)
+                        water_expansion_cell = neighbors[np.random.randint(len(neighbors))]
+                        self.next_type[water_expansion_cell[0], water_expansion_cell[1]] = self.type[i,j]   # Pick random adjacent cell
+        self.type = self.next_type
+
+    def spawn_energy(self):
+        &#34;&#34;&#34;
+        Replenishes energy on the map, the higher the consumption, lower the replenishment.
+        &#34;&#34;&#34;
+        for i in range(self.N):
+            for j in range(self.N):
+                if np.random.rand() &lt; self.energy_replenish_chance and self.energy[i,j]&lt;self.energy_barrier:
+                    self.next_energy[i,j] += self.energy_replenish_size * (1-self.emissions)
+        self.energy = self.next_energy
+
+    def update_stats(self):
+        &#34;&#34;&#34;
+        Updates the statistics of the grid.
+
+        Returns:
+        tuple: The mean population density, mean energy, and mean fitness.
+        &#34;&#34;&#34;
+        fitness_sum = 0
+        fitness_amount = 0
+        pop_dens_sum = 0
+        pop_dens_amount = 0
+        energy_sum = 0
+        energy_amount = 0
+        for i in range(self.N):
+            for j in range(self.N):
+                # we have to calculate stats per each cell as some of them are filled with water
+                if self.type[i,j] == 0:
+                    fitness_sum += self.fitness[i,j]
+                    fitness_amount += 1
+                    pop_dens_sum += self.pop_dens[i,j]
+                    pop_dens_amount += 1
+                    energy_sum += self.energy[i,j]
+                    energy_amount += 1
+        # Check for zero division
+        return pop_dens_sum/pop_dens_amount, energy_sum/energy_amount, fitness_sum/fitness_amount
+
+
+    # the part we can change later
+    def step(self):
+        &#34;&#34;&#34;
+        Executes one time step of the simulation. 
+        Constructs the self.nextgrid matrix based on the properties of self.grid
+        Applies the Percolation Model Rules:
+        
+        1. Cells attempt to colonise their Moore Neighbourhood with probability P
+        2. Cells do not make the attempt with probability 1-P
+        &#34;&#34;&#34;
+        
+        # Find Utility and Initial Migration
+        # Emissions, Sea Rise
+        self.emissions = 0
+        self.growth()
+        self.upd_water_level()
+        self.update_fitness()
+
+        loop = 0
+        while True:
+            loop += 1
+            migrants_temp = 0
+            self.climate_emmigration()
+            self.land_migration()
+            migrants_temp += self.simple_migration[-1] + self.climate_migration_displaced[-1] + self.climate_migration_dead[-1]
+            if migrants_temp &lt; 1: break
+            if loop &gt; 100:
+                print(&#34;Overlooped&#34;)                
+                break
+
+        # Replenishing energy
+        self.spawn_energy()
+        pop_dens_mean, energy_mean, fitness_mean = self.update_stats()
+
+        print()
+        print(&#34;Population: &#34;, pop_dens_mean)
+        print(&#34;Energy: &#34;, energy_mean)
+        print(&#34;Fitness: &#34;, fitness_mean)
+        print(&#34;Emissions: &#34;, self.emissions)
+        if len(self.simple_migration) &gt; 0:
+            print(&#34;Displaced by Fitness: &#34;, self.simple_migration[-1])
+        if len(self.climate_migration_displaced) &gt; 0:
+            print(&#34;Displaced by Climate: &#34;, self.climate_migration_displaced[-1])
+        if len(self.climate_migration_dead) &gt; 0:
+            print(&#34;Killed by Climate: &#34;, self.climate_migration_dead[-1])
+        print(&#34;\n&#34;)</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.climate_migration_dead"><code class="name">var <span class="ident">climate_migration_dead</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.climate_migration_displaced"><code class="name">var <span class="ident">climate_migration_displaced</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.emissions"><code class="name">var <span class="ident">emissions</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.emmigration_size"><code class="name">var <span class="ident">emmigration_size</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.energy"><code class="name">var <span class="ident">energy</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.energy_barrier"><code class="name">var <span class="ident">energy_barrier</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.energy_replenish_chance"><code class="name">var <span class="ident">energy_replenish_chance</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.energy_replenish_size"><code class="name">var <span class="ident">energy_replenish_size</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.fitness"><code class="name">var <span class="ident">fitness</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.growthrate"><code class="name">var <span class="ident">growthrate</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.migration_threshold"><code class="name">var <span class="ident">migration_threshold</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.next_energy"><code class="name">var <span class="ident">next_energy</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.next_pop_dens"><code class="name">var <span class="ident">next_pop_dens</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.next_type"><code class="name">var <span class="ident">next_type</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.pop_dens"><code class="name">var <span class="ident">pop_dens</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.simple_migration"><code class="name">var <span class="ident">simple_migration</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.type"><code class="name">var <span class="ident">type</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.view_distance"><code class="name">var <span class="ident">view_distance</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.water_score"><code class="name">var <span class="ident">water_score</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.climate_emmigration"><code class="name flex">
+<span>def <span class="ident">climate_emmigration</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Simulates climate emigration in the grid.
+size - is proportion of people who wants to leave
+People have to be displaced because of water rise, If there is no spot to go, they die</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def climate_emmigration(self):
+    &#39;&#39;&#39;
+    Simulates climate emigration in the grid. 
+    size - is proportion of people who wants to leave
+    People have to be displaced because of water rise, If there is no spot to go, they die
+
+    &#39;&#39;&#39;
+    climate_migration_displaced = 0
+    climate_migration_dead = 0
+    for i in range(self.N):
+        for j in range(self.N):
+            if self.type[i,j] != 0 and self.pop_dens[i,j] &gt; 0:     # Only people in the water are eligible
+                size = self.pop_dens[i,j]
+                destinations = self.neighbour_feature(i, j, extent=self.view_distance)
+                for k in range(len(destinations)):
+                    # Should play with border for capacity
+                    if self.type[destinations[k][0], destinations[k][1]] == 0:
+                        self.next_pop_dens[destinations[k][0], destinations[k][1]] += size
+                        self.next_pop_dens[i,j] -= size
+                        climate_migration_displaced += size
+                        if self.next_pop_dens[i,j] &lt; 0:       # So that we do not have negative people
+                            self.next_pop_dens[i,j] = 0
+                        break
+                    if k == len(destinations)-1:       # loop ended = nowhere to leave, they die :(
+                        climate_migration_dead += size
+                        self.next_pop_dens[i, j] = 0
+    # Saving Changes
+    self.climate_migration_displaced.append(climate_migration_displaced)
+    self.climate_migration_dead.append(climate_migration_dead)
+    self.pop_dens = self.next_pop_dens</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.gaussian"><code class="name flex">
+<span>def <span class="ident">gaussian</span></span>(<span>self, val)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the result of the Gaussian function for a given value.</p>
+<p>Parameters:
+val (float): The input value for the function.</p>
+<p>Returns:
+float: The result of the function.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def gaussian(self, val):
+    &#34;&#34;&#34;
+    Returns the result of the Gaussian function for a given value.
+
+    Parameters:
+    val (float): The input value for the function.
+
+    Returns:
+    float: The result of the function.
+    &#34;&#34;&#34;
+    return 1*np.exp((-(val - 0.5)**2/(0.05)))</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.getMooreNeighbourhood"><code class="name flex">
+<span>def <span class="ident">getMooreNeighbourhood</span></span>(<span>self, i, j, extent=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the Moore Neighbourhood for a cell at location (i, j).</p>
+<p>Parameters:
+i, j (int): The x and y coordinates of a cell.
+extent (int): The extent of the neighbourhood. Default is 1.</p>
+<p>Returns:
+list: The Moore Neighbourhood for the cell.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getMooreNeighbourhood(self, i,j, extent=1):
+    &#34;&#34;&#34;
+    Returns the Moore Neighbourhood for a cell at location (i, j).
+
+    Parameters:
+    i, j (int): The x and y coordinates of a cell.
+    extent (int): The extent of the neighbourhood. Default is 1.
+
+    Returns:
+    list: The Moore Neighbourhood for the cell.
+    &#34;&#34;&#34;
+
+    # Check for incorrect input
+    assert i&gt;=0 or i&lt;self.N, &#34;Error: Incorrect coordinates&#34;
+    assert j&gt;=0 or j&lt;self.N, &#34;Error: Incorrect coordinates&#34;       
+    indices = []
+    
+    for iadd in range(i-extent,i+extent+1):
+        for jadd in range(j-extent, j+extent+1):        
+            if(iadd==i and jadd == j):  # If is not the same cell
+                continue
+            if (iadd &lt; 0 or iadd&gt;=self.N):          # If is not in bounds
+                continue                
+            if (jadd &lt; 0 or jadd&gt;=self.N):          # If is not in bounds
+                continue
+            indices.append([iadd,jadd])
+    
+    return indices</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.getVonNeumannNeighbourhood"><code class="name flex">
+<span>def <span class="ident">getVonNeumannNeighbourhood</span></span>(<span>self, i, j, extent=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the Von Neumann Neighbourhood for a cell at location (i, j).</p>
+<p>Parameters:
+i, j (int): The x and y coordinates of a cell.
+extent (int): The extent of the neighbourhood. Default is 1.</p>
+<p>Returns:
+list: The Von Neumann Neighbourhood for the cell.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getVonNeumannNeighbourhood(self,i,j,extent=1):
+    &#34;&#34;&#34;
+    Returns the Von Neumann Neighbourhood for a cell at location (i, j).
+
+    Parameters:
+    i, j (int): The x and y coordinates of a cell.
+    extent (int): The extent of the neighbourhood. Default is 1.
+
+    Returns:
+    list: The Von Neumann Neighbourhood for the cell.
+    &#34;&#34;&#34;
+
+    # Check for incorrect input
+    assert i&gt;=0 or i&lt;self.N, &#34;Error: Incorrect coordinates&#34;
+    assert j&gt;=0 or j&lt;self.N, &#34;Error: Incorrect coordinates&#34;    
+    
+    indices = []
+    
+    for iadd in range(i-extent,i+extent+1):
+        if(iadd==i): continue
+        if(iadd &lt; 0 or iadd&gt;=self.N): continue       # If is not in bounds                
+        indices.append([iadd,j])
+        
+    for jadd in range(j-extent,j+extent+1):
+        if(jadd==j): continue
+        if(jadd &lt; 0 or jadd&gt;=self.N): continue       # If is not in bounds                            
+        indices.append([i,jadd])
+        
+    return indices    </code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.growth"><code class="name flex">
+<span>def <span class="ident">growth</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Simulates population growth/decline based on the available resources</p>
+<p>growthrate = proportion of energy used by population
+growthrate = proportion of population growth if energy is sufficient</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def growth(self):
+    &#39;&#39;&#39;
+    Simulates population growth/decline based on the available resources
+
+    growthrate = proportion of energy used by population
+    growthrate = proportion of population growth if energy is sufficient
+    &#39;&#39;&#39;
+    emissions = 0
+    for i in range(self.N):
+        for j in range(self.N):
+            # Growth
+            if self.energy[i,j] &gt; self.growthrate:
+                self.next_energy[i,j] -= self.growthrate
+                self.next_pop_dens[i,j] += self.growthrate
+                emissions += self.growthrate
+            # Decline
+            else:
+                self.next_pop_dens[i,j] /= 2
+    self.emissions = emissions/self.Ntot
+    self.energy = self.next_energy
+    self.pop_dens = self.next_pop_dens  # Update Map</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.init_grid"><code class="name flex">
+<span>def <span class="ident">init_grid</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initializes the grid for the cellular automata model.
+The grid contains population density, energy, type of cell and fitness of each cell.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def init_grid(self):
+    &#34;&#34;&#34;
+    Initializes the grid for the cellular automata model.
+    The grid contains population density, energy, type of cell and fitness of each cell.
+    &#34;&#34;&#34;
+
+    #self.pop_dens = np.random.rand(self.N, self.N)       # population grid [0, 1]
+    self.pop_dens = np.zeros((self.N, self.N))       # population grid [0, 1]
+    self.energy = np.random.rand(self.N, self.N)    # energy grid [0, 1]
+    self.type = init_water_map(self.N, 0.2 , 2, 5, 1)
+    #self.type = np.zeros((self.N, self.N))       # population grid [0, 1]
+    self.fitness = np.zeros((self.N, self.N))
+
+    # I believe this is too much, we can model existence/non existence of water just by changing cell type to land/toxic water etc.
+    # loop to purge population values in water area
+    for i in range(self.N):
+        for j in range(self.N):
+            if self.type[i, j]!=0:
+                self.pop_dens[i, j] = 0</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.inverse_poly"><code class="name flex">
+<span>def <span class="ident">inverse_poly</span></span>(<span>self, val)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the result of the inverse polynomial function for a given value.</p>
+<p>Parameters:
+val (float): The input value for the function.</p>
+<p>Returns:
+float: The result of the function.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inverse_poly(self, val):
+    &#34;&#34;&#34;
+    Returns the result of the inverse polynomial function for a given value.
+
+    Parameters:
+    val (float): The input value for the function.
+
+    Returns:
+    float: The result of the function.
+    &#34;&#34;&#34;
+    return 4*val-4*val**2</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.land_migration"><code class="name flex">
+<span>def <span class="ident">land_migration</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Simulates land migration in the grid based on the fitness of each cell.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def land_migration(self):
+    &#34;&#34;&#34;
+    Simulates land migration in the grid based on the fitness of each cell.
+    &#34;&#34;&#34;
+    simple_migration = 0
+    for i in range(self.N):
+        for j in range(self.N):
+            if self.type[i,j] == 0 and self.fitness[i,j] &lt; self.migration_threshold and self.pop_dens[i,j] &gt; self.emmigration_size:
+                destinations = self.neighbour_feature(i, j, extent=self.view_distance)
+                for k in range(len(destinations)):
+                    if self.type[destinations[k][0], destinations[k][1]] == 0:
+                        self.next_pop_dens[destinations[k][0], destinations[k][1]] += self.emmigration_size
+                        self.next_pop_dens[i,j] -= self.emmigration_size
+                        simple_migration += self.emmigration_size
+                        if self.next_pop_dens[i,j] &lt; 0:       # So that we do not have negative people
+                            self.next_pop_dens[i,j] = 0
+                        break
+                    if k == len(destinations)-1:       # loop ended = nowhere to leave, they die :(
+                        self.climate_migration_dead += self.emmigration_size
+                        self.next_pop_dens[i, j] = 0
+    self.simple_migration.append(simple_migration)
+    self.pop_dens = self.next_pop_dens</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.neighbour_feature"><code class="name flex">
+<span>def <span class="ident">neighbour_feature</span></span>(<span>self, i, j, extent=5)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the features of the neighbours for a cell at location (i, j).</p>
+<p>Parameters:
+i, j (int): The x and y coordinates of a cell.
+extent (int): The extent of the neighbourhood. Default is 5.</p>
+<p>Returns:
+list: The features of the neighbours of the cell, sorted by descending fitness</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def neighbour_feature(self, i, j, extent=5):
+    &#34;&#34;&#34;
+    Returns the features of the neighbours for a cell at location (i, j).
+
+    Parameters:
+    i, j (int): The x and y coordinates of a cell.
+    extent (int): The extent of the neighbourhood. Default is 5.
+
+    Returns:
+    list: The features of the neighbours of the cell, sorted by descending fitness
+    &#34;&#34;&#34;
+    assert i&gt;=0 or i&lt;self.N, &#34;Error: Incorrect index for x axis&#34;
+    assert j&gt;=0 or j&lt;self.N, &#34;Error: Incorrect index for y axis&#34; 
+
+    neighbors = self.getMooreNeighbourhood(i,j, extent)
+    values = []
+    for neighbor in neighbors:
+        values.append(-self.fitness[neighbor[0], neighbor[1]])
+    sort = np.argsort(values)
+    sorted_neighbors = []
+    for k in sort:
+        sorted_neighbors.append(neighbors[k][:])
+    return(sorted_neighbors)</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.sigmoid"><code class="name flex">
+<span>def <span class="ident">sigmoid</span></span>(<span>self, val)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the result of the sigmoid function for a given value.</p>
+<p>Parameters:
+val (float): The input value for the function.</p>
+<p>Returns:
+float: The result of the function.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sigmoid(self, val):
+    &#34;&#34;&#34;
+    Returns the result of the sigmoid function for a given value.
+
+    Parameters:
+    val (float): The input value for the function.
+
+    Returns:
+    float: The result of the function.
+    &#34;&#34;&#34;
+    return 1/(1 + np.exp(-(val-0.5)/0.2))</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.spawn_energy"><code class="name flex">
+<span>def <span class="ident">spawn_energy</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Replenishes energy on the map, the higher the consumption, lower the replenishment.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def spawn_energy(self):
+    &#34;&#34;&#34;
+    Replenishes energy on the map, the higher the consumption, lower the replenishment.
+    &#34;&#34;&#34;
+    for i in range(self.N):
+        for j in range(self.N):
+            if np.random.rand() &lt; self.energy_replenish_chance and self.energy[i,j]&lt;self.energy_barrier:
+                self.next_energy[i,j] += self.energy_replenish_size * (1-self.emissions)
+    self.energy = self.next_energy</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.step"><code class="name flex">
+<span>def <span class="ident">step</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Executes one time step of the simulation.
+Constructs the self.nextgrid matrix based on the properties of self.grid
+Applies the Percolation Model Rules:</p>
+<ol>
+<li>Cells attempt to colonise their Moore Neighbourhood with probability P</li>
+<li>Cells do not make the attempt with probability 1-P</li>
+</ol></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def step(self):
+    &#34;&#34;&#34;
+    Executes one time step of the simulation. 
+    Constructs the self.nextgrid matrix based on the properties of self.grid
+    Applies the Percolation Model Rules:
+    
+    1. Cells attempt to colonise their Moore Neighbourhood with probability P
+    2. Cells do not make the attempt with probability 1-P
+    &#34;&#34;&#34;
+    
+    # Find Utility and Initial Migration
+    # Emissions, Sea Rise
+    self.emissions = 0
+    self.growth()
+    self.upd_water_level()
+    self.update_fitness()
+
+    loop = 0
+    while True:
+        loop += 1
+        migrants_temp = 0
+        self.climate_emmigration()
+        self.land_migration()
+        migrants_temp += self.simple_migration[-1] + self.climate_migration_displaced[-1] + self.climate_migration_dead[-1]
+        if migrants_temp &lt; 1: break
+        if loop &gt; 100:
+            print(&#34;Overlooped&#34;)                
+            break
+
+    # Replenishing energy
+    self.spawn_energy()
+    pop_dens_mean, energy_mean, fitness_mean = self.update_stats()
+
+    print()
+    print(&#34;Population: &#34;, pop_dens_mean)
+    print(&#34;Energy: &#34;, energy_mean)
+    print(&#34;Fitness: &#34;, fitness_mean)
+    print(&#34;Emissions: &#34;, self.emissions)
+    if len(self.simple_migration) &gt; 0:
+        print(&#34;Displaced by Fitness: &#34;, self.simple_migration[-1])
+    if len(self.climate_migration_displaced) &gt; 0:
+        print(&#34;Displaced by Climate: &#34;, self.climate_migration_displaced[-1])
+    if len(self.climate_migration_dead) &gt; 0:
+        print(&#34;Killed by Climate: &#34;, self.climate_migration_dead[-1])
+    print(&#34;\n&#34;)</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.upd_available_water_map"><code class="name flex">
+<span>def <span class="ident">upd_available_water_map</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates the map of water availability for each cell.
+This is a helper function to calculate Fitness. It assigns score based on water quality and availability</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def upd_available_water_map(self):
+    &#39;&#39;&#39;
+    Updates the map of water availability for each cell.
+    This is a helper function to calculate Fitness. It assigns score based on water quality and availability
+    &#39;&#39;&#39;
+    self.water_score = np.zeros((self.N, self.N))
+    for i in range(self.N):
+        for j in range(self.N):
+            # Getting neighbours
+            neighbors = self.getMooreNeighbourhood(i,j, extent=self.view_distance*2)
+            w_counter = 0
+            for neighbor in neighbors:
+                # Counting available water
+                if self.type[neighbor[0], neighbor[1]] == 1:
+                    w_counter += 1.0
+                if self.type[neighbor[0], neighbor[1]] == 2:
+                    w_counter += 0.5    # Sea water counts as half
+            assert w_counter &gt;= 0, &#34;Error: Negative water score&#34;
+            self.water_score[i, j] = w_counter/(self.view_distance**4)</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.upd_water_level"><code class="name flex">
+<span>def <span class="ident">upd_water_level</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Raises water level with probability proportional to the emissions</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def upd_water_level(self):
+    &#39;&#39;&#39;
+    Raises water level with probability proportional to the emissions
+    &#39;&#39;&#39;
+    for i in range(self.N):
+        for j in range(self.N):
+            if self.type[i,j] == 0: continue
+            else:
+                if np.random.rand() &lt; self.emissions:
+                    neighbors = self.getVonNeumannNeighbourhood(i,j, extent = 1)
+                    random.shuffle(neighbors)
+                    water_expansion_cell = neighbors[np.random.randint(len(neighbors))]
+                    self.next_type[water_expansion_cell[0], water_expansion_cell[1]] = self.type[i,j]   # Pick random adjacent cell
+    self.type = self.next_type</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.update_fitness"><code class="name flex">
+<span>def <span class="ident">update_fitness</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates the fitness of each cell in the grid based on the current environmental conditions.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_fitness(self):
+    &#34;&#34;&#34;
+    Updates the fitness of each cell in the grid based on the current environmental conditions.
+    &#34;&#34;&#34;
+    # It is just made up for now
+    # We are combining available energy/density/water availabiltiy
+    self.fitness = np.zeros((self.N, self.N))   # Fitness map
+    for i in range(self.N):
+        for j in range(self.N):
+            fitness = 0
+            if self.type[i,j] != 0: self.fitness[i,j] = 0      # people can&#39;t live on water
+            else:
+                neighbors = self.getMooreNeighbourhood(i,j, extent=self.view_distance)
+                pop_dens_temp = 0
+                energy_temp = 0
+                #water_temp = 0
+                for neighbor in neighbors:
+                    pop_dens_temp += self.pop_dens[neighbor[0], neighbor[1]]
+                    energy_temp += self.energy[neighbor[0], neighbor[1]]
+                    #water_temp += self.water_score[neighbor[0], neighbor[1]]
+                pop_dens_temp /= len(neighbors)
+                energy_temp /= len(neighbors)
+                #water_temp /= len(neighbors)
+                fitness += self.gaussian(pop_dens_temp)
+                fitness += self.sigmoid(energy_temp)
+                #fitness += self.sigmoid(water_temp)
+                #fitness = fitness/3 # Getting Average
+                fitness = fitness/2 # Getting Average
+                self.fitness[i,j] = fitness
+            assert self.fitness[i,j] &gt;= -1, &#34;Error: Fitness value is invalid&#34;</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.update_stats"><code class="name flex">
+<span>def <span class="ident">update_stats</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates the statistics of the grid.</p>
+<p>Returns:
+tuple: The mean population density, mean energy, and mean fitness.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_stats(self):
+    &#34;&#34;&#34;
+    Updates the statistics of the grid.
+
+    Returns:
+    tuple: The mean population density, mean energy, and mean fitness.
+    &#34;&#34;&#34;
+    fitness_sum = 0
+    fitness_amount = 0
+    pop_dens_sum = 0
+    pop_dens_amount = 0
+    energy_sum = 0
+    energy_amount = 0
+    for i in range(self.N):
+        for j in range(self.N):
+            # we have to calculate stats per each cell as some of them are filled with water
+            if self.type[i,j] == 0:
+                fitness_sum += self.fitness[i,j]
+                fitness_amount += 1
+                pop_dens_sum += self.pop_dens[i,j]
+                pop_dens_amount += 1
+                energy_sum += self.energy[i,j]
+                energy_amount += 1
+    # Check for zero division
+    return pop_dens_sum/pop_dens_amount, energy_sum/energy_amount, fitness_sum/fitness_amount</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Urban-Architects.CA_Model" href="index.html">Urban-Architects.CA_Model</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D">PercolationModel2D</a></code></h4>
+<ul class="">
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.climate_emmigration" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.climate_emmigration">climate_emmigration</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.climate_migration_dead" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.climate_migration_dead">climate_migration_dead</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.climate_migration_displaced" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.climate_migration_displaced">climate_migration_displaced</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.emissions" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.emissions">emissions</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.emmigration_size" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.emmigration_size">emmigration_size</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.energy" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.energy">energy</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.energy_barrier" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.energy_barrier">energy_barrier</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.energy_replenish_chance" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.energy_replenish_chance">energy_replenish_chance</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.energy_replenish_size" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.energy_replenish_size">energy_replenish_size</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.fitness" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.fitness">fitness</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.gaussian" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.gaussian">gaussian</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.getMooreNeighbourhood" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.getMooreNeighbourhood">getMooreNeighbourhood</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.getVonNeumannNeighbourhood" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.getVonNeumannNeighbourhood">getVonNeumannNeighbourhood</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.growth" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.growth">growth</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.growthrate" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.growthrate">growthrate</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.init_grid" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.init_grid">init_grid</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.inverse_poly" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.inverse_poly">inverse_poly</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.land_migration" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.land_migration">land_migration</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.migration_threshold" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.migration_threshold">migration_threshold</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.neighbour_feature" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.neighbour_feature">neighbour_feature</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.next_energy" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.next_energy">next_energy</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.next_pop_dens" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.next_pop_dens">next_pop_dens</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.next_type" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.next_type">next_type</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.pop_dens" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.pop_dens">pop_dens</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.sigmoid" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.sigmoid">sigmoid</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.simple_migration" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.simple_migration">simple_migration</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.spawn_energy" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.spawn_energy">spawn_energy</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.step" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.step">step</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.type" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.type">type</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.upd_available_water_map" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.upd_available_water_map">upd_available_water_map</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.upd_water_level" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.upd_water_level">upd_water_level</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.update_fitness" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.update_fitness">update_fitness</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.update_stats" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.update_stats">update_stats</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.view_distance" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.view_distance">view_distance</a></code></li>
+<li><code><a title="Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.water_score" href="#Urban-Architects.CA_Model.PercolationModelComplicated.PercolationModel2D.water_score">water_score</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

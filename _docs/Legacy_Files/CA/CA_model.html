@@ -1,0 +1,1191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>Urban-Architects.Legacy_Files.CA.CA_model API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Urban-Architects.Legacy_Files.CA.CA_model</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import numpy as np
+import random as rd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pickle as pc
+import copy as cp
+import matplotlib.cm as cm
+
+
+class CA:
+        &#34;&#34;&#34;
+        NOTES:
+                According to Topa the complexity of the river system is measured by the number of
+                channels and bifurcations
+
+                ”Anastomosing river” term refers to river system that possess extremely complex
+                network of forking and joining channels
+
+                The new channels usually merge with the others, creating a complex network composed
+                of splitting and merging water channels and small lakes
+
+        &#34;&#34;&#34;
+
+        def __init__(
+                        self, size, slope, mu, gamma, rho, time_limit, rand_lower=0.9999, rand_upper=1.00001,
+                        branch_tresh=0.1, init_water=1, delta_water=0.0008, viz=False
+        ):
+                self.size = size
+                self.slope = slope
+                self.time_limit = time_limit
+                self.branch_tresh = branch_tresh
+                self.init_water_level = init_water
+                # starting point in the middle of the grid
+                self.starting_column = int(self.size / 2)
+                self.delta_w = delta_water
+                self.terrain = np.zeros((size, size))
+                self.peat_bog = np.zeros((size, size))
+                self.nutrients = np.zeros((size, size))
+                self.cur_river_nr = 1
+                self.rivers = {}
+
+                self.path = np.zeros((size, size))
+
+                self.mu = mu             # viscosity
+                self.gamma = gamma       # gradient of nutrients concentration
+                self.rho = rho           # proportionality coefficient
+                self.rand_lower = rand_lower
+                self.rand_upper = rand_upper
+                self.river_coors = set()
+                self.split_dict = {}
+                self.segment_dict = {}
+                self.segment_grid = self.path.copy()
+                self.viz=viz
+                if self.viz:
+                        self.path_list = []
+
+        def moore_neighborhood(self, grid, i, j):
+                &#34;&#34;&#34;[summary]
+                
+                Arguments:
+                        grid {[type]} -- [description]
+                        i {[type]} -- [description]
+                        j {[type]} -- [description]
+                
+                Returns:
+                        [type] -- [description]
+                &#34;&#34;&#34;
+
+                if i == 0 and j == 0:
+                        neighborhood = [
+                                grid[i + 1, j + 1],
+                                grid[i, j + 1],
+                                grid[i + 1, j],
+                        ]
+                        locations = [
+                                [i + 1, j + 1],
+                                [i, j + 1],
+                                [i + 1, j]
+                        ]
+
+                elif i == 0 and j == (self.size - 1):
+                        neighborhood = [
+                                grid[i, j - 1],
+                                grid[i + 1, j - 1],
+                                grid[i + 1, j],
+                        ]
+                        locations = [
+                                [i, j - 1],
+                                [i + 1, j - 1],
+                                [i + 1, j],
+                        ]
+
+                elif i == 0 and 0 &lt; j &lt; (self.size - 1):
+                        neighborhood = [
+                                grid[i, j - 1],
+                                grid[i, j + 1],
+                                grid[i + 1, j - 1],
+                                grid[i + 1, j],
+                                grid[i + 1, j + 1],
+                        ]
+                        locations = [
+                                [i, j - 1],
+                                [i, j + 1],
+                                [i + 1, j - 1],
+                                [i + 1, j],
+                                [i + 1, j + 1],
+                        ]
+
+                elif i == (self.size - 1) and j == 0:
+                        neighborhood = [
+                                grid[i, j + 1],
+                                grid[i - 1, j + 1],
+                                grid[i - 1, j],
+                        ]
+                        locations = [
+                                [i, j + 1],
+                                [i - 1, j + 1],
+                                [i - 1, j],
+                        ]
+
+                elif i == (self.size - 1) and j == (self.size - 1):
+                        neighborhood = [
+                                grid[i - 1, j - 1],
+                                grid[i, j - 1],
+                                grid[i - 1, j],
+                        ]
+                        locations = [
+                                [i - 1, j - 1],
+                                [i, j - 1],
+                                [i - 1, j],
+                        ]
+
+                elif i == (self.size - 1) and 0 &lt; j &lt; (self.size - 1):
+                        neighborhood = [
+                                grid[i, j - 1],
+                                grid[i, j + 1],
+                                grid[i - 1, j - 1],
+                                grid[i - 1, j],
+                                grid[i - 1, j + 1],
+                        ]
+                        locations = [
+                                [i, j - 1],
+                                [i, j + 1],
+                                [i - 1, j - 1],
+                                [i - 1, j],
+                                [i - 1, j + 1],
+                        ]
+
+                elif 0 &lt; i &lt; (self.size - 1) and j == 0:
+                        neighborhood = [
+                                grid[i - 1, j],
+                                grid[i - 1, j + 1],
+                                grid[i, j + 1],
+                                grid[i + 1, j],
+                                grid[i + 1, j + 1],
+                        ]
+                        locations = [
+                                [i - 1, j],
+                                [i - 1, j + 1],
+                                [i, j + 1],
+                                [i + 1, j],
+                                [i + 1, j + 1],
+                        ]
+
+                elif 0 &lt; i &lt; (self.size - 1) and j == (self.size - 1):
+                        neighborhood = [
+                                grid[i - 1, j],
+                                grid[i - 1, j - 1],
+                                grid[i, j - 1],
+                                grid[i + 1, j],
+                                grid[i + 1, j - 1],
+                        ]
+                        locations = [
+                                [i - 1, j],
+                                [i - 1, j - 1],
+                                [i, j - 1],
+                                [i + 1, j],
+                                [i + 1, j - 1],
+                        ]
+
+                else:
+                        neighborhood = [
+                                grid[i - 1, j - 1],
+                                grid[i - 1, j],
+                                grid[i - 1, j + 1],
+                                grid[i, j - 1],
+                                grid[i, j + 1],
+                                grid[i + 1, j - 1],
+                                grid[i + 1, j],
+                                grid[i + 1, j + 1],
+                        ]
+                        locations = [
+                                [i - 1, j - 1],
+                                [i - 1, j],
+                                [i - 1, j + 1],
+                                [i, j - 1],
+                                [i, j + 1],
+                                [i + 1, j - 1],
+                                [i + 1, j],
+                                [i + 1, j + 1],
+                        ]
+
+                return neighborhood, locations
+
+        def initialize_terrain(self):
+                terrain = np.ones((self.size, self.size))
+
+                for i in range(self.size - 1):
+                        terrain[i + 1] = terrain[i] * (1 - self.slope)
+
+                for i in range(self.size):
+                        for j in range(self.size):
+                                neighbors = self.moore_neighborhood(terrain, i, j)[0]
+                                if rd.random() &lt; 0.01:
+                                        perturb = rd.uniform(0.999, 1.0001)
+                                else:
+                                        perturb = rd.uniform(self.rand_lower, self.rand_upper)
+                                terrain[i, j] = np.mean(neighbors) * perturb
+
+                # create hill top
+                hill_coords = [
+                        (0, int(self.size / 2)),
+                        # (5, 12),
+                        # (7, 40),
+                        # (1, 60),
+                        # (1, 135),
+                        # (5, 150),
+                        # (5, 170),
+                        # (7, 185),
+                        # (1, 195),
+                        # (28, 150),
+                        # (33, 115),
+                        # (20, 70),
+                        # (45, 80),
+                        # (60, 110),
+                ]
+                for hill_coord in hill_coords:
+                        # terrain[hill_coord] = terrain[hill_coord] * 1.04  # rd.uniform(1.01, 1.04)
+                        terrain[hill_coord] = terrain[hill_coord]*1
+                for _ in range(2):
+
+                        for i in range(self.size):
+                                for j in range(self.size):
+                                        neighborhood, locations = self.moore_neighborhood(terrain, i, j)
+                                        for n, neighbor in enumerate(neighborhood):
+                                                location = (locations[n][0], locations[n][1])
+                                                if ((terrain[i, j] - neighbor) / neighbor) &gt; 0.01:
+                                                        terrain[location] = terrain[i, j] * rd.uniform(0.995, 0.999)
+
+                        for i in range(self.size - 1, 0, -1):
+                                for j in range(self.size - 1, 0, -1):
+                                        neighborhood, locations = self.moore_neighborhood(terrain, i, j)
+                                        for n, neighbor in enumerate(neighborhood):
+                                                location = (locations[n][0], locations[n][1])
+                                                if ((terrain[i, j] - neighbor) / neighbor) &gt; 0.01:
+                                                        terrain[location] = terrain[i, j] * rd.uniform(0.995, 0.999)
+
+                self.terrain = terrain
+                return self.terrain
+
+        def get_location_of_lowest_neighbor(self, grid, i, j, temp_ends):
+                neighborhood = self.moore_neighborhood(grid, i, j)
+                neighborhood0, neighborhood1 = [], []
+                for i, val in enumerate(neighborhood[1]):
+                        if tuple(val) not in self.river_coors:
+                                neighborhood0.append(neighborhood[0][i])
+                                neighborhood1.append(val)
+                try:
+                        value, location = (list(t) for t in zip(*sorted(zip(neighborhood0, neighborhood1))))
+                except ValueError:
+                        value, location = [], []
+                
+                return value, location
+
+        def get_path(self, prev_val, coor_list, value_list):
+                for i, coor in enumerate(coor_list):
+                        tup = tuple(coor)
+                        if tup not in self.river_coors:
+                                self.river_coors.add(tup)
+                        else:
+                                pass
+                        self.path[tup] = self.path[tup] + float(prev_val[i])*(1-self.delta_w)
+                return self.path
+
+        def create_path_from_start(self):
+                
+                self.path = self.get_path([self.init_water_level/(1-self.delta_w)],[(0, self.starting_column)], [self.init_water_level])
+                self.river_coors.add((0, self.starting_column))
+                self.cur_ends = {}
+                self.cur_ends[(0, self.starting_column)] = self.cur_river_nr
+                self.segment_dict = {self.cur_river_nr:[(0, self.starting_column)]}
+                self.segment_grid[(0, self.starting_column)] = self.cur_river_nr
+                self.cur_river_nr += 1
+
+                for x in range(1, self.time_limit):
+                        temp_ends = {}
+                        for item, val in self.cur_ends.items():
+                                if self.path[item] &gt; self.branch_tresh:
+
+                                        old_value = self.terrain[item]
+                                        sort_values, sort_location = self.get_location_of_lowest_neighbor(self.terrain, item[0], item[1], temp_ends)
+                                        if not sort_values:
+                                                continue
+                                        
+                                        next_cell, next_value = [tuple(sort_location[0])], [sort_values[0]]
+                                        next_water = [self.path[item]]
+                                        if old_value &lt; sort_values[0] and len(sort_location) &gt; 1:
+                                                next_cell.append(tuple(sort_location[1]))
+                                                next_value.append(sort_values[1])
+                                                next_water = self.new_water_ratio(item, tuple(sort_location[0]), tuple(sort_location[1]))
+                                                temp_ends[next_cell[0]] = self.cur_river_nr
+                                                self.segment_grid[next_cell[0]] = self.cur_river_nr
+                                                self.segment_dict[self.cur_river_nr] = [next_cell[0]]
+                                                self.cur_river_nr += 1
+                                                temp_ends[next_cell[1]] = self.cur_river_nr
+                                                self.segment_grid[next_cell[1]] = self.cur_river_nr
+                                                self.segment_dict[self.cur_river_nr] = [next_cell[1]]
+                                                self.cur_river_nr += 1
+                                                self.split_dict[self.segment_grid[item]] = (self.segment_grid[next_cell[1]], self.segment_grid[next_cell[0]])
+                                        else:
+                                                temp_ends[(next_cell[0])] = self.segment_grid[item]
+                                                self.segment_grid[(next_cell[0])] = self.segment_grid[item]
+                                                self.segment_dict[self.segment_grid[item]].append(next_cell[0])
+                                        self.path = self.get_path(next_water, next_cell, next_value)
+                        if self.viz:
+                                self.path_list.append(self.path.copy()) 
+                        self.cur_ends = temp_ends.copy()
+                        
+
+                        if not self.cur_ends:
+                                if self.viz:
+                                        return self.path_list 
+                                return self.path, self.segment_grid, self.split_dict, self.segment_dict
+                if self.viz:
+                        return self.path_list 
+                return self.path, self.segment_grid, self.split_dict, self.segment_dict
+
+        def new_water_ratio(self, old, coor_split1, coor_split2):
+                new_l = self.terrain[coor_split1] - self.terrain[old]
+                new_r = self.terrain[coor_split2] - self.terrain[old]
+                l = new_l/(new_l + new_r) * self.path[old]
+                r = new_r/(new_l + new_r) * self.path[old]
+                return [l, r]
+
+
+if __name__ == &#34;__main__&#34;:
+        for i in range(1, 51):
+                size = 50
+                print(i)
+                # slopes = [0.0001, 0.0002, 0.0004, 0.0006, 0.0008, 0.001]
+                # waters = [0.0001, 0.0005, 0.0010, 0.0015]
+                slopes = [0.0001]
+                waters = [0.0008]
+                for slope in slopes:
+                        for water in waters:
+                                ca = CA(size=size, slope=slope, mu=0.0004, gamma=0.0002, rho=0.02, time_limit=size, delta_water=water)
+                                terrain = ca.initialize_terrain()
+                                path, segments, split_dict, segment_dict = ca.create_path_from_start()
+                                # np.savetxt(f&#39;tests/test_final.csv&#39;, path, delimiter=&#39;,&#39;)
+                                fig, axes = plt.subplots(1, 2,figsize=(15,5))
+                                
+                                sns.heatmap(terrain[:, 0:size-1], cmap=&#34;Greens&#34;, ax=axes[0])
+                                sns.heatmap(path, cmap=&#34;Blues&#34;, ax=axes[1])
+                                axes[1].set_title(&#34;Path of river&#34;)
+                                plt.savefig(f&#39;plots/FINAL_50_{i}.png&#39;, dpi=300)
+        #                       with open(f&#39;pickles/splits_slope_{slope}_water_{water}_version_{i}.p&#39;, &#39;wb&#39;) as handle:
+        #                               pc.dump(split_dict, handle, protocol=pc.HIGHEST_PROTOCOL)
+        #                       with open(f&#39;pickles/segments_slope_{slope}_water_{water}_version_{i}.p&#39;, &#39;wb&#39;) as handle:
+        #                               pc.dump(segment_dict, handle, protocol=pc.HIGHEST_PROTOCOL)
+        #                       np.savetxt(f&#39;tests/path_matrix_with_slope_{slope}_water_{water}_version_{i}.csv&#39;, path, delimiter=&#39;,&#39;)
+
+        # for i in range(1, 2):
+        #       size = 200
+        #       # slopes = [0.0001, 0.0002, 0.0004, 0.0006, 0.0008, 0.001]
+        #       slopes = [0.0005]
+        #       for slope in slopes:
+        #               ca = CA(size=size, slope=slope, mu=0.0004, gamma=0.0002, rho=0.02, time_limit=size)
+        #               terrain = ca.initialize_terrain()
+        #               path, segments,_,_ = ca.create_path_from_start()
+
+        #               # plt.figure(figsize=(15, 5))
+
+        #               # plt.subplot2grid((1, 2), (0, 0))
+        #               # sns.heatmap(terrain[:, 0:199], cmap=&#34;Greens&#34;)
+        #               # plt.title(f&#34;Terrain with a slope of {slope*100} %&#34;)
+
+        #               # my_cmap = cp.copy(cm.get_cmap(&#39;Blues&#39;))
+        #               # my_cmap.set_under(alpha=0.001)
+        #               # # plt.subplot2grid((1, 2), (0, 1))
+        #               # sns.heatmap(path, cmap=my_cmap)
+        #               # plt.title(&#34;River&#34;)
+
+        #               # # plt.savefig(f&#39;plots/river_{i}.png&#39;, dpi=300)
+        #               # plt.show()
+
+        #               # Generate some data...
+        #               # gray_data = np.arange(10000).reshape(100, 100)
+
+        #               # masked_data = np.random.random((100,100))
+        #               masked_data = np.ma.masked_where(path &lt; 0.01, path)
+        #               print(np.min(path), np.max(path))
+        #               # Overlay the two images
+        #               fig, ax = plt.subplots()
+        #               ax.imshow(terrain[:, 0:199], cmap=&#39;Greens&#39;)
+        #               ax.imshow(masked_data, cmap=&#39;Blues&#39;,vmin=-1,vmax=1, interpolation=&#39;none&#39;)
+        #               plt.show()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="Urban-Architects.Legacy_Files.CA.CA_model.CA"><code class="flex name class">
+<span>class <span class="ident">CA</span></span>
+<span>(</span><span>size, slope, mu, gamma, rho, time_limit, rand_lower=0.9999, rand_upper=1.00001, branch_tresh=0.1, init_water=1, delta_water=0.0008, viz=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="notes">Notes</h2>
+<p>According to Topa the complexity of the river system is measured by the number of
+channels and bifurcations</p>
+<p>”Anastomosing river” term refers to river system that possess extremely complex
+network of forking and joining channels</p>
+<p>The new channels usually merge with the others, creating a complex network composed
+of splitting and merging water channels and small lakes</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CA:
+        &#34;&#34;&#34;
+        NOTES:
+                According to Topa the complexity of the river system is measured by the number of
+                channels and bifurcations
+
+                ”Anastomosing river” term refers to river system that possess extremely complex
+                network of forking and joining channels
+
+                The new channels usually merge with the others, creating a complex network composed
+                of splitting and merging water channels and small lakes
+
+        &#34;&#34;&#34;
+
+        def __init__(
+                        self, size, slope, mu, gamma, rho, time_limit, rand_lower=0.9999, rand_upper=1.00001,
+                        branch_tresh=0.1, init_water=1, delta_water=0.0008, viz=False
+        ):
+                self.size = size
+                self.slope = slope
+                self.time_limit = time_limit
+                self.branch_tresh = branch_tresh
+                self.init_water_level = init_water
+                # starting point in the middle of the grid
+                self.starting_column = int(self.size / 2)
+                self.delta_w = delta_water
+                self.terrain = np.zeros((size, size))
+                self.peat_bog = np.zeros((size, size))
+                self.nutrients = np.zeros((size, size))
+                self.cur_river_nr = 1
+                self.rivers = {}
+
+                self.path = np.zeros((size, size))
+
+                self.mu = mu             # viscosity
+                self.gamma = gamma       # gradient of nutrients concentration
+                self.rho = rho           # proportionality coefficient
+                self.rand_lower = rand_lower
+                self.rand_upper = rand_upper
+                self.river_coors = set()
+                self.split_dict = {}
+                self.segment_dict = {}
+                self.segment_grid = self.path.copy()
+                self.viz=viz
+                if self.viz:
+                        self.path_list = []
+
+        def moore_neighborhood(self, grid, i, j):
+                &#34;&#34;&#34;[summary]
+                
+                Arguments:
+                        grid {[type]} -- [description]
+                        i {[type]} -- [description]
+                        j {[type]} -- [description]
+                
+                Returns:
+                        [type] -- [description]
+                &#34;&#34;&#34;
+
+                if i == 0 and j == 0:
+                        neighborhood = [
+                                grid[i + 1, j + 1],
+                                grid[i, j + 1],
+                                grid[i + 1, j],
+                        ]
+                        locations = [
+                                [i + 1, j + 1],
+                                [i, j + 1],
+                                [i + 1, j]
+                        ]
+
+                elif i == 0 and j == (self.size - 1):
+                        neighborhood = [
+                                grid[i, j - 1],
+                                grid[i + 1, j - 1],
+                                grid[i + 1, j],
+                        ]
+                        locations = [
+                                [i, j - 1],
+                                [i + 1, j - 1],
+                                [i + 1, j],
+                        ]
+
+                elif i == 0 and 0 &lt; j &lt; (self.size - 1):
+                        neighborhood = [
+                                grid[i, j - 1],
+                                grid[i, j + 1],
+                                grid[i + 1, j - 1],
+                                grid[i + 1, j],
+                                grid[i + 1, j + 1],
+                        ]
+                        locations = [
+                                [i, j - 1],
+                                [i, j + 1],
+                                [i + 1, j - 1],
+                                [i + 1, j],
+                                [i + 1, j + 1],
+                        ]
+
+                elif i == (self.size - 1) and j == 0:
+                        neighborhood = [
+                                grid[i, j + 1],
+                                grid[i - 1, j + 1],
+                                grid[i - 1, j],
+                        ]
+                        locations = [
+                                [i, j + 1],
+                                [i - 1, j + 1],
+                                [i - 1, j],
+                        ]
+
+                elif i == (self.size - 1) and j == (self.size - 1):
+                        neighborhood = [
+                                grid[i - 1, j - 1],
+                                grid[i, j - 1],
+                                grid[i - 1, j],
+                        ]
+                        locations = [
+                                [i - 1, j - 1],
+                                [i, j - 1],
+                                [i - 1, j],
+                        ]
+
+                elif i == (self.size - 1) and 0 &lt; j &lt; (self.size - 1):
+                        neighborhood = [
+                                grid[i, j - 1],
+                                grid[i, j + 1],
+                                grid[i - 1, j - 1],
+                                grid[i - 1, j],
+                                grid[i - 1, j + 1],
+                        ]
+                        locations = [
+                                [i, j - 1],
+                                [i, j + 1],
+                                [i - 1, j - 1],
+                                [i - 1, j],
+                                [i - 1, j + 1],
+                        ]
+
+                elif 0 &lt; i &lt; (self.size - 1) and j == 0:
+                        neighborhood = [
+                                grid[i - 1, j],
+                                grid[i - 1, j + 1],
+                                grid[i, j + 1],
+                                grid[i + 1, j],
+                                grid[i + 1, j + 1],
+                        ]
+                        locations = [
+                                [i - 1, j],
+                                [i - 1, j + 1],
+                                [i, j + 1],
+                                [i + 1, j],
+                                [i + 1, j + 1],
+                        ]
+
+                elif 0 &lt; i &lt; (self.size - 1) and j == (self.size - 1):
+                        neighborhood = [
+                                grid[i - 1, j],
+                                grid[i - 1, j - 1],
+                                grid[i, j - 1],
+                                grid[i + 1, j],
+                                grid[i + 1, j - 1],
+                        ]
+                        locations = [
+                                [i - 1, j],
+                                [i - 1, j - 1],
+                                [i, j - 1],
+                                [i + 1, j],
+                                [i + 1, j - 1],
+                        ]
+
+                else:
+                        neighborhood = [
+                                grid[i - 1, j - 1],
+                                grid[i - 1, j],
+                                grid[i - 1, j + 1],
+                                grid[i, j - 1],
+                                grid[i, j + 1],
+                                grid[i + 1, j - 1],
+                                grid[i + 1, j],
+                                grid[i + 1, j + 1],
+                        ]
+                        locations = [
+                                [i - 1, j - 1],
+                                [i - 1, j],
+                                [i - 1, j + 1],
+                                [i, j - 1],
+                                [i, j + 1],
+                                [i + 1, j - 1],
+                                [i + 1, j],
+                                [i + 1, j + 1],
+                        ]
+
+                return neighborhood, locations
+
+        def initialize_terrain(self):
+                terrain = np.ones((self.size, self.size))
+
+                for i in range(self.size - 1):
+                        terrain[i + 1] = terrain[i] * (1 - self.slope)
+
+                for i in range(self.size):
+                        for j in range(self.size):
+                                neighbors = self.moore_neighborhood(terrain, i, j)[0]
+                                if rd.random() &lt; 0.01:
+                                        perturb = rd.uniform(0.999, 1.0001)
+                                else:
+                                        perturb = rd.uniform(self.rand_lower, self.rand_upper)
+                                terrain[i, j] = np.mean(neighbors) * perturb
+
+                # create hill top
+                hill_coords = [
+                        (0, int(self.size / 2)),
+                        # (5, 12),
+                        # (7, 40),
+                        # (1, 60),
+                        # (1, 135),
+                        # (5, 150),
+                        # (5, 170),
+                        # (7, 185),
+                        # (1, 195),
+                        # (28, 150),
+                        # (33, 115),
+                        # (20, 70),
+                        # (45, 80),
+                        # (60, 110),
+                ]
+                for hill_coord in hill_coords:
+                        # terrain[hill_coord] = terrain[hill_coord] * 1.04  # rd.uniform(1.01, 1.04)
+                        terrain[hill_coord] = terrain[hill_coord]*1
+                for _ in range(2):
+
+                        for i in range(self.size):
+                                for j in range(self.size):
+                                        neighborhood, locations = self.moore_neighborhood(terrain, i, j)
+                                        for n, neighbor in enumerate(neighborhood):
+                                                location = (locations[n][0], locations[n][1])
+                                                if ((terrain[i, j] - neighbor) / neighbor) &gt; 0.01:
+                                                        terrain[location] = terrain[i, j] * rd.uniform(0.995, 0.999)
+
+                        for i in range(self.size - 1, 0, -1):
+                                for j in range(self.size - 1, 0, -1):
+                                        neighborhood, locations = self.moore_neighborhood(terrain, i, j)
+                                        for n, neighbor in enumerate(neighborhood):
+                                                location = (locations[n][0], locations[n][1])
+                                                if ((terrain[i, j] - neighbor) / neighbor) &gt; 0.01:
+                                                        terrain[location] = terrain[i, j] * rd.uniform(0.995, 0.999)
+
+                self.terrain = terrain
+                return self.terrain
+
+        def get_location_of_lowest_neighbor(self, grid, i, j, temp_ends):
+                neighborhood = self.moore_neighborhood(grid, i, j)
+                neighborhood0, neighborhood1 = [], []
+                for i, val in enumerate(neighborhood[1]):
+                        if tuple(val) not in self.river_coors:
+                                neighborhood0.append(neighborhood[0][i])
+                                neighborhood1.append(val)
+                try:
+                        value, location = (list(t) for t in zip(*sorted(zip(neighborhood0, neighborhood1))))
+                except ValueError:
+                        value, location = [], []
+                
+                return value, location
+
+        def get_path(self, prev_val, coor_list, value_list):
+                for i, coor in enumerate(coor_list):
+                        tup = tuple(coor)
+                        if tup not in self.river_coors:
+                                self.river_coors.add(tup)
+                        else:
+                                pass
+                        self.path[tup] = self.path[tup] + float(prev_val[i])*(1-self.delta_w)
+                return self.path
+
+        def create_path_from_start(self):
+                
+                self.path = self.get_path([self.init_water_level/(1-self.delta_w)],[(0, self.starting_column)], [self.init_water_level])
+                self.river_coors.add((0, self.starting_column))
+                self.cur_ends = {}
+                self.cur_ends[(0, self.starting_column)] = self.cur_river_nr
+                self.segment_dict = {self.cur_river_nr:[(0, self.starting_column)]}
+                self.segment_grid[(0, self.starting_column)] = self.cur_river_nr
+                self.cur_river_nr += 1
+
+                for x in range(1, self.time_limit):
+                        temp_ends = {}
+                        for item, val in self.cur_ends.items():
+                                if self.path[item] &gt; self.branch_tresh:
+
+                                        old_value = self.terrain[item]
+                                        sort_values, sort_location = self.get_location_of_lowest_neighbor(self.terrain, item[0], item[1], temp_ends)
+                                        if not sort_values:
+                                                continue
+                                        
+                                        next_cell, next_value = [tuple(sort_location[0])], [sort_values[0]]
+                                        next_water = [self.path[item]]
+                                        if old_value &lt; sort_values[0] and len(sort_location) &gt; 1:
+                                                next_cell.append(tuple(sort_location[1]))
+                                                next_value.append(sort_values[1])
+                                                next_water = self.new_water_ratio(item, tuple(sort_location[0]), tuple(sort_location[1]))
+                                                temp_ends[next_cell[0]] = self.cur_river_nr
+                                                self.segment_grid[next_cell[0]] = self.cur_river_nr
+                                                self.segment_dict[self.cur_river_nr] = [next_cell[0]]
+                                                self.cur_river_nr += 1
+                                                temp_ends[next_cell[1]] = self.cur_river_nr
+                                                self.segment_grid[next_cell[1]] = self.cur_river_nr
+                                                self.segment_dict[self.cur_river_nr] = [next_cell[1]]
+                                                self.cur_river_nr += 1
+                                                self.split_dict[self.segment_grid[item]] = (self.segment_grid[next_cell[1]], self.segment_grid[next_cell[0]])
+                                        else:
+                                                temp_ends[(next_cell[0])] = self.segment_grid[item]
+                                                self.segment_grid[(next_cell[0])] = self.segment_grid[item]
+                                                self.segment_dict[self.segment_grid[item]].append(next_cell[0])
+                                        self.path = self.get_path(next_water, next_cell, next_value)
+                        if self.viz:
+                                self.path_list.append(self.path.copy()) 
+                        self.cur_ends = temp_ends.copy()
+                        
+
+                        if not self.cur_ends:
+                                if self.viz:
+                                        return self.path_list 
+                                return self.path, self.segment_grid, self.split_dict, self.segment_dict
+                if self.viz:
+                        return self.path_list 
+                return self.path, self.segment_grid, self.split_dict, self.segment_dict
+
+        def new_water_ratio(self, old, coor_split1, coor_split2):
+                new_l = self.terrain[coor_split1] - self.terrain[old]
+                new_r = self.terrain[coor_split2] - self.terrain[old]
+                l = new_l/(new_l + new_r) * self.path[old]
+                r = new_r/(new_l + new_r) * self.path[old]
+                return [l, r]</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="Urban-Architects.Legacy_Files.CA.CA_model.CA.create_path_from_start"><code class="name flex">
+<span>def <span class="ident">create_path_from_start</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_path_from_start(self):
+        
+        self.path = self.get_path([self.init_water_level/(1-self.delta_w)],[(0, self.starting_column)], [self.init_water_level])
+        self.river_coors.add((0, self.starting_column))
+        self.cur_ends = {}
+        self.cur_ends[(0, self.starting_column)] = self.cur_river_nr
+        self.segment_dict = {self.cur_river_nr:[(0, self.starting_column)]}
+        self.segment_grid[(0, self.starting_column)] = self.cur_river_nr
+        self.cur_river_nr += 1
+
+        for x in range(1, self.time_limit):
+                temp_ends = {}
+                for item, val in self.cur_ends.items():
+                        if self.path[item] &gt; self.branch_tresh:
+
+                                old_value = self.terrain[item]
+                                sort_values, sort_location = self.get_location_of_lowest_neighbor(self.terrain, item[0], item[1], temp_ends)
+                                if not sort_values:
+                                        continue
+                                
+                                next_cell, next_value = [tuple(sort_location[0])], [sort_values[0]]
+                                next_water = [self.path[item]]
+                                if old_value &lt; sort_values[0] and len(sort_location) &gt; 1:
+                                        next_cell.append(tuple(sort_location[1]))
+                                        next_value.append(sort_values[1])
+                                        next_water = self.new_water_ratio(item, tuple(sort_location[0]), tuple(sort_location[1]))
+                                        temp_ends[next_cell[0]] = self.cur_river_nr
+                                        self.segment_grid[next_cell[0]] = self.cur_river_nr
+                                        self.segment_dict[self.cur_river_nr] = [next_cell[0]]
+                                        self.cur_river_nr += 1
+                                        temp_ends[next_cell[1]] = self.cur_river_nr
+                                        self.segment_grid[next_cell[1]] = self.cur_river_nr
+                                        self.segment_dict[self.cur_river_nr] = [next_cell[1]]
+                                        self.cur_river_nr += 1
+                                        self.split_dict[self.segment_grid[item]] = (self.segment_grid[next_cell[1]], self.segment_grid[next_cell[0]])
+                                else:
+                                        temp_ends[(next_cell[0])] = self.segment_grid[item]
+                                        self.segment_grid[(next_cell[0])] = self.segment_grid[item]
+                                        self.segment_dict[self.segment_grid[item]].append(next_cell[0])
+                                self.path = self.get_path(next_water, next_cell, next_value)
+                if self.viz:
+                        self.path_list.append(self.path.copy()) 
+                self.cur_ends = temp_ends.copy()
+                
+
+                if not self.cur_ends:
+                        if self.viz:
+                                return self.path_list 
+                        return self.path, self.segment_grid, self.split_dict, self.segment_dict
+        if self.viz:
+                return self.path_list 
+        return self.path, self.segment_grid, self.split_dict, self.segment_dict</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Legacy_Files.CA.CA_model.CA.get_location_of_lowest_neighbor"><code class="name flex">
+<span>def <span class="ident">get_location_of_lowest_neighbor</span></span>(<span>self, grid, i, j, temp_ends)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_location_of_lowest_neighbor(self, grid, i, j, temp_ends):
+        neighborhood = self.moore_neighborhood(grid, i, j)
+        neighborhood0, neighborhood1 = [], []
+        for i, val in enumerate(neighborhood[1]):
+                if tuple(val) not in self.river_coors:
+                        neighborhood0.append(neighborhood[0][i])
+                        neighborhood1.append(val)
+        try:
+                value, location = (list(t) for t in zip(*sorted(zip(neighborhood0, neighborhood1))))
+        except ValueError:
+                value, location = [], []
+        
+        return value, location</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Legacy_Files.CA.CA_model.CA.get_path"><code class="name flex">
+<span>def <span class="ident">get_path</span></span>(<span>self, prev_val, coor_list, value_list)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_path(self, prev_val, coor_list, value_list):
+        for i, coor in enumerate(coor_list):
+                tup = tuple(coor)
+                if tup not in self.river_coors:
+                        self.river_coors.add(tup)
+                else:
+                        pass
+                self.path[tup] = self.path[tup] + float(prev_val[i])*(1-self.delta_w)
+        return self.path</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Legacy_Files.CA.CA_model.CA.initialize_terrain"><code class="name flex">
+<span>def <span class="ident">initialize_terrain</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def initialize_terrain(self):
+        terrain = np.ones((self.size, self.size))
+
+        for i in range(self.size - 1):
+                terrain[i + 1] = terrain[i] * (1 - self.slope)
+
+        for i in range(self.size):
+                for j in range(self.size):
+                        neighbors = self.moore_neighborhood(terrain, i, j)[0]
+                        if rd.random() &lt; 0.01:
+                                perturb = rd.uniform(0.999, 1.0001)
+                        else:
+                                perturb = rd.uniform(self.rand_lower, self.rand_upper)
+                        terrain[i, j] = np.mean(neighbors) * perturb
+
+        # create hill top
+        hill_coords = [
+                (0, int(self.size / 2)),
+                # (5, 12),
+                # (7, 40),
+                # (1, 60),
+                # (1, 135),
+                # (5, 150),
+                # (5, 170),
+                # (7, 185),
+                # (1, 195),
+                # (28, 150),
+                # (33, 115),
+                # (20, 70),
+                # (45, 80),
+                # (60, 110),
+        ]
+        for hill_coord in hill_coords:
+                # terrain[hill_coord] = terrain[hill_coord] * 1.04  # rd.uniform(1.01, 1.04)
+                terrain[hill_coord] = terrain[hill_coord]*1
+        for _ in range(2):
+
+                for i in range(self.size):
+                        for j in range(self.size):
+                                neighborhood, locations = self.moore_neighborhood(terrain, i, j)
+                                for n, neighbor in enumerate(neighborhood):
+                                        location = (locations[n][0], locations[n][1])
+                                        if ((terrain[i, j] - neighbor) / neighbor) &gt; 0.01:
+                                                terrain[location] = terrain[i, j] * rd.uniform(0.995, 0.999)
+
+                for i in range(self.size - 1, 0, -1):
+                        for j in range(self.size - 1, 0, -1):
+                                neighborhood, locations = self.moore_neighborhood(terrain, i, j)
+                                for n, neighbor in enumerate(neighborhood):
+                                        location = (locations[n][0], locations[n][1])
+                                        if ((terrain[i, j] - neighbor) / neighbor) &gt; 0.01:
+                                                terrain[location] = terrain[i, j] * rd.uniform(0.995, 0.999)
+
+        self.terrain = terrain
+        return self.terrain</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Legacy_Files.CA.CA_model.CA.moore_neighborhood"><code class="name flex">
+<span>def <span class="ident">moore_neighborhood</span></span>(<span>self, grid, i, j)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>[summary]</p>
+<h2 id="arguments">Arguments</h2>
+<p>grid {[type]} &ndash; [description]
+i {[type]} &ndash; [description]
+j {[type]} &ndash; [description]</p>
+<h2 id="returns">Returns</h2>
+<p>[type] &ndash; [description]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def moore_neighborhood(self, grid, i, j):
+        &#34;&#34;&#34;[summary]
+        
+        Arguments:
+                grid {[type]} -- [description]
+                i {[type]} -- [description]
+                j {[type]} -- [description]
+        
+        Returns:
+                [type] -- [description]
+        &#34;&#34;&#34;
+
+        if i == 0 and j == 0:
+                neighborhood = [
+                        grid[i + 1, j + 1],
+                        grid[i, j + 1],
+                        grid[i + 1, j],
+                ]
+                locations = [
+                        [i + 1, j + 1],
+                        [i, j + 1],
+                        [i + 1, j]
+                ]
+
+        elif i == 0 and j == (self.size - 1):
+                neighborhood = [
+                        grid[i, j - 1],
+                        grid[i + 1, j - 1],
+                        grid[i + 1, j],
+                ]
+                locations = [
+                        [i, j - 1],
+                        [i + 1, j - 1],
+                        [i + 1, j],
+                ]
+
+        elif i == 0 and 0 &lt; j &lt; (self.size - 1):
+                neighborhood = [
+                        grid[i, j - 1],
+                        grid[i, j + 1],
+                        grid[i + 1, j - 1],
+                        grid[i + 1, j],
+                        grid[i + 1, j + 1],
+                ]
+                locations = [
+                        [i, j - 1],
+                        [i, j + 1],
+                        [i + 1, j - 1],
+                        [i + 1, j],
+                        [i + 1, j + 1],
+                ]
+
+        elif i == (self.size - 1) and j == 0:
+                neighborhood = [
+                        grid[i, j + 1],
+                        grid[i - 1, j + 1],
+                        grid[i - 1, j],
+                ]
+                locations = [
+                        [i, j + 1],
+                        [i - 1, j + 1],
+                        [i - 1, j],
+                ]
+
+        elif i == (self.size - 1) and j == (self.size - 1):
+                neighborhood = [
+                        grid[i - 1, j - 1],
+                        grid[i, j - 1],
+                        grid[i - 1, j],
+                ]
+                locations = [
+                        [i - 1, j - 1],
+                        [i, j - 1],
+                        [i - 1, j],
+                ]
+
+        elif i == (self.size - 1) and 0 &lt; j &lt; (self.size - 1):
+                neighborhood = [
+                        grid[i, j - 1],
+                        grid[i, j + 1],
+                        grid[i - 1, j - 1],
+                        grid[i - 1, j],
+                        grid[i - 1, j + 1],
+                ]
+                locations = [
+                        [i, j - 1],
+                        [i, j + 1],
+                        [i - 1, j - 1],
+                        [i - 1, j],
+                        [i - 1, j + 1],
+                ]
+
+        elif 0 &lt; i &lt; (self.size - 1) and j == 0:
+                neighborhood = [
+                        grid[i - 1, j],
+                        grid[i - 1, j + 1],
+                        grid[i, j + 1],
+                        grid[i + 1, j],
+                        grid[i + 1, j + 1],
+                ]
+                locations = [
+                        [i - 1, j],
+                        [i - 1, j + 1],
+                        [i, j + 1],
+                        [i + 1, j],
+                        [i + 1, j + 1],
+                ]
+
+        elif 0 &lt; i &lt; (self.size - 1) and j == (self.size - 1):
+                neighborhood = [
+                        grid[i - 1, j],
+                        grid[i - 1, j - 1],
+                        grid[i, j - 1],
+                        grid[i + 1, j],
+                        grid[i + 1, j - 1],
+                ]
+                locations = [
+                        [i - 1, j],
+                        [i - 1, j - 1],
+                        [i, j - 1],
+                        [i + 1, j],
+                        [i + 1, j - 1],
+                ]
+
+        else:
+                neighborhood = [
+                        grid[i - 1, j - 1],
+                        grid[i - 1, j],
+                        grid[i - 1, j + 1],
+                        grid[i, j - 1],
+                        grid[i, j + 1],
+                        grid[i + 1, j - 1],
+                        grid[i + 1, j],
+                        grid[i + 1, j + 1],
+                ]
+                locations = [
+                        [i - 1, j - 1],
+                        [i - 1, j],
+                        [i - 1, j + 1],
+                        [i, j - 1],
+                        [i, j + 1],
+                        [i + 1, j - 1],
+                        [i + 1, j],
+                        [i + 1, j + 1],
+                ]
+
+        return neighborhood, locations</code></pre>
+</details>
+</dd>
+<dt id="Urban-Architects.Legacy_Files.CA.CA_model.CA.new_water_ratio"><code class="name flex">
+<span>def <span class="ident">new_water_ratio</span></span>(<span>self, old, coor_split1, coor_split2)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def new_water_ratio(self, old, coor_split1, coor_split2):
+        new_l = self.terrain[coor_split1] - self.terrain[old]
+        new_r = self.terrain[coor_split2] - self.terrain[old]
+        l = new_l/(new_l + new_r) * self.path[old]
+        r = new_r/(new_l + new_r) * self.path[old]
+        return [l, r]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Urban-Architects.Legacy_Files.CA" href="index.html">Urban-Architects.Legacy_Files.CA</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="Urban-Architects.Legacy_Files.CA.CA_model.CA" href="#Urban-Architects.Legacy_Files.CA.CA_model.CA">CA</a></code></h4>
+<ul class="">
+<li><code><a title="Urban-Architects.Legacy_Files.CA.CA_model.CA.create_path_from_start" href="#Urban-Architects.Legacy_Files.CA.CA_model.CA.create_path_from_start">create_path_from_start</a></code></li>
+<li><code><a title="Urban-Architects.Legacy_Files.CA.CA_model.CA.get_location_of_lowest_neighbor" href="#Urban-Architects.Legacy_Files.CA.CA_model.CA.get_location_of_lowest_neighbor">get_location_of_lowest_neighbor</a></code></li>
+<li><code><a title="Urban-Architects.Legacy_Files.CA.CA_model.CA.get_path" href="#Urban-Architects.Legacy_Files.CA.CA_model.CA.get_path">get_path</a></code></li>
+<li><code><a title="Urban-Architects.Legacy_Files.CA.CA_model.CA.initialize_terrain" href="#Urban-Architects.Legacy_Files.CA.CA_model.CA.initialize_terrain">initialize_terrain</a></code></li>
+<li><code><a title="Urban-Architects.Legacy_Files.CA.CA_model.CA.moore_neighborhood" href="#Urban-Architects.Legacy_Files.CA.CA_model.CA.moore_neighborhood">moore_neighborhood</a></code></li>
+<li><code><a title="Urban-Architects.Legacy_Files.CA.CA_model.CA.new_water_ratio" href="#Urban-Architects.Legacy_Files.CA.CA_model.CA.new_water_ratio">new_water_ratio</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
