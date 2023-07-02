@@ -16,7 +16,7 @@ http://www.geoffreylandis.com/percolation.htp
 How do climate change factors (such as emission increase, rising sea levels, etc.) influence the patterns and dynamics of urban expansion, and what emergent behaviours can we observe from these interactions? 
 
 ## Hypothesis
-
+ 
 We assume that the climate change will have a significant impact on urban expansion. Climate change can alter the distribution of suitable habitats, potentially making previously uninhabitable areas more desirable for urban development. The increasing frequency and severity of extreme weather events due to climate change can render urban areas more vulnerable, leading to a redirection of urban expansion away from high-risk regions. And the socioeconomic effects of climate change, such as changes in agricultural productivity and employment, can influence the economic viability of urban expansion plans and contribute to population pressures on cities. 
 If our system exhibits SOC, we expect that small changes and increased pressure will lead to large changes in the environment’s state, while we can conclude that the system does not exhibit SOC if it follows more linear correlations.
 
@@ -93,14 +93,14 @@ pip3 install -r requirements.txt
     │  
     │   
     │       
-    ├── CA Model               <- 
-    │   ├── __init__.py    <- 
+    ├── CA Model                                  <- 
+    │   ├── __init__.py    
     │   │
-    │   ├── historical_res  <-                    <- Some statistical runs from the complicated model
+    │   ├── historical_res                        <- Some statistical runs from the complicated model
     │   │   
-    │   ├── results       <-                      <- Folder with results
+    │   ├── results                               <- Folder with results
     │   │   
-    │   ├── results_presentation       <-                      <- Folder with results for presentation
+    │   ├── results_presentation                  <- Folder with results for presentation
     │   
     │   ├── PercolationModelComplicated.py        <- Model that we did not manage to run
     │   ├── PercolationModelSimple.py             <- Topological Model where people move based on Population Density
@@ -109,7 +109,7 @@ pip3 install -r requirements.txt
     │   ├── run_model_simple.py                   <- Runs Simple Cellular Automata model
     │   └── visualization                         <- File with some of our statistical results
     │      
-    ├── Legacy Files            <- (Unused files, and files used for inspiration)
+    ├── Legacy Files                              <- (Unused files, and files used for inspiration)
     │   
 
 --------
